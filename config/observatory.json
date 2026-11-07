@@ -1,0 +1,10 @@
+{
+  "schema": "jupi.observatory.config.v1",
+  "keep_samples": 576,
+  "fcl_client_sha256": "32324e8880956553fc772b9f0569789633933b246da84f9668b4cf05bb8cbb0a",
+  "expected_interval_seconds": 300,
+  "sample_freshness_limit_seconds": 900,
+  "minimum_internal_backing_headroom_bytes": 17179869184,
+  "external_notifications": false,
+  "automatic_remediation": false
+}

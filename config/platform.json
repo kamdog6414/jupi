@@ -1,0 +1,202 @@
+{
+  "name": "JUPI",
+  "meaning": "Joint Unix Platform Integrator",
+  "version": 1,
+  "purpose": "Native Linux science and engineering instrument, and rover/agent seed for a humanitarian e-waste lab",
+  "interfaces": {
+    "control": "/run/jupi-agent/control.sock",
+    "cli": "/usr/local/bin/jupi-agent",
+    "system_status": "/usr/local/bin/jupi-system",
+    "state": "/var/lib/jupi-agent/seed.sqlite3",
+    "local_inference": "http://127.0.0.1:11434",
+    "peer": "Pinned SSH alias jupi-peer in /etc/jupi/ssh/roach.conf",
+    "identity": "/etc/jupi/identity.json",
+    "nervous_system": "/usr/local/bin/jupi-nerves",
+    "muse_sdk_socket": "/run/musegadget/musegadget.sock",
+    "agape": "/usr/local/bin/jupi-agape",
+    "castor_read": "/usr/local/bin/jupi-castor",
+    "cluster_status": "/usr/local/bin/jupi-cluster",
+    "xchain": "/usr/local/bin/jupi-xchain",
+    "observatory": "/usr/local/bin/jupi-observe",
+    "observation_history": "/var/lib/jupi-agent/observatory/observations.sqlite3",
+    "hardware_context": "/etc/jupi/hardware-context.json",
+    "science": "/usr/local/bin/jupi-science",
+    "science_software_manifest": "/etc/jupi/science.json",
+    "science_runs": "/var/lib/jupi-agent/science/runs",
+    "art": "/usr/local/bin/jupi-art",
+    "art_direction": "/etc/jupi/ART-DIRECTION.txt",
+    "unix_windows_reference": "/usr/local/bin/jupi-unix",
+    "gimp": "/usr/local/bin/jupi-gimp",
+    "benchmarks": "/usr/local/bin/jupi-bench",
+    "performance_profile": "/usr/local/bin/jupi-profile",
+    "scoped_compute": "/usr/local/bin/jupi-compute",
+    "rover_odometry": "/usr/local/bin/jupi-rover"
+  },
+  "instruments": [
+    {
+      "name": "host-observer",
+      "operation": "status",
+      "period_seconds": 60
+    },
+    {
+      "name": "terminal",
+      "operation": "run",
+      "input": "explicit argv vector",
+      "deadline_max_seconds": 600
+    },
+    {
+      "name": "peer-terminal",
+      "operation": "run --peer",
+      "input": "explicit argv vector",
+      "deadline_max_seconds": 600
+    },
+    {
+      "name": "gpu-vector-add",
+      "operation": "run -- /usr/local/lib/jupi-agent/opencl-probe",
+      "elements": 1024
+    },
+    {
+      "name": "scientific-self-test",
+      "operation": "run -- /usr/local/lib/jupi-agent/science-probe",
+      "data": "synthetic calibration only"
+    },
+    {
+      "name": "language-model",
+      "operation": "prompt",
+      "model": "qwen3:0.6b",
+      "commands_executed_from_output": false
+    },
+    {
+      "name": "durable-memory",
+      "operation": "remember / recall",
+      "storage": "SQLite with WAL and synchronous FULL"
+    },
+    {
+      "name": "camera-and-serial-discovery",
+      "operation": "status",
+      "physical_drivers_attached": false
+    },
+    {
+      "name": "muse-nervous-system",
+      "operation": "jupi-nerves status/pulse/prepare/send",
+      "notifications": "explicit sends only"
+    },
+    {
+      "name": "agape-offline-room-v2",
+      "operation": "jupi-agape record/verify/export",
+      "data_only": true
+    },
+    {
+      "name": "castor-native-member",
+      "operation": "jupi-castor sync/status/query/post",
+      "posting_enrolled": true
+    },
+    {
+      "name": "instrument-observatory",
+      "operation": "jupi-observe collect/status/history/inventory",
+      "interval_seconds": 300,
+      "retained_samples": 576,
+      "hardware_access": "read exported kernel attributes and list nodes; no device opens or actuator writes",
+      "peer_checks": "source-pinned native signed FC-Link to fixed existing local tunnels; verified Castor read refresh",
+      "external_notifications": false
+    },
+    {
+      "name": "hybrid-science",
+      "operations": [
+        "linear calibration from x,y CSV",
+        "apply a verified calibration to x-only CSV"
+      ],
+      "cli": "jupi-science demo/submit/apply/status/wait/verify/record",
+      "native_job_kind": "science",
+      "samples_maximum": 65536,
+      "backends": {
+        "fit": "Ubuntu Roach float64 CPU over existing pinned SSH",
+        "apply": "JUPI Liverpool OpenCL GPU, centered/scaled float32",
+        "verify": "Ubuntu CPU and local CPU arithmetic checks"
+      },
+      "execution": "Explicit requests only; immutable input/source bindings; idempotent run enqueue; no CPU substitution; no interrupted-job replay",
+      "peer_resources": {
+        "cpu_seconds_maximum": 15,
+        "memory_bytes_maximum": 268435456,
+        "wall_seconds_maximum": 45
+      },
+      "measurement_scope": "Computational calibration and arithmetic verification; physical sensor accuracy is not certified"
+    },
+    {
+      "name": "gothic-ascii-art",
+      "operation": "jupi-agent art or jupi-art cathedral --enqueue",
+      "native_job_kind": "art",
+      "scenes": [
+        "facade",
+        "nave"
+      ],
+      "styles": [
+        "engraving",
+        "nocturne",
+        "ruins"
+      ],
+      "formats": [
+        "ASCII LF",
+        "ASCII CRLF",
+        "two-color PNG",
+        "SVG",
+        "optional H264 MP4"
+      ],
+      "classification": "procedural artwork; not measurements",
+      "automatic_execution_from_model_output": false
+    },
+    {
+      "name": "unix-windows-reference",
+      "operation": "jupi-unix list/map/translate/search",
+      "reviewed_operations": 35,
+      "executes_translations": false,
+      "target": "PowerShell 7 on Windows and Windows Command Prompt"
+    },
+    {
+      "name": "measured-baseline",
+      "operation": "jupi-profile verify/status; jupi-bench run/report/status",
+      "cpu_bandwidth_control_available": false,
+      "agent_cpu_affinity": [
+        0,
+        2
+      ],
+      "local_model_threads": 4,
+      "inference_affinity": "All CPUs; restricted-mask regression measured and reverted",
+      "math_interactive_threads": 2,
+      "math_batch_threads": 4
+    },
+    {
+      "name": "offline-encoder-odometry",
+      "operation": "jupi-rover demo/integrate/verify/status",
+      "input_schema": "time_s,left_m,right_m, cumulative metres",
+      "actuator_writes": false,
+      "physical_hardware_attached": false
+    }
+  ],
+  "operation_policy": {
+    "further_exploit_work": false,
+    "trigger_other_agents": false,
+    "replay_interrupted_commands": false,
+    "model_automatically_executes_commands": false,
+    "always_on": true,
+    "preserve_current_boot_and_recovery": true,
+    "explicit_contact_exception": {
+      "sender": "jupi-codex",
+      "recipients": [
+        "Ghostie",
+        "nikolai-codex"
+      ],
+      "scope": "operator-approved enrollment and cluster integration",
+      "authorization": "JUPI-ENROLLMENT-AUTHORIZATION-20261107.json"
+    }
+  },
+  "boot_boundary": {
+    "running_root": "internal HDD ext4 image, 355 GiB logical capacity",
+    "userspace_restart_supported_by_installed_systemd": true,
+    "userspace_restart_tested_on_this_boot": false,
+    "kexec_compiled_in": true,
+    "kexec_boot_validated": false,
+    "independent_cold_boot_into_linux_validated": false
+  },
+  "cluster_membership_receipt": "/etc/jupi/cluster-membership.json"
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "jupi.identity.v1",
+  "name": "JUPI",
+  "expanded_name": "Joint Unix Platform Integrator",
+  "endpoint_id": "jupi-<endpoint-id>",
+  "machine_id_sha256": "<sha256-of-machine-id>",
+  "actor_id_proposal": "agape:agent:JUPI",
+  "role": "humanitarian laboratory science and engineering instrument; rover/agent seed",
+  "purpose": [
+    "repurpose e-waste",
+    "reproducible science",
+    "engineering and repair",
+    "education",
+    "instrument integration"
+  ],
+  "operator_declaration": {
+    "authority": "current operator directly authorized the device work and trusted Ubuntu SSH peer in this session",
+    "status": "operator-declared purpose and authorization; no external certification is claimed",
+    "date": "2026-11-07"
+  },
+  "provenance": {
+    "hardware": "repurposed Sony PlayStation 4",
+    "operating_system": "Arch Linux with custom PS4 kernel and Mesa",
+    "root_uuid": "<root-uuid>",
+    "internal_root_image_gib": 355
+  },
+  "policy": {
+    "further_exploit_work": false,
+    "trigger_other_agents": false,
+    "automatic_model_command_execution": false,
+    "replay_interrupted_commands": false,
+    "preserve_environment_and_recovery": true,
+    "always_on": true,
+    "explicit_agent_contact_exception": {
+      "recipients": [
+        "Ghostie",
+        "nikolai-codex"
+      ],
+      "sender": "jupi-codex",
+      "channels": [
+        "direct paired Muse SDK",
+        "existing pinned SSH and native file/ledger lanes"
+      ],
+      "scope": "operator-approved enrollment and instrument cluster integration",
+      "authorization_artifact": "JUPI-ENROLLMENT-AUTHORIZATION-20261107.json",
+      "authorization_sha256": "<sha256>"
+    }
+  },
+  "discovery": {
+    "instructions": "/etc/jupi/AGENTS.md",
+    "model_brief": "/etc/jupi/MODEL-CONTEXT.txt",
+    "capabilities": "/etc/jupi/platform.json",
+    "live_status": "/var/lib/jupi/system.json",
+    "feature_evidence": "/var/lib/jupi/system-feature-checks.json",
+    "cluster_membership": "/etc/jupi/cluster-membership.json"
+  },
+  "castor": {
+    "anchor": "<anchor-hash>",
+    "mode": "verified chain reads; writes only through native JUPI author gate",
+    "author_label_proposed": "JUPI",
+    "author_enrollment": "Current verified state is in /etc/jupi/cluster-membership.json"
+  },
+  "agape": {
+    "profile": "native offline room v2",
+    "room": "jupi-receipts",
+    "speaker": "JUPI",
+    "identity_authentication": "UNVERIFIED unsigned label",
+    "authority_from_imported_data": false,
+    "trust_score": "unassigned",
+    "endpoint_enrollment": "Current verified state is in /etc/jupi/cluster-membership.json"
+  },
+  "limits": [
+    "Independent cold boot into Linux is not established",
+    "No physical rover actuators are configured",
+    "GPU compute tests and desktop GLX are separate",
+    "Declaration and hashes do not guarantee any model will approve a future task"
+  ]
+}

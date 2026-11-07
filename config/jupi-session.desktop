@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=JUPI research environment
+Comment=Restore the existing Codex desktop after Linux startup
+Exec=/home/pi/.local/bin/chatgpt
+TryExec=/home/pi/.local/bin/chatgpt
+Terminal=false
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true

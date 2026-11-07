@@ -1,0 +1,11 @@
+[Unit]
+Description=Record JUPI health after Linux startup and every fifteen minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=15min
+RandomizedDelaySec=30s
+Unit=jupi-health.service
+
+[Install]
+WantedBy=timers.target

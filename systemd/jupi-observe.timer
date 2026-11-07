@@ -1,0 +1,12 @@
+[Unit]
+Description=Observe JUPI after Linux startup and every five minutes
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+RandomizedDelaySec=20s
+AccuracySec=30s
+Unit=jupi-observe.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=JUPI compressed RAM swap independent of removable disks
+After=systemd-udevd.service local-fs.target
+Before=lightdm.service
+ConditionPathExists=/sys/block/zram0/disksize
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/jupi-zram start
+ExecStop=/usr/local/sbin/jupi-zram stop
+TimeoutStartSec=60
+TimeoutStopSec=60
+
+[Install]
+WantedBy=multi-user.target

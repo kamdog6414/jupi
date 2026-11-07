@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+state/
+*.key
+id_ed25519*
+.cache/
+gpu-*-probe.ppm
+podman-info.json
+*.sqlite3
+ghostie-mirror/
+inbox/
+device-secrets/
+*.bin

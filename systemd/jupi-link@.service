@@ -1,0 +1,25 @@
+[Unit]
+Description=JUPI persistent outbound SSH transport to %i
+Wants=network-online.target
+After=network-online.target sshd.service
+StartLimitIntervalSec=0
+ConditionPathExists=/etc/jupi/ssh/%i.conf
+
+[Service]
+Type=exec
+User=pi
+Group=pi
+ExecStart=/usr/bin/ssh -F /etc/jupi/ssh/%i.conf -NT jupi-peer
+Restart=always
+RestartSec=15s
+TimeoutStopSec=10s
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+RestrictSUIDSGID=yes
+LockPersonality=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh the local JUPI nervous-system snapshot
+
+[Timer]
+OnBootSec=60
+OnUnitActiveSec=60
+AccuracySec=5
+Unit=jupi-nerves.service
+
+[Install]
+WantedBy=timers.target

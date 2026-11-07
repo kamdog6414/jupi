@@ -1,0 +1,27 @@
+[Unit]
+Description=JUPI bounded hardware and cluster observations
+After=network-online.target jupi-agent.service jupi-link@roach.service jupi-link@fclink.service
+
+[Service]
+Type=oneshot
+User=pi
+Group=pi
+ExecStart=/usr/local/bin/jupi-observe collect --record
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/jupi-agent
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+LockPersonality=yes
+MemoryMax=256M
+CPUQuota=50%
+TasksMax=64
+Nice=15
+IOSchedulingClass=idle
+TimeoutStartSec=90

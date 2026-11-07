@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+"""JUPI's native Agape offline-room adapter; no network or command dispatch."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+MODULE = Path('/usr/local/lib/jupi-agent/agape_room.py')
+PIN = '019f674dc63f2cf89fffd75d098a8b5fe922d6c6165a39a2d8c26c40d4cda51d'
+DB = '/var/lib/jupi-agent/agape.sqlite3'
+ROOM = 'jupi-receipts'
+
+
+def main():
+    os.umask(0o077)
+    if hashlib.sha256(MODULE.read_bytes()).hexdigest() != PIN:
+        raise SystemExit('Agape source pin differs; review the adapter before using it')
+    if len(sys.argv) < 2 or sys.argv[1] not in ('verify', 'list', 'export', 'record', 'note'):
+        raise SystemExit('Usage: jupi-agape verify|list|export|record FILE|note TEXT')
+    action = sys.argv[1]
+    common = ['--db', DB, '--room', ROOM]
+    if not Path(DB).exists():
+        subprocess.run([sys.executable, '-B', str(MODULE), 'init', *common], check=True, stdout=subprocess.DEVNULL)
+    if action in ('record', 'note'):
+        if len(sys.argv) != 3: raise SystemExit('Provide exactly one file or note argument')
+        if action == 'record':
+            path = Path(sys.argv[2]).resolve(strict=True)
+            if not path.is_file() or path.stat().st_size > 8*1024*1024:
+                raise SystemExit('A regular artifact of at most 8 MiB is required')
+            data = path.read_bytes()
+            text = json.dumps({'schema':'jupi.artifact.reference.v1', 'artifact':path.name,
+                               'sha256':hashlib.sha256(data).hexdigest(), 'bytes':len(data),
+                               'claim':'artifact reference; not independent validation'}, sort_keys=True, separators=(',', ':'))
+        else:
+            text = sys.argv[2]
+        operation = hashlib.sha256(text.encode()).hexdigest()
+        command = ['post', *common, '--speaker', 'JUPI', '--text', text, '--operation-id', operation]
+    else:
+        command = [action, *common]
+    return subprocess.run([sys.executable, '-B', str(MODULE), *command]).returncode
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

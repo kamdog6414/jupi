@@ -1,0 +1,18 @@
+[Unit]
+Description=JUPI inbound firewall (preserve SSH, DHCP and ICMP)
+Documentation=man:nft(8)
+After=local-fs.target
+Before=network-pre.target
+Wants=network-pre.target
+ConditionPathExists=/etc/jupi/firewall.nft
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/nft --check --file /etc/jupi/firewall.nft
+ExecStart=/usr/bin/nft --file /etc/jupi/firewall.nft
+ExecReload=/usr/bin/nft --file /etc/jupi/firewall.nft
+ExecStop=-/usr/bin/nft delete table inet jupi
+
+[Install]
+WantedBy=multi-user.target

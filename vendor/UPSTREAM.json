@@ -1,0 +1,9 @@
+{
+  "schema": "jupi.upstream.pin.v1",
+  "module": "vendor/agape_room.py",
+  "sha256": "019f674dc63f2cf89fffd75d098a8b5fe922d6c6165a39a2d8c26c40d4cda51d",
+  "source_host": "pinned jupi-peer SSH endpoint",
+  "source_path": "/home/roach/Documents/Codex/2026-10-23/c/agape-gate-runner-roach-20261102/vendor/agape_room.py",
+  "scope": "Unmodified native Agape offline room v2 only; no gate runner, scoring loop, activation or remote agent trigger",
+  "retrieved_utc": "2026-11-07T06:04:51.064139+00:00"
+}

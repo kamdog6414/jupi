@@ -1,0 +1,7 @@
+[Unit]
+Description=JUPI Joint Unix Platform Integrator
+Wants=jupi-agent.service jupi-health.timer jupi-zram.service jupi-link@roach.service jupi-firewall.service sshd.service musegadget.service jupi-nerves.timer fclink.service jupi-link@fclink.service jupi-observe.timer ollama.service
+After=local-fs.target network.target
+
+[Install]
+WantedBy=multi-user.target

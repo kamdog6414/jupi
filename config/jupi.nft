@@ -1,0 +1,17 @@
+#!/usr/bin/nft -f
+# Own table only; leave other software's tables in place.
+destroy table inet jupi
+table inet jupi {
+    chain input {
+        type filter hook input priority filter; policy drop;
+        iifname "lo" accept
+        ct state established,related accept
+        ct state invalid drop
+        meta l4proto { icmp, ipv6-icmp } accept
+        udp sport 67 udp dport 68 accept comment "DHCPv4 renewal"
+        udp sport 547 udp dport 546 accept comment "DHCPv6 renewal"
+        tcp dport 22 accept comment "JUPI SSH access"
+        iifname "eth0" ip saddr { 192.168.77.1, 192.168.77.3 } tcp dport 8765 accept comment "Signed FC-Link from verified lab peers"
+        counter drop
+    }
+}

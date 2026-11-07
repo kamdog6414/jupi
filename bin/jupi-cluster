@@ -1,0 +1,81 @@
+#!/usr/bin/python3
+"""Observe JUPI's enrolled membership and local cluster services without actuation."""
+from datetime import datetime,timezone
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+def read(path):
+    return json.loads(Path(path).read_text())
+
+
+def run(argv):
+    try:
+        result=subprocess.run(argv,capture_output=True,text=True,timeout=12)
+        return {'code':result.returncode,'stdout':result.stdout.strip(),'stderr':result.stderr.strip()[:500]}
+    except (OSError,subprocess.TimeoutExpired) as error:
+        return {'code':-1,'stdout':'','stderr':type(error).__name__}
+
+
+def identity_binding(identity_bytes,membership,authorization_bytes):
+    identity=json.loads(identity_bytes)
+    return (membership.get('schema')=='jupi.cluster.membership.v1' and
+            membership.get('endpoint_id')==identity.get('endpoint_id') and
+            membership.get('actor')=='agape:agent:JUPI' and membership.get('seat_or_author')=='JUPI' and
+            membership.get('config_hash')==hashlib.sha256(identity_bytes).hexdigest() and
+            membership.get('authorization_sha256')==hashlib.sha256(authorization_bytes).hexdigest())
+
+
+def observation_age(utc,reference=None):
+    try:
+        stamp=datetime.fromisoformat(utc.replace('Z','+00:00'))
+        if stamp.tzinfo is None: raise ValueError('Timezone required')
+        seconds=((reference or datetime.now(timezone.utc))-stamp).total_seconds()
+        return {'seconds':round(seconds,1),'fresh':-60<=seconds<=900,'maximum_seconds':900}
+    except (ValueError,TypeError,AttributeError):
+        return {'seconds':None,'fresh':False,'maximum_seconds':900}
+
+
+def collect():
+    membership=read('/etc/jupi/cluster-membership.json')
+    identity=Path('/etc/jupi/identity.json').read_bytes()
+    authorization=Path('/home/pi/ChatGPT/JUPI/JUPI-ENROLLMENT-AUTHORIZATION-20261107.json').read_bytes()
+    bound=identity_binding(identity,membership,authorization)
+    services={name:{'active':run(['systemctl','is-active',name])['stdout'],
+                    'enabled':run(['systemctl','is-enabled',name])['stdout']}
+              for name in ('jupi-agent.service','musegadget.service','jupi-link@roach.service',
+                           'fclink.service','jupi-link@fclink.service','jupi-nerves.timer','jupi-observe.timer')}
+    xchain=run(['/usr/local/bin/jupi-xchain','verify'])
+    castor=run(['/usr/local/bin/jupi-castor','status'])
+    agape=run(['/usr/local/bin/jupi-agape','verify'])
+    issues=[]
+    if not bound: issues.append('Membership does not match the frozen identity and explicit authorization')
+    for name in ('agape','castorlte','fc-link','xchain'):
+        if membership.get('memberships',{}).get(name,{}).get('state')!='ENROLLED':issues.append(name+' is not enrolled')
+    for name,value in services.items():
+        if value!={'active':'active','enabled':'enabled'}:issues.append(name+' is not active and enabled')
+    for name,value in (('xchain',xchain),('Castor',castor),('Agape',agape)):
+        if value['code']!=0:issues.append(name+' verification failed')
+    if castor['code']==0 and json.loads(castor['stdout']).get('author_enrolled') is not True:
+        issues.append('Castor author membership is not confirmed')
+    castor_age=observation_age(json.loads(castor['stdout']).get('utc')) if castor['code']==0 else observation_age(None)
+    return {'schema':'jupi.cluster.status.v1','utc':datetime.now(timezone.utc).isoformat(),
+            'endpoint_id':membership.get('endpoint_id'),'membership_config_and_authorization_bound':bound,
+            'instrument_cluster_ready':not issues,'issues':issues,'memberships':membership['memberships'],
+            'services':services,'verification':{'xchain':xchain,'castor':castor,'agape':agape},
+            'castor_snapshot_age':castor_age,
+            'observation_warnings':[] if castor_age['fresh'] else ['Castor snapshot is stale or its time is unconfirmed; membership remains a separate check'],
+            'live_peer_observations':'jupi-observe status',
+            'scope':'JUPI membership and local service verification. Cached chain integrity does not prove live peer reachability. See observer freshness and wider-cluster receipts.'}
+
+
+def main():
+    if len(sys.argv)>1 and sys.argv[1]!='status':raise SystemExit('Usage: jupi-cluster [status]')
+    result=collect();print(json.dumps(result,indent=2))
+    return 0 if result['instrument_cluster_ready'] else 1
+
+
+if __name__=='__main__':raise SystemExit(main())

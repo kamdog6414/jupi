@@ -1,0 +1,5 @@
+#!/bin/sh
+export GEGL_USE_OPENCL=no
+export GEGL_THREADS=2
+export GEGL_CACHE_SIZE=256
+exec /usr/bin/gimp --no-splash "$@"

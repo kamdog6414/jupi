@@ -1,0 +1,28 @@
+{
+  "schema": "jupi.science.config.v1",
+  "expected_peer_hostname": "roach",
+  "components": {
+    "workflow": {
+      "path": "/usr/local/lib/jupi-agent/science_workflow.py",
+      "sha256": "d42b386d76877171fd0f6f885cb9a7583de8a397e7f61a86c2052dd188d3d18c"
+    },
+    "peer": {
+      "path": "/usr/local/lib/jupi-agent/science_peer.py",
+      "sha256": "c8a435b538a22c1a6b7bbb85e2351744d64c1a023e3732862085ab81418c51eb"
+    },
+    "gpu_source": {
+      "path": "/usr/local/lib/jupi-agent/science_gpu.c",
+      "sha256": "637d72729f7b0a41e79029cb250b9b9db791b5458f42a3de3d87fbc2da289456"
+    },
+    "gpu_binary": {
+      "path": "/usr/local/lib/jupi-agent/science-gpu",
+      "sha256": "f3bbeeed8a91a62885bc347374185bd9ca2da34cd3c29851272e54c3765748f2"
+    }
+  },
+  "maximum_samples": 65536,
+  "native_job_deadline_seconds": 180,
+  "peer_wall_deadline_seconds": 45,
+  "peer_cpu_deadline_seconds": 15,
+  "peer_address_space_bytes": 268435456,
+  "automatic_publication": false
+}

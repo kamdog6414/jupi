@@ -1,0 +1,65 @@
+# Development and recovery
+base-devel
+cmake
+meson
+pkgconf
+rsync
+tmux
+jq
+ripgrep
+btop
+iotop
+sysstat
+strace
+lsof
+usbutils
+inetutils
+lm_sensors
+smartmontools
+unzip
+zip
+7zip
+# Native coding runtimes and workflow tools
+nodejs-lts-krypton
+npm
+uv
+python-virtualenv
+sqlite
+pv
+tree
+ncdu
+opencl-headers
+# Scientific computing and instrument interfaces
+python-numpy
+python-scipy
+python-sympy
+python-matplotlib
+python-pyserial
+python-pyusb
+# GPU diagnostics; preserve the custom Mesa/AMDGPU packages
+mesa-utils
+vulkan-tools
+libva-utils
+clinfo
+# Rootless containers
+podman
+fuse-overlayfs
+passt
+buildah
+skopeo
+podman-compose
+
+# Creative media and command quality
+ffmpeg
+gimp
+chafa
+figlet
+ttf-dejavu
+man-db
+man-pages
+shellcheck
+shfmt
+fio
+sysbench
+iperf3
+openblas

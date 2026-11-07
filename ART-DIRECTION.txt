@@ -1,0 +1,25 @@
+JUPI GOTHIC ASCII ART DIRECTION
+
+Use the installed renderer through explicit native art jobs. Do not rely on a small language model to keep a large character grid aligned.
+
+Command: jupi-agent art --scene facade --style engraving --width 141 --height 77 --seed 14 --video
+Inspect: jupi-agent wait JOB_ID; jupi-art verify --output DIRECTORY; jupi-art preview --output DIRECTORY
+
+Composition grammar:
+- facade: paired spires, pointed lancet arches, rose-window tracery, three portals, flying buttresses and descending steps.
+- nave: repeated pointed vaults and columns, a distant rose window/altar and a perspective floor.
+- engraving: readable structural lines and restrained stone stipple.
+- nocturne: more negative space and sparse light-like marks.
+- ruins: weathered masonry texture; preserve the main architectural silhouette.
+
+Quality rules:
+Keep the text strictly ASCII, with the requested fixed columns and rows. Use generous canvas size for fine tracery. Preserve the central axis and legible entrances. Treat the rose window as a focal point. Keep titles modest. Inspect both TXT and PNG; revise the recipe/seed into a new run instead of overwriting earlier work.
+
+Outputs:
+cathedral.txt uses LF; cathedral-windows.txt uses CRLF. PNG is strict two-color, SVG uses monospaced text, and optional MP4 is a four-second monochrome fade. Font and renderer snapshots plus hashes preserve the result's provenance. Artwork is creative output, not sensor data or scientific measurement.
+
+Editing and conversion:
+Open PNG/SVG with jupi-gimp. Its scoped GEGL profile uses two CPU threads and disables GEGL OpenCL, leaving the science GPU path independent. Chafa and FIGlet are available for additional terminal art; consult chafa --help/figlet --help for exact options. Use FFmpeg explicitly for media transformations.
+
+Cross-platform work:
+Use jupi-unix list/map/translate/search. References target PowerShell 7 on Windows and explain object/text, privilege, path and encoding differences. Unknown commands need explicit reasoning; no translated command is automatically executed. Local man pages, ShellCheck and shfmt support Linux command work.

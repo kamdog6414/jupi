@@ -1,0 +1,24 @@
+{
+  "schema": "jupi.art.config.v1",
+  "renderer_sha256": "2a5b19e72e53d3813dc798ee99ff67ce0efd9921f287a385dc708ca661a0ecd2",
+  "scenes": [
+    "facade",
+    "nave"
+  ],
+  "styles": [
+    "engraving",
+    "nocturne",
+    "ruins"
+  ],
+  "maximum_columns": 241,
+  "maximum_rows": 121,
+  "native_job_seconds": 120,
+  "classification": "procedural artwork; not science measurements",
+  "output_formats": [
+    "ASCII LF",
+    "ASCII CRLF",
+    "monochrome PNG",
+    "SVG",
+    "optional H264 MP4"
+  ]
+}

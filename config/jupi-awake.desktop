@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=JUPI always-on desktop
+Comment=Keep the research computer awake and unlocked
+Exec=/usr/local/bin/jupi-awake
+TryExec=/usr/local/bin/jupi-awake
+Terminal=false
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true

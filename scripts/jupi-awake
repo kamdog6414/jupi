@@ -1,0 +1,66 @@
+#!/usr/bin/python3
+"""Apply the owner's always-on, unlocked XFCE desktop policy."""
+import json
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+
+
+def run(argv):
+    return subprocess.run(argv, capture_output=True, text=True, timeout=15)
+
+
+def set_property(channel, key, kind, value):
+    query = run(["xfconf-query", "-c", channel, "-p", key])
+    command = ["xfconf-query", "-c", channel, "-p", key, "-s", value]
+    if query.returncode:
+        command += ["-n", "-t", kind]
+    result = run(command)
+    if result.returncode:
+        raise RuntimeError(f"Unable to set {channel} {key}: {result.stderr.strip()}")
+
+
+def main():
+    if os.geteuid() != 1000:
+        raise SystemExit("Run this policy as pi in the desktop session")
+    settings = [
+        ("xfce4-power-manager", "/xfce4-power-manager/dpms-enabled", "bool", "false"),
+        ("xfce4-power-manager", "/xfce4-power-manager/lock-screen-suspend-hibernate", "bool", "false"),
+        ("xfce4-session", "/shutdown/LockScreen", "bool", "false"),
+        ("xfce4-screensaver", "/lock/enabled", "bool", "false"),
+        ("xfce4-screensaver", "/lock/saver-activation/enabled", "bool", "false"),
+        ("xfce4-screensaver", "/saver/enabled", "bool", "false"),
+        ("xfce4-screensaver", "/saver/idle-activation/enabled", "bool", "false"),
+    ]
+    for name in ["inactivity-on-ac", "inactivity-on-battery", "blank-on-ac", "blank-on-battery",
+                 "dpms-on-ac-sleep", "dpms-on-ac-off", "dpms-on-battery-sleep", "dpms-on-battery-off"]:
+        settings.append(("xfce4-power-manager", "/xfce4-power-manager/" + name, "uint", "0"))
+    for setting in settings:
+        set_property(*setting)
+    stopped = []
+    lockers = {"xfce4-screensaver", "light-locker", "xscreensaver", "xss-lock"}
+    for process in Path("/proc").iterdir():
+        if not process.name.isdigit():
+            continue
+        try:
+            if process.stat().st_uid == 1000 and (process / "exe").resolve().name in lockers:
+                os.kill(int(process.name), signal.SIGTERM)
+                stopped.append(int(process.name))
+        except (OSError, ProcessLookupError):
+            pass
+    xset = shutil.which("xset")
+    if not xset:
+        raise RuntimeError("xorg-xset is required to verify the live X11 policy")
+    for args in [["s", "off"], ["s", "noblank"], ["-dpms"], ["s", "reset"]]:
+        result = run([xset, *args])
+        if result.returncode:
+            raise RuntimeError("X11 power-policy update failed: " + result.stderr.strip())
+    query = run([xset, "q"])
+    print(json.dumps({"policy": "always on; no automatic screen lock, blanking, DPMS, suspend or hibernate",
+                      "locker_processes_stopped": stopped, "x11_query": query.stdout.strip()}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,24 @@
+# Enable only after the peer host key is independently verified and the
+# JUPI public key is authorized by the intended account on Roach.
+Host jupi-peer
+    HostName 192.168.77.3
+    User roach
+    Port 22
+    IdentityFile /home/pi/.ssh/jupi_roach_ed25519
+    IdentitiesOnly yes
+    IdentityAgent none
+    BatchMode yes
+    StrictHostKeyChecking yes
+    UserKnownHostsFile /etc/jupi/ssh/roach.known_hosts
+    UpdateHostKeys no
+    ConnectTimeout 10
+    ConnectionAttempts 1
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    ExitOnForwardFailure yes
+    ForwardAgent no
+    RequestTTY no
+    ControlMaster no
+    LogLevel VERBOSE
+# Optional reverse path, bound only on the peer's loopback interface:
+#    RemoteForward 127.0.0.1:22052 127.0.0.1:22

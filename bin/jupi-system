@@ -1,0 +1,116 @@
+#!/usr/bin/python3
+"""Live status for JUPI's internal Linux root and native workspace features."""
+import argparse
+from datetime import datetime, timezone
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import tempfile
+
+STATE = Path("/var/lib/jupi")
+ROOT_UUID = "70dbf870-bcb6-4be9-9fb5-f25c4718b71a"
+IMAGE = "/ps4hdd/home/jupi-linux-2a79fafeb62d61ff.img"
+
+
+def probe(argv):
+    try:
+        result = subprocess.run(argv, capture_output=True, text=True, timeout=8)
+        return {"code": result.returncode, "output": result.stdout.strip(), "error": result.stderr.strip()}
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return {"code": -1, "output": "", "error": type(error).__name__}
+
+
+def receipt(name):
+    try:
+        return json.loads((STATE / name).read_text())
+    except (OSError, ValueError):
+        return None
+
+
+def collect():
+    root = probe(["findmnt", "--task", "1", "-n", "-o", "SOURCE,FSTYPE,OPTIONS,UUID", "/"])
+    fields = root["output"].split()
+    backing = None
+    if fields and re.fullmatch(r"/dev/loop[0-9]+", fields[0]):
+        try:
+            backing = Path("/sys/block", Path(fields[0]).name, "loop/backing_file").read_text().strip()
+        except OSError:
+            pass
+    spaces = {}
+    for path in ("/", "/ps4hdd"):
+        stat = os.statvfs(path)
+        spaces[path] = {"filesystem_bytes": stat.f_blocks * stat.f_frsize,
+                        "available_bytes": stat.f_bavail * stat.f_frsize}
+    services = {unit: {"active": probe(["systemctl", "is-active", unit])["output"],
+                       "enabled": probe(["systemctl", "is-enabled", unit])["output"]}
+                for unit in ("sshd.service", "NetworkManager.service", "jupi-firewall.service",
+                             "jupi-link@roach.service", "jupi-health.timer", "jupi-zram.service",
+                             "jupi-agent.service", "jupi-platform.target", "ollama.service", "musegadget.service",
+                             "fclink.service", "jupi-link@fclink.service", "jupi-nerves.timer", "jupi-observe.timer")}
+    masks = {unit: probe(["systemctl", "is-enabled", unit])["output"]
+             for unit in ("sleep.target", "suspend.target", "hibernate.target", "hybrid-sleep.target",
+                          "suspend-then-hibernate.target")}
+    failed = probe(["systemctl", "--failed", "--no-legend", "--plain", "--no-pager"])
+    swaps = Path("/proc/swaps").read_text().strip()
+    issues = []
+    if not (len(fields) == 4 and fields[3] == ROOT_UUID and "rw" in fields[2].split(",") and backing == IMAGE):
+        issues.append("Expected writable internal image root is not confirmed")
+    for unit, status in services.items():
+        if status != {"active": "active", "enabled": "enabled"}:
+            issues.append(unit + " is not both active and enabled")
+    if any(value != "masked" for value in masks.values()):
+        issues.append("A sleep or hibernation target is not masked")
+    if "/dev/zram0" not in swaps:
+        issues.append("Compressed RAM swap is not active")
+    if failed["code"] or failed["output"]:
+        issues.append("System service failures require inspection")
+    if spaces["/"]["available_bytes"] < 5 * 1024**3:
+        issues.append("Root available space is below 5 GiB")
+    return {"utc": datetime.now(timezone.utc).isoformat(), "kernel": os.uname().release,
+            "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip(),
+            "runtime_healthy": not issues, "runtime_issues": issues, "root": root,
+            "backing_image": backing, "space": spaces, "swap": swaps,
+            "services": services, "sleep_targets": masks, "failed_units": failed,
+            "boot_activation": receipt("disk-boot-activation.json"),
+            "capacity": receipt("root-capacity.json"), "feature_checks": receipt("system-feature-checks.json"),
+            "limits": ["PlayStation/GoldHEN loader is still required before Linux starts",
+                       "Boot with the USB physically absent is not yet tested",
+                       "Hardware-rendering test and current desktop acceleration are recorded separately"]}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--json", action="store_true")
+    parser.add_argument("--record", action="store_true")
+    args = parser.parse_args()
+    data = collect()
+    if args.record:
+        fd, temporary = tempfile.mkstemp(prefix=".system-", dir=STATE)
+        try:
+            with os.fdopen(fd, "w") as output:
+                json.dump(data, output, indent=2); output.write("\n"); output.flush(); os.fsync(output.fileno())
+            os.replace(temporary, STATE / "system.json")
+        finally:
+            Path(temporary).unlink(missing_ok=True)
+    if args.json:
+        print(json.dumps(data, indent=2))
+    else:
+        print("JUPI native Linux: " + ("PASS" if data["runtime_healthy"] else "ATTENTION"))
+        print("Root: " + data["root"]["output"])
+        print("Backing image: " + str(data["backing_image"]))
+        print(f"Root available: {data['space']['/']['available_bytes'] / 1024**3:.1f} GiB")
+        print(data["swap"])
+        for unit, status in data["services"].items():
+            print(f"{unit}: {status['active']}; {status['enabled']}")
+        print("Sleep/hibernation targets: " + ", ".join(sorted(set(data["sleep_targets"].values()))))
+        for issue in data["runtime_issues"]:
+            print("ATTENTION: " + issue)
+        for limit in data["limits"]:
+            print("Boot/graphics note: " + limit)
+    return 0 if data["runtime_healthy"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

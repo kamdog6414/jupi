@@ -1,0 +1,13 @@
+{
+  "schema": "jupi.hardware.context.v1",
+  "utc": "2026-11-07T13:49:28.280115+00:00",
+  "platform": "Repurposed Sony PS4 running native Arch Linux as JUPI",
+  "firmware_version": {
+    "value": "14.00",
+    "source": "Operator report in this conversation",
+    "independently_read_from_console_firmware": false
+  },
+  "engineering_scope": "Maintain the running native Linux instrument, its verified interfaces, and recovery. No further exploit development or boot changes in this integration.",
+  "novelty_claim": "Not independently established",
+  "sensor_reference": "https://docs.kernel.org/hwmon/k10temp.html"
+}

@@ -1,0 +1,18 @@
+[Unit]
+Description=JUPI local nervous-system observation
+After=jupi-agent.service musegadget.service
+
+[Service]
+Type=oneshot
+User=pi
+Group=pi
+ExecStart=/usr/local/bin/jupi-nerves pulse
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/jupi-agent/nerves
+RestrictAddressFamilies=AF_UNIX
+MemoryMax=128M
+Nice=10
+TimeoutStartSec=20

@@ -1,0 +1,58 @@
+#!/usr/bin/python3
+"""Manage JUPI's 2 GiB compressed RAM swap without a USB dependency."""
+import os
+from pathlib import Path
+import stat
+import subprocess
+import sys
+
+DEVICE = "/dev/zram0"
+SYSFS = Path("/sys/block/zram0")
+MARKER = Path("/run/jupi-zram.owned")
+SIZE = 2 * 1024**3
+
+
+def active():
+    return DEVICE in [line.split()[0] for line in Path("/proc/swaps").read_text().splitlines()[1:]]
+
+
+def run(argv):
+    subprocess.run(argv, check=True, timeout=60)
+
+
+def main():
+    if os.geteuid() != 0 or len(sys.argv) != 2 or sys.argv[1] not in ("start", "stop"):
+        raise SystemExit("Usage: jupi-zram start|stop (as root)")
+    os.umask(0o077)
+    if not stat.S_ISBLK(Path(DEVICE).stat().st_mode) or SYSFS.resolve() != Path("/sys/devices/virtual/block/zram0"):
+        raise SystemExit("Unexpected zram device")
+    if sys.argv[1] == "stop":
+        if not MARKER.exists():
+            return
+        if active():
+            run(["swapoff", DEVICE])
+        (SYSFS / "reset").write_text("1\n")
+        MARKER.unlink(missing_ok=True)
+        return
+    if active():
+        if not MARKER.exists():
+            raise SystemExit("An existing zram swap is managed elsewhere")
+        return
+    if int((SYSFS / "disksize").read_text()) != 0:
+        raise SystemExit("An existing nonempty zram device will not be reformatted")
+    initialized = False
+    try:
+        (SYSFS / "disksize").write_text(str(SIZE) + "\n")
+        initialized = True
+        run(["mkswap", "-L", "JUPI_ZRAM", DEVICE])
+        run(["swapon", "--priority", "100", DEVICE])
+        MARKER.write_text("JUPI compressed RAM swap, 2 GiB\n")
+        os.chmod(MARKER, 0o600)
+    except Exception:
+        if initialized and not active():
+            (SYSFS / "reset").write_text("1\n")
+        raise
+
+
+if __name__ == "__main__":
+    main()

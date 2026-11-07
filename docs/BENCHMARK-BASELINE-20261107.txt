@@ -1,0 +1,43 @@
+JUPI MEASURED INSTRUMENT BASELINE — 7 NOVEMBER 2026
+
+Profile: 589c1d7f5f6ddda597b21fb2012aa0e3a2a37f936a8eedd1a4020e01597d85ba
+Raw measurements: /var/lib/jupi-agent/benchmarks/eb4a6b26-0642-4259-af1b-33a1219d4901
+Detailed report: JUPI-BENCHMARK-REPORT-20261107.json
+Chart: /var/lib/jupi-agent/benchmarks/eb4a6b26-0642-4259-af1b-33a1219d4901/benchmark-chart.png
+
+RESULTS (three trials unless stated)
+CPU prime events/s: one thread 746.98; eight threads 4315.03, 5.78x scaling.
+Reference float64 matrix 384x384: 0.727 GFLOP/s. Scoped OpenBLAS: 5.325 at two threads, 9.923 at four.
+Final agent 768x768 matrix: 5.799 GFLOP/s with two threads on CPUs 0,2; exact validation of every output element.
+Memory array workload (192 MiB): 5.937 nominal GB/s, 8,388,608 sums checked.
+GPU vector-add: 51.119 nominal GB/s; 1,048,576 output elements checked, zero mismatches. Nominal traffic includes three float transfers, host enqueue/finish timing and cache effects.
+GLES checkerboard draw-and-finish: 720p 0.188 ms; 1080p 0.308 ms. All final pixel channels match. These are offscreen microbenchmarks, not game FPS.
+CPU 720p x264 veryfast encoding: 46.08 fps at two threads and 50.28 at four. Two threads selected for interactive work.
+Pinned SSH path: upload 382.25 Mbit/s, download 278.50 Mbit/s; each 32 MiB transfer rehashed. Includes SSH/Python/copy/hash overhead, not raw Ethernet.
+Local qwen3:0.6b final retest: 13.55 generated tokens/s with four threads. Full-context native prompt took 34.57 s including setup, prompt processing and six output tokens. This is not a model-quality result.
+Storage sequential writes: 13.47, 79.83, 81.42 MiB/s; first write includes fresh extent allocation. Guest direct reads reach backing cache and do not measure raw HDD speed. Mean fsync latency across trials: 4.708 ms.
+Relative k10temp Tctl: 77.75–82.75 control degrees across 282 snapshots, not calibrated die Celsius. Minimum available RAM during the initial suite: 2.41 GiB.
+
+CONFIGURATION SELECTED
+Agent inherits CPUs 0 and 2. Two scoped OpenBLAS threads are fastest within that pair; four are available for explicit unrestricted batch work. System BLAS was not replaced. The custom kernel cannot enforce CPUQuota; inherited affinity is placement, not an exclusive reservation or security boundary.
+Ollama retains all-core scheduler placement, four explicit model workers, nice 10, one request, 2048 context tokens and its enforced memory limit. A restricted mask regressed badly, was rejected and reverted before the final retest. GIMP keeps its two-thread CPU compatibility profile. Existing 2 GiB lz4 zram and always-on settings are retained.
+Local inference starts without network-online.target. Kernel, graphics stack, root image, boot assets, SSH, SDK and desktop remain intact. No overclock or fan/voltage writes were introduced.
+
+OFFLINE AND ROVER QUALIFICATION
+Network-isolated native agent/model instances completed local inference, reviewed OS lookup, GPU arithmetic, art and 501-frame synthetic encoder odometry. Memory and completed job records survived an agent restart. The peer connection returned ENETUNREACH. The initial reconnect failure and successful retests are retained separately; 76 tests pass.
+Rover analysis accepts time_s,left_m,right_m (cumulative metres) and an explicit wheel separation, writes relative pose/velocity CSV and trajectory SVG, and preserves input/source hashes. It assumes no slip and supplies no absolute localization, gyro fusion or actuator control. No physical rover, camera or encoder is attached.
+Hybrid GPU/Ubuntu calibration and cluster communication still require the peer/network. No independent cold boot or new startup loader is claimed.
+
+REPEAT AND VERIFY
+jupi-profile verify
+jupi-bench status
+jupi-bench run
+jupi-compute -- python3 my_analysis.py
+jupi-rover demo
+jupi-rover integrate encoders.csv --wheelbase-m 0.4
+
+METHOD REFERENCES
+fio: https://fio.readthedocs.io/en/latest/fio_doc.html
+OpenBLAS runtime controls: https://www.openmathlib.org/OpenBLAS/docs/runtime_variables/
+Network namespace isolation: https://www.freedesktop.org/software/systemd/man/latest/systemd.exec
+Differential-drive odometry context: https://control.ros.org/rolling/doc/ros2_controllers/diff_drive_controller/doc/userdoc.html

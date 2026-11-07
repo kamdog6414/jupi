@@ -1,0 +1,35 @@
+[Unit]
+Description=JUPI native agent seed and durable job queue
+After=local-fs.target network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=exec
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/ChatGPT/JUPI
+ExecStart=/usr/local/lib/jupi-agent/runtime.py serve
+Restart=on-failure
+RestartSec=5
+StateDirectory=jupi-agent
+StateDirectoryMode=0700
+RuntimeDirectory=jupi-agent
+RuntimeDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryHigh=768M
+MemoryMax=1536M
+CPUQuota=200%
+TasksMax=96
+Nice=10
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,22 @@
+# JUPI override of the native vendor unit: local inference does not require an online network.
+[Unit]
+Description=Ollama Service
+After=local-fs.target network.target
+
+[Service]
+ExecStart=/usr/bin/ollama serve
+WorkingDirectory=/var/lib/ollama
+Environment="HOME=/var/lib/ollama"
+Environment="OLLAMA_MODELS=/var/lib/ollama"
+User=ollama
+Group=ollama
+Restart=on-failure
+RestartSec=3
+RestartPreventExitStatus=1
+Type=simple
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target

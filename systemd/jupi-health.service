@@ -1,0 +1,20 @@
+[Unit]
+Description=JUPI bounded system inventory and health receipt
+After=network.target
+
+[Service]
+Type=oneshot
+User=pi
+Group=pi
+ExecStart=/usr/local/bin/jupi health --record
+StateDirectory=jupi
+StateDirectoryMode=0750
+UMask=0027
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+RestrictSUIDSGID=yes
+LockPersonality=yes
+TimeoutStartSec=90
+Nice=10

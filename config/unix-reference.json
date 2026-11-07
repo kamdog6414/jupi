@@ -1,0 +1,321 @@
+{
+  "schema": "jupi.unix.reference.v1",
+  "scope": "Reviewed operation templates, not automatic shell conversion or execution. PowerShell examples target PowerShell 7 on Windows. Substitute placeholders and review privileges, paths, encoding and object/text semantics.",
+  "sources": {
+    "powershell_parsing": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing",
+    "powershell_pipeline": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines",
+    "get_childitem": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem",
+    "linux_reference": "Installed man-db/man-pages and each program's --help"
+  },
+  "entries": {
+    "files": {
+      "linux": "ls -lah",
+      "powershell_windows": "Get-ChildItem -Force",
+      "windows_cmd": "dir /a",
+      "notes": "PowerShell returns filesystem objects; -Force includes hidden items.",
+      "linux_aliases": [
+        "ls -la",
+        "ls"
+      ],
+      "changes_state": false
+    },
+    "location": {
+      "linux": "pwd",
+      "powershell_windows": "Get-Location",
+      "windows_cmd": "cd",
+      "notes": "Get-Location returns a PathInfo object.",
+      "linux_aliases": [
+        "pwd"
+      ],
+      "changes_state": false
+    },
+    "read-file": {
+      "linux": "cat FILE",
+      "powershell_windows": "Get-Content -LiteralPath FILE",
+      "windows_cmd": "type FILE",
+      "notes": "Encoding and newline defaults differ; choose an encoding for interchange.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "head": {
+      "linux": "head -n 20 FILE",
+      "powershell_windows": "Get-Content -LiteralPath FILE -TotalCount 20",
+      "windows_cmd": "powershell -NoProfile -Command \"Get-Content -LiteralPath FILE -TotalCount 20\"",
+      "notes": "Use literal paths rather than wildcard interpretation.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "tail-follow": {
+      "linux": "tail -n 20 -f FILE",
+      "powershell_windows": "Get-Content -LiteralPath FILE -Tail 20 -Wait",
+      "windows_cmd": null,
+      "notes": "Follow mode is a long-running read; stop it explicitly.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "search-literal": {
+      "linux": "grep -n -F -- needle FILE",
+      "powershell_windows": "Select-String -LiteralPath FILE -Pattern needle -SimpleMatch -CaseSensitive",
+      "windows_cmd": "findstr /n /l /c:needle FILE",
+      "notes": "Select-String returns MatchInfo objects; grep normally returns text.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "recursive-files": {
+      "linux": "find . -type f -name '*.log'",
+      "powershell_windows": "Get-ChildItem -LiteralPath . -File -Recurse -Force -Filter '*.log'",
+      "windows_cmd": "dir /s /b *.log",
+      "notes": "Hidden files, links, permissions and error behavior require review.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "hash": {
+      "linux": "sha256sum FILE",
+      "powershell_windows": "Get-FileHash -LiteralPath FILE -Algorithm SHA256",
+      "windows_cmd": "certutil -hashfile FILE SHA256",
+      "notes": "Compare the digest field, not display formatting.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "copy": {
+      "linux": "cp -- SOURCE DESTINATION",
+      "powershell_windows": "Copy-Item -LiteralPath SOURCE -Destination DESTINATION",
+      "windows_cmd": "copy SOURCE DESTINATION",
+      "notes": "Overwrite, recursion and metadata preservation options differ.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "move": {
+      "linux": "mv -- SOURCE DESTINATION",
+      "powershell_windows": "Move-Item -LiteralPath SOURCE -Destination DESTINATION",
+      "windows_cmd": "move SOURCE DESTINATION",
+      "notes": "A move across filesystems can become a copy/delete operation.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "mkdir": {
+      "linux": "mkdir -p DIRECTORY",
+      "powershell_windows": "New-Item -ItemType Directory -Path DIRECTORY",
+      "windows_cmd": "mkdir DIRECTORY",
+      "notes": "Parent creation and existing-directory behavior differ.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "remove": {
+      "linux": "rm -i -- FILE",
+      "powershell_windows": "Remove-Item -LiteralPath FILE -Confirm",
+      "windows_cmd": "del /p FILE",
+      "notes": "State-changing examples ask before deletion; check the resolved target.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "permissions": {
+      "linux": "stat FILE",
+      "powershell_windows": "Get-Acl -LiteralPath FILE",
+      "windows_cmd": "icacls FILE",
+      "notes": "Unix mode/ownership and Windows ACLs require a semantic mapping, not flag substitution.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "processes": {
+      "linux": "ps aux",
+      "powershell_windows": "Get-Process",
+      "windows_cmd": "tasklist",
+      "notes": "Process objects use properties such as Id and ProcessName; output columns differ.",
+      "linux_aliases": [
+        "ps aux"
+      ],
+      "changes_state": false
+    },
+    "system": {
+      "linux": "uname -a",
+      "powershell_windows": "Get-ComputerInfo",
+      "windows_cmd": "systeminfo",
+      "notes": "Kernel identification and full OS/computer inventory are different scopes.",
+      "linux_aliases": [
+        "uname -a"
+      ],
+      "changes_state": false
+    },
+    "cpu": {
+      "linux": "lscpu",
+      "powershell_windows": "Get-CimInstance Win32_Processor | Select-Object Name,NumberOfCores,NumberOfLogicalProcessors",
+      "windows_cmd": null,
+      "notes": "Windows CIM results describe physical processors and logical counts.",
+      "linux_aliases": [
+        "lscpu"
+      ],
+      "changes_state": false
+    },
+    "memory": {
+      "linux": "free -h",
+      "powershell_windows": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory",
+      "windows_cmd": "systeminfo",
+      "notes": "CIM memory fields here are KiB; free also distinguishes caches and swap.",
+      "linux_aliases": [
+        "free -h"
+      ],
+      "changes_state": false
+    },
+    "disks": {
+      "linux": "lsblk -f",
+      "powershell_windows": "Get-Disk; Get-Volume",
+      "windows_cmd": null,
+      "notes": "Disks, partitions, volumes and mount points are separate concepts.",
+      "linux_aliases": [
+        "lsblk -f"
+      ],
+      "changes_state": false
+    },
+    "disk-space": {
+      "linux": "df -hT",
+      "powershell_windows": "Get-PSDrive -PSProvider FileSystem",
+      "windows_cmd": null,
+      "notes": "Filesystem drives and mounted volumes are not identical inventories.",
+      "linux_aliases": [
+        "df -hT",
+        "df -h"
+      ],
+      "changes_state": false
+    },
+    "network": {
+      "linux": "ip -brief address",
+      "powershell_windows": "Get-NetIPConfiguration",
+      "windows_cmd": "ipconfig /all",
+      "notes": "The NetTCPIP module is Windows-specific, including from PowerShell 7.",
+      "linux_aliases": [
+        "ip -brief address",
+        "ip -br address"
+      ],
+      "changes_state": false
+    },
+    "routes": {
+      "linux": "ip route",
+      "powershell_windows": "Get-NetRoute",
+      "windows_cmd": "route print",
+      "notes": "Review address family and interface index.",
+      "linux_aliases": [
+        "ip route"
+      ],
+      "changes_state": false
+    },
+    "listeners": {
+      "linux": "ss -lntup",
+      "powershell_windows": "Get-NetTCPConnection -State Listen",
+      "windows_cmd": "netstat -ano",
+      "notes": "TCP and UDP are separate cmdlets; use Get-NetUDPEndpoint for UDP.",
+      "linux_aliases": [
+        "ss -lntup"
+      ],
+      "changes_state": false
+    },
+    "dns": {
+      "linux": "resolvectl query example.org",
+      "powershell_windows": "Resolve-DnsName example.org",
+      "windows_cmd": "nslookup example.org",
+      "notes": "Resolver configuration and caching differ.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "ping": {
+      "linux": "ping -c 4 HOST",
+      "powershell_windows": "Test-Connection -TargetName HOST -Count 4",
+      "windows_cmd": "ping -n 4 HOST",
+      "notes": "-TargetName is the PowerShell 7 spelling; older Windows PowerShell uses -ComputerName.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "services": {
+      "linux": "systemctl --type=service",
+      "powershell_windows": "Get-Service",
+      "windows_cmd": "sc query",
+      "notes": "Service lifecycle, systemd units and Windows service dependencies differ.",
+      "linux_aliases": [
+        "systemctl --type=service"
+      ],
+      "changes_state": false
+    },
+    "service-start": {
+      "linux": "sudo systemctl start SERVICE",
+      "powershell_windows": "Start-Service -Name SERVICE",
+      "windows_cmd": "sc start SERVICE",
+      "notes": "State-changing; elevation may be required.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "service-autostart": {
+      "linux": "sudo systemctl enable SERVICE",
+      "powershell_windows": "Set-Service -Name SERVICE -StartupType Automatic",
+      "windows_cmd": "sc config SERVICE start= auto",
+      "notes": "This configures startup policy; starting the service is a separate action.",
+      "linux_aliases": [],
+      "changes_state": true
+    },
+    "logs": {
+      "linux": "journalctl -n 50 --no-pager",
+      "powershell_windows": "Get-WinEvent -LogName System -MaxEvents 50",
+      "windows_cmd": null,
+      "notes": "Windows event channels and the systemd journal have different sources and schemas.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "environment": {
+      "linux": "env",
+      "powershell_windows": "Get-ChildItem Env:",
+      "windows_cmd": "set",
+      "notes": "Environment values may contain secrets; review before sharing.",
+      "linux_aliases": [
+        "env"
+      ],
+      "changes_state": false
+    },
+    "command-location": {
+      "linux": "command -v PROGRAM",
+      "powershell_windows": "Get-Command PROGRAM",
+      "windows_cmd": "where PROGRAM",
+      "notes": "Get-Command also resolves functions, aliases and cmdlets.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "identity": {
+      "linux": "id",
+      "powershell_windows": "whoami /all",
+      "windows_cmd": "whoami /all",
+      "notes": "Windows SIDs, groups and privileges differ from Unix UID/GID.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "ssh": {
+      "linux": "ssh user@host",
+      "powershell_windows": "ssh user@host",
+      "windows_cmd": "ssh user@host",
+      "notes": "Requires OpenSSH client, verified host trust and the intended account.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "archive-list": {
+      "linux": "tar -tf ARCHIVE",
+      "powershell_windows": "tar.exe -tf ARCHIVE",
+      "windows_cmd": "tar -tf ARCHIVE",
+      "notes": "Modern Windows ships a tar implementation; verify format and tool version.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "media-info": {
+      "linux": "ffprobe -v error -show_format -show_streams -of json FILE",
+      "powershell_windows": "ffprobe -v error -show_format -show_streams -of json FILE",
+      "windows_cmd": "ffprobe -v error -show_format -show_streams -of json FILE",
+      "notes": "FFprobe must be installed on the target system.",
+      "linux_aliases": [],
+      "changes_state": false
+    },
+    "ascii-art": {
+      "linux": "jupi-art cathedral --enqueue --scene facade --style engraving --seed 14",
+      "powershell_windows": null,
+      "windows_cmd": null,
+      "notes": "Generate on JUPI; TXT/CRLF TXT, PNG, SVG and MP4 are portable outputs.",
+      "linux_aliases": [],
+      "changes_state": true
+    }
+  }
+}

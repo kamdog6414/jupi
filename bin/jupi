@@ -1,0 +1,226 @@
+#!/usr/bin/python3
+"""JUPI's local operations shell. Bounded, read-only probes; no command eval."""
+import argparse
+from datetime import datetime, timezone
+import json
+import os
+from pathlib import Path
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
+
+VERSION = "0.1.0"
+STATE = Path("/var/lib/jupi")
+
+# These mappings explain equivalents. They do not execute translated input.
+MAP = {
+    "files": {"linux": "ls -lah", "powershell": "Get-ChildItem -Force", "cmd": "dir", "macos": "ls -lah"},
+    "location": {"linux": "pwd", "powershell": "Get-Location", "cmd": "cd", "macos": "pwd"},
+    "processes": {"linux": "ps aux", "powershell": "Get-Process", "cmd": "tasklist", "macos": "ps aux"},
+    "network": {"linux": "ip -brief address", "powershell": "Get-NetIPConfiguration", "cmd": "ipconfig /all", "macos": "ifconfig"},
+    "routes": {"linux": "ip route", "powershell": "Get-NetRoute", "cmd": "route print", "macos": "netstat -rn"},
+    "listeners": {"linux": "ss -lntup", "powershell": "Get-NetTCPConnection -State Listen", "cmd": "netstat -ano", "macos": "lsof -nP -iTCP -sTCP:LISTEN"},
+    "services": {"linux": "systemctl --type=service", "powershell": "Get-Service", "cmd": "sc query", "macos": "launchctl list"},
+    "disks": {"linux": "lsblk -f", "powershell": "Get-Volume", "cmd": "fsutil fsinfo drives", "macos": "diskutil list"},
+    "disk-space": {"linux": "df -hT", "powershell": "Get-PSDrive -PSProvider FileSystem", "cmd": "fsutil volume diskfree C:", "macos": "df -h"},
+    "memory": {"linux": "free -h", "powershell": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize,FreePhysicalMemory", "cmd": "systeminfo", "macos": "vm_stat"},
+    "system": {"linux": "uname -a", "powershell": "Get-ComputerInfo", "cmd": "systeminfo", "macos": "sw_vers"},
+    "ssh": {"linux": "ssh user@host", "powershell": "ssh user@host", "cmd": "ssh user@host", "macos": "ssh user@host"},
+}
+
+
+def probe(argv, timeout=8):
+    try:
+        completed = subprocess.run(argv, capture_output=True, text=True, timeout=timeout,
+                                   env={**os.environ, "LC_ALL": "C", "SYSTEMD_PAGER": "cat"})
+        return {"command": argv, "returncode": completed.returncode,
+                "stdout": completed.stdout.strip(), "stderr": completed.stderr.strip()}
+    except (OSError, subprocess.TimeoutExpired) as error:
+        return {"command": argv, "returncode": 124 if isinstance(error, subprocess.TimeoutExpired) else 127,
+                "stdout": "", "stderr": str(error)}
+
+
+def atomic_json(path, payload):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(prefix=".jupi-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(payload, handle, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(name, 0o640)
+        os.replace(name, path)
+        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
+
+
+def unit_state(name, field="is-active"):
+    return probe(["systemctl", field, name])
+
+
+def inventory():
+    checks = {
+        "root": ["findmnt", "--task", "1", "-n", "-o", "SOURCE,FSTYPE,OPTIONS", "/"],
+        "root_uuid": ["findmnt", "--task", "1", "-n", "-o", "UUID", "/"],
+        "disks": ["lsblk", "-J", "-o", "NAME,TYPE,SIZE,FSTYPE,MOUNTPOINTS,UUID,MODEL"],
+        "network": ["ip", "-j", "address"],
+        "routes": ["ip", "-j", "route"],
+        "listeners": ["ss", "-lntu"],
+        "failed_units": ["systemctl", "--failed", "--no-legend", "--plain", "--no-pager"],
+        "swap": ["swapon", "--show", "--noheadings"],
+        "clock": ["timedatectl", "show", "-p", "NTPSynchronized", "-p", "Timezone"],
+    }
+    data = {"version": VERSION, "utc": datetime.now(timezone.utc).isoformat(),
+            "hostname": os.uname().nodename, "kernel": os.uname().release,
+            "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip(),
+            "uptime_seconds": float(Path("/proc/uptime").read_text().split()[0]),
+            "load_average": list(os.getloadavg()),
+            "boot_firmware": "UEFI" if Path("/sys/firmware/efi").exists() else "No UEFI interface detected",
+            "cold_boot_verified": False,
+            "boot_note": "PS4 payload/loader required; these probes do not establish unattended cold boot.",
+            "probes": {name: probe(argv) for name, argv in checks.items()}}
+    data["services"] = {
+        name: {"active": unit_state(name), "enabled": unit_state(name, "is-enabled")}
+        for name in ["sshd.service", "NetworkManager.service", "systemd-timesyncd.service",
+                     "jupi-firewall.service", "jupi-health.timer", "jupi-link@roach.service"]
+    }
+    disk = shutil.disk_usage("/")
+    data["root_space"] = {"total_bytes": disk.total, "free_bytes": disk.free,
+                          "used_percent": round(disk.used / disk.total * 100, 1)}
+    data["memory_kib"] = {line.split(":", 1)[0]: int(line.split()[1])
+                          for line in Path("/proc/meminfo").read_text().splitlines()
+                          if line.startswith(("MemTotal:", "MemAvailable:", "SwapTotal:", "SwapFree:", "Dirty:", "Writeback:"))}
+    return data
+
+
+def assess(data):
+    issues = []
+    for name in ["sshd.service", "NetworkManager.service", "jupi-firewall.service", "jupi-health.timer"]:
+        service = data["services"][name]
+        if service["active"]["returncode"] != 0:
+            issues.append(f"{name} is not active")
+        if service["enabled"]["returncode"] != 0:
+            issues.append(f"{name} is not enabled at Linux startup")
+    for name, result in data["probes"].items():
+        if result["returncode"] != 0:
+            issues.append(f"Probe {name} failed: {result['stderr']}")
+    failed_units = [line for line in data["probes"]["failed_units"]["stdout"].splitlines()
+                    if line.split() and line.split()[0] != "jupi-health.service"]
+    if failed_units:
+        issues.append("systemd has failed units")
+    if data["root_space"]["used_percent"] >= 90:
+        issues.append("Root filesystem is at least 90% full")
+    if data["memory_kib"]["MemAvailable"] < 256 * 1024:
+        issues.append("Available RAM is below 256 MiB")
+    root_fields = data["probes"]["root"]["stdout"].split()
+    if not root_fields or "rw" not in root_fields[-1].split(","):
+        issues.append("Root filesystem is not confirmed writable")
+    data["runtime_healthy"] = not issues
+    data["runtime_issues"] = issues
+    data["pending"] = ["Unattended PS4 cold boot and internal-drive migration are unverified"]
+    if data["services"]["jupi-link@roach.service"]["active"]["returncode"] != 0:
+        data["pending"].append("Outbound SSH link to Roach is not connected")
+    if "NTPSynchronized=yes" not in data["probes"]["clock"]["stdout"]:
+        data["pending"].append("Clock synchronization is not confirmed")
+    return data
+
+
+def display(data):
+    print(f"JUPI {VERSION} | {data['hostname']} | {data['utc']}")
+    print(f"Kernel: {data['kernel']}\nBoot ID: {data['boot_id']}")
+    print(f"Root: {data['probes']['root']['stdout']}")
+    print(f"Root space used: {data['root_space']['used_percent']}% | available RAM: "
+          f"{data['memory_kib']['MemAvailable'] / 1024:.0f} MiB")
+    print(f"Runtime health: {'PASS' if data['runtime_healthy'] else 'ATTENTION'}")
+    for unit, state in data["services"].items():
+        print(f"  {unit}: {state['active']['stdout'] or 'unknown'}, {state['enabled']['stdout'] or 'unknown'}")
+    for message in data["runtime_issues"]:
+        print(f"ATTENTION: {message}")
+    for message in data["pending"]:
+        print(f"PENDING: {message}")
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--version", action="version", version=VERSION)
+    commands = parser.add_subparsers(dest="command", required=True)
+    for name in ["status", "health", "inventory"]:
+        command = commands.add_parser(name)
+        command.add_argument("--json", action="store_true")
+        if name == "health":
+            command.add_argument("--record", action="store_true")
+    mapping = commands.add_parser("map", help="explain OS command equivalents without execution")
+    mapping.add_argument("function", nargs="?", choices=sorted(MAP))
+    mapping.add_argument("--os", choices=["linux", "powershell", "cmd", "macos"])
+    run = commands.add_parser("run", help="time and run an explicit command as the current user")
+    run.add_argument("--timeout", type=int, default=60, choices=range(1, 3601), metavar="1..3600")
+    run.add_argument("argv", nargs=argparse.REMAINDER)
+    commands.add_parser("links", help="show configured peer connection state")
+    commands.add_parser("boot", help="show measured boot facts and remaining gates")
+    args = parser.parse_args(argv)
+    if args.command == "map":
+        rows = {args.function: MAP[args.function]} if args.function else MAP
+        print("Command equivalents are approximate; options, privileges, and output formats differ.")
+        for function, equivalents in rows.items():
+            print(function + ":")
+            for system, command in equivalents.items():
+                if not args.os or system == args.os:
+                    print(f"  {system}: {command}")
+        return 0
+    if args.command == "run":
+        import time
+        command = args.argv[1:] if args.argv[:1] == ["--"] else args.argv
+        if not command:
+            parser.error("jupi run requires an explicit command after --")
+        start = time.monotonic()
+        print("Running as current user: " + shlex.join(command), flush=True)
+        try:
+            result = subprocess.run(command, timeout=args.timeout)
+            code = result.returncode
+        except subprocess.TimeoutExpired:
+            code = 124
+        except OSError as error:
+            print(str(error), file=sys.stderr)
+            code = 127
+        print(f"Elapsed: {time.monotonic() - start:.3f}s | exit: {code}", file=sys.stderr)
+        return code if code >= 0 else 128 - code
+    if args.command == "links":
+        for name in sorted(Path("/etc/jupi/ssh").glob("*.conf")):
+            print(f"Peer {name.stem}: {unit_state('jupi-link@' + name.stem + '.service')['stdout']}")
+        print("Roach discovered from recovery records and accepted incoming SSH: 192.168.77.3")
+        print(probe(["systemctl", "status", "jupi-link@roach.service", "--no-pager", "-l"])["stdout"])
+        print("Peer host trust and authentication are required before enabling an outbound link.")
+        return 0
+    if args.command == "boot":
+        info = {"boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip(),
+                "root": probe(["findmnt", "-n", "-o", "SOURCE,FSTYPE,UUID,OPTIONS", "/"]),
+                "uefi_detected": Path("/sys/firmware/efi").exists(),
+                "cold_boot_verified": False,
+                "internal_root_verified_this_install": False,
+                "next_gate": "Verify PS4 loader and internal linux.img from known recovery evidence before migration; arrange preboot recovery before reboot."}
+        print(json.dumps(info, indent=2))
+        return 0
+    data = assess(inventory())
+    if args.command == "health" and args.record:
+        atomic_json(STATE / "health.json", data)
+        boot_receipt = STATE / "boot-receipts" / (data["boot_id"] + ".json")
+        if not boot_receipt.exists():
+            atomic_json(boot_receipt, data)
+    if args.json or args.command == "inventory":
+        print(json.dumps(data, indent=2))
+    else:
+        display(data)
+    return 1 if args.command == "health" and not data["runtime_healthy"] else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,14 @@
+#!/usr/bin/python3
+"""Use JUPI's qualified fleet xchain tool with its explicit node identity."""
+import hashlib
+import os
+from pathlib import Path
+import sys
+
+tool=Path('/home/pi/xchain/xchain.py')
+expected='5e662e665a6defeb5e66a9dd499239c04a7262a98eb135a627945fa3ec5df73d'
+if hashlib.sha256(tool.read_bytes()).hexdigest()!=expected:
+    raise SystemExit('Fleet xchain source changed; qualification review required')
+os.environ['XCHAIN_DEVICE']='JUPI'
+os.environ['XCHAIN_DIR']='/home/pi/xchain'
+os.execv(sys.executable,[sys.executable,'-B',str(tool),*sys.argv[1:]])

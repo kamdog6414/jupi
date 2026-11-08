@@ -1,0 +1,110 @@
+{
+ "cpu_numpy_openblas": "2048x2048 GEMM, best of 3, numpy/OpenBLAS 3.12.0 (pkg-config cblas, configuration 'unknown'): SGEMM 0.7 / DGEMM 0.6 GFLOPS at 1, 2, 4 AND 8 threads - flat. Supplement taskset sweep (core 0 / cores 0,2 / 0-3 / 0-7, threads matched): 0.7/0.7 in every cell. 1024^3 comparability: 0.7/0.6. Shell affinity verified 0-7 in both shells. Collapse is not threads, affinity, placement, or matrix size; it travels with the distro numpy/BLAS path. Morning survey comparison on this unit: scoped batch 26.6/11.6, unscoped 0.7/0.6 - regime gap reproduces exactly. Open test: same GEMM inside the platform agent's Python env. Misc: MEMCOPY 8.0 GB/s; hashlib SHA256 87.3 MB/s single-thread.",
+ "crypto_openssl": "Suite's combined invocation aborted on this build ('speed: Unknown algorithm aes-256-gcm'); repaired by top-up (OpenSSL 3.6.5, per-algorithm). SHA256 peak 90.6 MB/s (16384B); AES-256-GCM via -evp peak 777.6 MB/s (16384B); AES-256-CBC peak 351.0 MB/s (16384B). Cipher list confirms id-aes256-GCM present; speed app requires -evp form here.",
+ "date": "2026-11-07",
+ "gpu_opencl_clover": {
+  "copy_bandwidth_gbs": 127.3,
+  "device_string": "AMD DG1000FGF84HT (LIVERPOOL, DRM 3.63.0, 6.15.4-crashnt-4.7_no-built-in-fw, LLVM 13.0.1)",
+  "fp32_gflops": 896.2,
+  "fp64_gflops": 111.2,
+  "morning_run_for_comparison": {
+   "copy_bandwidth_gbs": 127.9,
+   "fp32_gflops": 881.0,
+   "fp64_gflops": 111.9
+  }
+ },
+ "gpu_radv_vulkan": {
+  "copy_bandwidth_gbs_best_of_5": 129.8,
+  "fp32_sustained_gflops": 2858,
+  "fp32_wg128_gflops": [
+   2691.1,
+   2676.8,
+   2671.0
+  ],
+  "fp32_wg256_gflops": [
+   2849.8,
+   2851.3,
+   2825.8
+  ],
+  "fp32_wg512_gflops": [
+   2830.6,
+   2854.6,
+   2861.6
+  ],
+  "fp32_wg64_gflops": [
+   2805.7,
+   2858.8,
+   2859.3
+  ],
+  "fp64_base_gflops": [
+   113.4,
+   113.2,
+   113.5
+  ],
+  "fp64_ilp2_gflops": [
+   113.3,
+   113.3,
+   113.7
+  ],
+  "harness": "vkprobe2.c sha256 165397a9ce5ecf2f220a5d92e76a2b7977d1b4b406c14c3dfeb78e39f88c26dc",
+  "implied_clock_ghz_inference": 1.24,
+  "wide_chain_anomaly": {
+   "apparent_gflops_range": [
+    6746,
+    7174
+   ],
+   "claimed_as_throughput": false,
+   "falsifiers_run": [
+    "SPIR-V disassembly complete (8 OpFMul / 15 OpFAdd)",
+    "K-scaling linear K500/K2000/K8000",
+    "output readback = +inf (0x7f800000), mathematically correct",
+    "same-harness 2-chain control = 2865 GFLOPS",
+    "FP64 shows no effect"
+   ],
+   "standing_interpretation": "RADV/ACO backend compilation effect on wide independent-chain compute loops; mechanism unidentified; filed open",
+   "variants_reproduced": [
+    "constant chains (ilp)",
+    "per-thread seeded chains (ilp2)",
+    "distinct vec4 components (ilp3)",
+    "8 chains at half K (ilp8)"
+   ]
+  }
+ },
+ "inference_ollama": "qwen3:0.6b Q4_K_M, 5 fixed prompts, seed 42, temp 0, num_predict 128, server-side counters. Generation 0.44 tok/s on every run (128 tok in 288.4-289.0 s); prompt eval 7.1-12.8 tok/s. llama-server held ~6.8 cores for the full section (~2.8 CPU-hours) - collapsed default path, same regime as the GEMM result; mechanism hypothesis: thread-pool spin + unvectorized kernels.",
+ "internal_capture": {
+  "amdgpu_sysfs_exposed": [
+   "power_state"
+  ],
+  "boot_id_matches_desk": true,
+  "lsblk": "loop0 350G /; sda 114.6G (stick, unmounted); sdb 465.8G (internal HGST)",
+  "roach_loader_store": {
+   "initramfs-fc.cpio.gz_bytes": 6773849,
+   "linux-1024mb.bin_bytes": 329088
+  },
+  "vantage": "Roach, via SSH to pi@192.168.77.52, during the run"
+ },
+ "session": "second (refined)",
+ "storage_fio": "Sequential write 1 GiB (1M blocks, libaio, iodepth 8, direct): 15.4 MB/s (69.8 s). Sequential read 1 GiB: 67.9 MB/s (15.8 s). Random read 4k over 256 MiB: 34.9k IOPS / 143 MB/s but CACHE-RESIDENT (file freshly laid out by fio, in page cache) - not a device figure. Root stack: ext4 image (loop0) on UFS, 5400rpm HGST, Sony USB-SATA bridge.",
+ "suite": "JUPI refined benchmark suite",
+ "unit": {
+  "boot_id": "54f4c94e-2a9d-443a-8c03-321c3ae6a714",
+  "clock_counters_exposed": false,
+  "clock_note": "No pp_dpm_sclk / gpu_busy_percent in this kernel build (verified desk-side and via SSH from Roach). Clock figures are inference.",
+  "cpu": "AMD Jaguar, 8 cores, AVX+AES, no FMA, no AVX2",
+  "cpu_model_string": "DG1000FGF84HT",
+  "gpu": "AMD Liverpool, 18 CU, 1152 FP32 lanes",
+  "gpu_mem_gib_visible": 3.37,
+  "gpu_stack_legacy": "Clover / OpenCL 1.1 (Mesa)",
+  "gpu_stack_primary": "RADV / Mesa 21.3.2 / Vulkan 1.2.195",
+  "hardware": "PlayStation 4 CUH-1001A",
+  "island_link_roach_ms_avg": 0.455,
+  "island_link_speed_mbps": 1000,
+  "name": "JUPI (Joint Unix Platform Integrator)",
+  "os": "Psxitarch Linux, kernel 6.15.4-crashnt-4.7_no-built-in-fw",
+  "ram_mb": 6904,
+  "root_storage": "350 GiB ext4 image (loop0) on internal HGST 465.8 GiB",
+  "swap_mb": 2047,
+  "thermal_c_at_start": 77.4,
+  "thermal_c_peak": 82.25
+ }
+}

@@ -1,0 +1,26 @@
+SUITE START 2026-11-07T23:09:09+00:00
+=== SYSINFO 2026-11-07T23:09:09+00:00 ===
+=== BUILD 2026-11-07T23:09:09+00:00 ===
+=== GPU-RADV 2026-11-07T23:09:17+00:00 ===
+=== GPU-OPENCL 2026-11-07T23:09:17+00:00 ===
+=== CPU 2026-11-07T23:09:20+00:00 ===
+=== CRYPTO 2026-11-07T23:23:05+00:00 ===
+=== STORAGE 2026-11-07T23:23:05+00:00 ===
+=== INFERENCE 2026-11-07T23:26:32+00:00 ===
+SUITE DONE 2026-11-07T23:51:11+00:00
+total 140
+drwx------ 2 pi pi   300 Nov  7 23:51 .
+drwx------ 3 pi pi  1000 Nov  7 23:23 ..
+-rw------- 1 pi pi  1716 Nov  7 23:09 build.txt
+-rw------- 1 pi pi   864 Nov  7 23:23 cpu.txt
+-rw------- 1 pi pi    37 Nov  7 23:23 crypto.txt
+-rw------- 1 pi pi   221 Nov  7 23:09 gpu-opencl.txt
+-rw------- 1 pi pi  1285 Nov  7 23:09 gpu-radv.txt
+-rw------- 1 pi pi   431 Nov  7 23:51 inference.txt
+-rw------- 1 pi pi   516 Nov  7 23:26 storage.txt
+-rw------- 1 pi pi   410 Nov  7 23:51 suite.log
+-rw------- 1 pi pi  1178 Nov  7 23:09 sysinfo.txt
+-rw------- 1 pi pi   123 Nov  7 23:51 thermal-end.txt
+-rw------- 1 pi pi 21148 Nov  7 23:51 thermal.log
+-rw------- 1 pi pi     6 Nov  7 23:09 thermal.pid
+-rw------- 1 pi pi 73072 Nov  7 23:09 vulkaninfo.txt

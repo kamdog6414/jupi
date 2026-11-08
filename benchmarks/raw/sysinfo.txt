@@ -1,0 +1,22 @@
+2026-11-07T23:09:09+00:00
+Linux playstation 6.15.4-crashnt-4.7_no-built-in-fw #2 SMP PREEMPT_DYNAMIC Sat Mar 14 11:01:12 UTC 2026 x86_64 GNU/Linux
+54f4c94e-2a9d-443a-8c03-321c3ae6a714
+model name	: DG1000FGF84HT
+8
+               total        used        free      shared  buff/cache   available
+Mem:            6904        3106         248         101        3948        3798
+Swap:           2047           3        2044
+	apiVersion         = 1.2.195
+	deviceName         = AMD RADV LIVERPOOL
+	driverName         = radv
+	driverInfo         = Mesa 21.3.2
+{"models":[{"name":"qwen3:0.6b","model":"qwen3:0.6b","modified_at":"2026-11-07T05:51:20.003875663Z","size":522653767,"digest":"7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435","details":{"parent_model":"","format":"gguf","family":"qwen3","families":["qwen3"],"parameter_size":"751.63M","quantization_level":"Q4_K_M","context_length":40960,"embedding_length":1024,"runner":"ggml"},"ca
+fam15h_power-pci-00c4
+Adapter: PCI adapter
+power1:           N/A  (crit =   0.00 W)
+
+k10temp-pci-00c3
+Adapter: PCI adapter
+temp1:        +77.4°C  (high = +70.0°C)
+                       (crit = +100.0°C, hyst = +99.0°C)
+

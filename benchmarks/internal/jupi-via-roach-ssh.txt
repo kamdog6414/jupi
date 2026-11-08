@@ -1,0 +1,46 @@
+HOST playstation
+2026-11-07T23:09:13+00:00
+BOOT 54f4c94e-2a9d-443a-8c03-321c3ae6a714
+ 23:09:13 up 18:20,  3 users,  load average: 1.13, 1.14, 1.23
+model name	: DG1000FGF84HT
+MemTotal:        7070228 kB
+MemAvailable:    3826652 kB
+--- SENSORS ---
+fam15h_power-pci-00c4
+Adapter: PCI adapter
+power1:           N/A  (crit =   0.00 W)
+
+k10temp-pci-00c3
+Adapter: PCI adapter
+temp1:        +78.5 C  (high = +70.0 C)
+                       (crit = +100.0 C, hyst = +99.0 C)
+
+--- AMDGPU SYSFS NAMES ---
+power_state
+--- GPU BUSY ---
+gpu_busy_percent absent
+--- DPM SCLK ---
+pp_dpm_sclk absent
+--- HWMON ---
+/sys/class/hwmon/hwmon0 fam15h_power
+/sys/class/hwmon/hwmon1 k10temp
+  /sys/class/hwmon/hwmon1/temp1_input = 78500
+--- STORAGE ---
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop0      350G   18G  329G   6% /
+/dev/loop0      350G   18G  329G   6% /
+NAME                     SIZE TYPE  MOUNTPOINT
+loop0                    355G loop  /
+sda                    114.6G disk  
+|-sda1                   512M part  
+|-sda2                 106.1G part  
+`-sda3                     8G part  
+sdb                    465.8G disk  
+|-sdb1                   512M part  
+|-sdb3                     1G part  
+|-sdb5                    16M part  
+|-sdb7                   128M part  
+|-sdb9                     1G part  
+--- OLLAMA PS ---
+{"models":[]}
+INNER DONE

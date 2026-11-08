@@ -1,0 +1,7 @@
+RUN 1: gen 0.44 tok/s (128 tok in 288.96 s), prompt 10.5 tok/s (27 tok)
+RUN 2: gen 0.44 tok/s (128 tok in 288.48 s), prompt 8.1 tok/s (21 tok)
+RUN 3: gen 0.44 tok/s (128 tok in 288.42 s), prompt 8.0 tok/s (23 tok)
+RUN 4: gen 0.44 tok/s (128 tok in 288.91 s), prompt 7.1 tok/s (17 tok)
+RUN 5: gen 0.44 tok/s (128 tok in 289.01 s), prompt 12.8 tok/s (35 tok)
+MEDIAN gen 0.44 tok/s; runs: 0.44, 0.44, 0.44, 0.44, 0.44
+INFERBENCH DONE

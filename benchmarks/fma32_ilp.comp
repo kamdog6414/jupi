@@ -1,0 +1,18 @@
+#version 450
+layout(local_size_x = 256) in;
+layout(std430, binding = 0) buffer Out { float v[]; } o;
+layout(push_constant) uniform PC { int K; } pc;
+void main() {
+  vec4 c = vec4(0.5);
+  vec4 a = vec4(1.0001), b = vec4(0.9999);
+  vec4 a2 = vec4(1.0003), b2 = vec4(0.9997);
+  vec4 a3 = vec4(1.0005), b3 = vec4(0.9995);
+  vec4 a4 = vec4(1.0007), b4 = vec4(0.9993);
+  for (int i = 0; i < pc.K; i++) {
+    a = a * b + c; b = b * a + c;
+    a2 = a2 * b2 + c; b2 = b2 * a2 + c;
+    a3 = a3 * b3 + c; b3 = b3 * a3 + c;
+    a4 = a4 * b4 + c; b4 = b4 * a4 + c;
+  }
+  if (gl_GlobalInvocationID.x == 0u) { o.v[0] = a.x + a2.y + a3.z + a4.w + b.x + b2.y + b3.z + b4.w; }
+}

@@ -1,0 +1,25 @@
+CPU SUPPLEMENT 2026-11-07T23:53:19+00:00
+-- shell affinity --
+Cpus_allowed:	ff
+Cpus_allowed_list:	0-7
+-- taskset sweep (2048^3, best of 3, warmup 1) --
+--- taskset -c 0 threads=1 ---
+SGEMM 2048 0.7 GFLOPS (best 23.608 s)
+DGEMM 2048 0.7 GFLOPS (best 26.118 s)
+CPUBENCH DONE
+--- taskset -c 0,2 threads=2 ---
+SGEMM 2048 0.7 GFLOPS (best 23.600 s)
+DGEMM 2048 0.7 GFLOPS (best 26.061 s)
+CPUBENCH DONE
+--- taskset -c 0-3 threads=4 ---
+SGEMM 2048 0.7 GFLOPS (best 23.605 s)
+DGEMM 2048 0.7 GFLOPS (best 26.098 s)
+CPUBENCH DONE
+--- taskset -c 0-7 threads=8 ---
+SGEMM 2048 0.7 GFLOPS (best 23.920 s)
+DGEMM 2048 0.7 GFLOPS (best 26.390 s)
+CPUBENCH DONE
+-- 1024^3 comparability (morning survey used 1024^3) --
+SGEMM 1024 default-threads 0.7 GFLOPS (best 2.975 s)
+DGEMM 1024 default-threads 0.6 GFLOPS (best 3.308 s)
+SUPPLEMENT DONE

@@ -1,0 +1,26 @@
+COLLECTOR roach 2026-11-07T15:09:09-08:00
+roach
+ 15:09:09 up 12 days, 18:36,  6 users,  load average: 1.05, 1.33, 1.27
+--- LINK TO JUPI ---
+5 packets transmitted, 5 received, 0% packet loss, time 4112ms
+rtt min/avg/max/mdev = 0.397/0.455/0.549/0.053 ms
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+eno1             UP             2c:f0:5d:19:fe:89 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+wlp1s0           UP             cc:d9:ac:e7:c6:ec <BROADCAST,MULTICAST,UP,LOWER_UP> 
+tailscale0       UNKNOWN        <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> 
+docker0          DOWN           96:27:3b:a0:b8:27 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+/sys/class/net/docker0/speed = -1
+/sys/class/net/eno1/speed = 1000
+/sys/class/net/lo/speed = 
+/sys/class/net/tailscale0/speed = -1
+/sys/class/net/wlp1s0/speed = 
+--- ROACH SENSORS ---
+--- ROACH VIEW OF PS4-LINUX STORE ---
+total 6956
+drwx------  4 roach roach    4096 Nov  7 11:40 .
+drwxr-x--- 76 roach roach    4096 Nov  5 16:46 ..
+drwxrwxr-x  2 roach roach    4096 Nov  7 11:42 JUPI-SOURCE-KIT-20261107-r1
+drwxrwxr-x 10 roach roach    4096 Nov  6 13:33 diagnostics
+-rw-------  1 roach roach 6773849 Nov  5 18:42 initramfs-fc.cpio.gz
+-rw-------  1 roach roach  329088 Nov  5 16:46 linux-1024mb.bin
+COLLECT DONE 2026-11-07T15:09:14-08:00

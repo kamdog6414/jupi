@@ -1,0 +1,39 @@
+CRYPTO TOPUP 2026-11-07T23:52:25+00:00
+OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)
+-- cipher algorithms containing aes/gcm --
+  id-aes128-GCM
+  id-aes192-GCM
+  AES-256-CBC
+  AES-256-CBC-HMAC-SHA1
+  AES-256-CBC-HMAC-SHA256
+  AES-256-CFB
+  AES-256-CFB1
+  AES-256-CFB8
+  AES-256-CTR
+  AES-256-ECB
+  id-aes256-GCM
+  AES-256-OCB
+  AES-256-OFB
+  AES-256-XTS
+  aes256 => AES-256-CBC
+  ARIA-128-GCM
+  ARIA-192-GCM
+  ARIA-256-GCM
+  id-aes128-GCM
+  id-aes192-GCM
+-- sha256 --
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+sha256           11155.79k    30046.95k    60509.35k    80969.05k    89915.39k    90576.21k
+-- aes-256-gcm via -evp --
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+AES-256-GCM      15781.79k    55139.09k   181739.86k   427777.02k   741777.41k   777568.26k
+-- aes-256-cbc --
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+aes-256-cbc     166993.98k   262242.13k   324568.58k   345119.74k   350601.22k   351016.28k
+TOPUP DONE

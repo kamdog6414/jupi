@@ -1,0 +1,32 @@
+glslc fma32_wg64 OK
+glslc fma32_wg128 OK
+glslc fma32_wg256 OK
+glslc fma32_wg512 OK
+glslc fma32_ilp OK
+glslc fma64 OK
+glslc fma64x2 OK
+glslc copy OK
+gcc vkprobe2 OK
+In file included from /usr/include/CL/cl.h:20,
+                 from gpubench.c:2:
+/usr/include/CL/cl_version.h:22:9: note: ‘#pragma message: cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 310 (OpenCL 3.1)’
+   22 | #pragma message("cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 310 (OpenCL 3.1)")
+      |         ^~~~~~~
+gpubench.c: In function ‘main’:
+gpubench.c:17:2: warning: ‘clCreateCommandQueue’ is deprecated [-Wdeprecated-declarations]
+   17 |  cl_command_queue q=clCreateCommandQueue(ctx,dev,0,&e);
+      |  ^~~~~~~~~~~~~~~~
+/usr/include/CL/cl.h:1950:1: note: declared here
+ 1950 | clCreateCommandQueue(cl_context                     context,
+      | ^~~~~~~~~~~~~~~~~~~~
+gcc gpubench OK
+165397a9ce5ecf2f220a5d92e76a2b7977d1b4b406c14c3dfeb78e39f88c26dc  vkprobe2.c
+d9751764bf4cf9b1f15b1846297d1e765e76cf75a587911b706ca2a6e9faa54c  gpubench.c
+020e452c0483c137f7c8f57fd4fac2490cd2f54fe8068b2f59a1aaebc9fde86b  copy.comp
+47019ebb35ca6509967aa949e5d21cbf4ac55b13789955407c634aaceb620f1c  fma32_ilp.comp
+321355e969ca1d8f3d82dc14953ebe350f34afc3282d5d0c677e11fe1711ce68  fma32_wg128.comp
+8c31d1219c3d8ca010497e6e96c34427dd52348bffe229cb77fcf7c5c84b6d54  fma32_wg256.comp
+037ae33e48a06b16968975c97c65faec5923d8a5ecf978beb47daf40d62f3bde  fma32_wg512.comp
+e913583fad6df39b92806e57825f012dd41554fc973bce3de71f2076d4a8de61  fma32_wg64.comp
+55dd1a20dd9d42da319f921ed5fbcb6dff94afa67cdcf25322a698a24b72b5cf  fma64.comp
+3860646ce6ec24db68772ffa68c5d546af1086bfc80785c3c42843857b8678da  fma64x2.comp

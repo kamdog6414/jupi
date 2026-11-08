@@ -1,0 +1,32 @@
+Build Dependencies:
+  blas:
+    detection method: pkgconfig
+    found: true
+    include directory: /usr/include
+    lib directory: /usr/lib
+    name: cblas
+    openblas configuration: unknown
+    pc file directory: /usr/lib/pkgconfig
+    version: 3.12.0
+  lapack:
+    detection method: pkgconfig
+--- threads=1 ---
+SGEMM 2048 0.7 GFLOPS (best 23.742 s)
+DGEMM 2048 0.6 GFLOPS (best 26.453 s)
+CPUBENCH DONE
+--- threads=2 ---
+SGEMM 2048 0.7 GFLOPS (best 23.926 s)
+DGEMM 2048 0.6 GFLOPS (best 26.805 s)
+CPUBENCH DONE
+--- threads=4 ---
+SGEMM 2048 0.7 GFLOPS (best 23.621 s)
+DGEMM 2048 0.6 GFLOPS (best 26.580 s)
+CPUBENCH DONE
+--- threads=8 ---
+SGEMM 2048 0.7 GFLOPS (best 23.884 s)
+DGEMM 2048 0.6 GFLOPS (best 26.774 s)
+CPUBENCH DONE
+--- misc ---
+MEMCOPY 8.0 GB/s (best 0.067 s, 0.54 GB moved)
+SHA256 87.3 MB/s (512 MiB in 5.866 s, digest 9acca8e8c222...)
+CPUBENCH DONE

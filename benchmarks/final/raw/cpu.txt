@@ -1,0 +1,16 @@
+--- scoped batch: LD_PRELOAD profile OpenBLAS, threads=4 ---
+SGEMM 2048 27.2 GFLOPS (best 0.631 s)
+DGEMM 2048 11.7 GFLOPS (best 1.472 s)
+CPUBENCH DONE
+--- scoped interactive: taskset 0,2, threads=2 ---
+SGEMM 2048 13.6 GFLOPS (best 1.263 s)
+DGEMM 2048 5.8 GFLOPS (best 2.939 s)
+CPUBENCH DONE
+--- misc (lane-independent) ---
+MEMCOPY 8.2 GB/s (best 0.066 s, 0.54 GB moved)
+SHA256 87.2 MB/s (512 MiB in 5.869 s, digest 9acca8e8c222...)
+CPUBENCH DONE
+--- STOCK comparison cell: distro BLAS, threads=4, single pass ---
+SGEMM 2048 0.7 GFLOPS (best 23.874 s)
+DGEMM 2048 0.7 GFLOPS (best 26.404 s)
+CPUBENCH DONE

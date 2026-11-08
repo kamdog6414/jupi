@@ -1,0 +1,13 @@
+OpenSSL 3.6.5 29 Sep 2026 (Library: OpenSSL 3.6.5 29 Sep 2026)
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+sha256           11164.89k    29926.85k    60552.11k    81058.47k    89994.58k    90658.13k
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+AES-256-GCM      16107.00k    52820.18k   171432.28k   422700.71k   739074.05k   778376.53k
+CPUINFO: OPENSSL_ia32cap=0x3ed8220b078bffff:0x0000000000000008:0x0000000000000000:0x0000000000000000:0x0000000000000000
+The 'numbers' are in 1000s of bytes per second processed.
+type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
+aes-256-cbc     166472.80k   261788.48k   324740.35k   345184.26k   350846.98k   351311.19k

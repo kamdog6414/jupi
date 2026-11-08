@@ -1,0 +1,46 @@
+2026-11-08T00:35:35+00:00
+Linux playstation 6.15.4-crashnt-4.7_no-built-in-fw #2 SMP PREEMPT_DYNAMIC Sat Mar 14 11:01:12 UTC 2026 x86_64 GNU/Linux
+54f4c94e-2a9d-443a-8c03-321c3ae6a714
+model name	: DG1000FGF84HT
+8
+               total        used        free      shared  buff/cache   available
+Mem:            6904        3067         917         101        3318        3837
+Swap:           2047          26        2021
+	apiVersion         = 1.2.195
+	deviceName         = AMD RADV LIVERPOOL
+	driverName         = radv
+	driverInfo         = Mesa 21.3.2
+{"models":[{"name":"qwen3:0.6b","model":"qwen3:0.6b","modified_at":"2026-11-07T05:51:20.003875663Z","size":522653767,"digest":"7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435","details":{"parent_model":"","format":"gguf","family":"qwen3","families":["qwen3"],"parameter_size":"751.63M","quantization_level":"Q4_K_M","context_length":40960,"embedding_length":1024,"runner":"ggml"},"ca
+fam15h_power-pci-00c4
+Adapter: PCI adapter
+power1:           N/A  (crit =   0.00 W)
+
+k10temp-pci-00c3
+Adapter: PCI adapter
+temp1:        +77.2°C  (high = +70.0°C)
+                       (crit = +100.0°C, hyst = +99.0°C)
+
+--- MANIFEST INPUTS ---
+b816e536dd0dbf28b00052d2af6e731a15cc83d52042d2c5277cc77bd1db3bf6  /usr/lib/libopenblas.so.0.3
+835ed139142d3749d6a410d48a67bc089ed8f128648441d36cb26c20143db9a6  /usr/lib/dri/radeonsi_dri.so
+e682a7cca03ce3fc38ca7a2aeeecec9a46e878d3894781a3f68a454a0e76eed8  /home/pi/ChatGPT/JUPI/config/performance-profile.json
+fd3ba55e3e2cd13bb98a51c9853a0777a3d46856b2cc8d3e4dd110c299aba295  /usr/local/lib/jupi-agent/performance_profile.py
+037afd84ff606279a23f7f7f2a7b18790cb1bac81156e9460a6c15ca6935f9d3  /etc/systemd/system/ollama.service.d/50-jupi.conf
+7e73b75e42bbed5113c9423801a1030fa921d95d4a14f3baf8b391c47ea50e9a  /etc/systemd/system/ollama.service.d/70-jupi-affinity.conf
+  "name": "JUPI measured baseline 2026-11-07",
+  "profile_id": "589c1d7f5f6ddda597b21fb2012aa0e3a2a37f936a8eedd1a4020e01597d85ba"
+165397a9ce5ecf2f220a5d92e76a2b7977d1b4b406c14c3dfeb78e39f88c26dc  vkprobe2.c
+3f4c68a3da5b7d4c4ea64784456c556732881331a783504e610c33ec81bfcb27  vkprobe5.c
+d9751764bf4cf9b1f15b1846297d1e765e76cf75a587911b706ca2a6e9faa54c  gpubench.c
+648d3440711fc83444d11fa67f8cae6b18ab99a60923a49de1a09db167f62a39  cpu_bench.py
+81be72c53ed9a9dcf9dcd5ea5f646e7f35c154e960b658d8bdab6f105cd4afd6  infer_final.py
+020e452c0483c137f7c8f57fd4fac2490cd2f54fe8068b2f59a1aaebc9fde86b  copy.comp
+1dd13a092d4e1d1dfed18b4cebbced7d16d7821ff32b4a45dfd6342834d08a02  fma32_ilp3.comp
+dd139ad2ea0a7c69245aff902999a9f3b9fcb92c355747076885360f786d338f  fma32_ilp8.comp
+47019ebb35ca6509967aa949e5d21cbf4ac55b13789955407c634aaceb620f1c  fma32_ilp.comp
+321355e969ca1d8f3d82dc14953ebe350f34afc3282d5d0c677e11fe1711ce68  fma32_wg128.comp
+8c31d1219c3d8ca010497e6e96c34427dd52348bffe229cb77fcf7c5c84b6d54  fma32_wg256.comp
+037ae33e48a06b16968975c97c65faec5923d8a5ecf978beb47daf40d62f3bde  fma32_wg512.comp
+e913583fad6df39b92806e57825f012dd41554fc973bce3de71f2076d4a8de61  fma32_wg64.comp
+55dd1a20dd9d42da319f921ed5fbcb6dff94afa67cdcf25322a698a24b72b5cf  fma64.comp
+3860646ce6ec24db68772ffa68c5d546af1086bfc80785c3c42843857b8678da  fma64x2.comp

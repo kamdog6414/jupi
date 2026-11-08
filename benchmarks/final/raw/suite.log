@@ -1,0 +1,27 @@
+FINAL START 2026-11-08T00:35:35+00:00
+=== SYSINFO 2026-11-08T00:35:35+00:00 ===
+=== BUILD 2026-11-08T00:35:39+00:00 ===
+=== WARMUP-LEGACY-OPENCL 2026-11-08T00:35:53+00:00 ===
+=== GPU-RADV 2026-11-08T00:35:58+00:00 ===
+=== GPU-ANOMALY 2026-11-08T00:35:59+00:00 ===
+=== CPU-TUNED 2026-11-08T00:35:59+00:00 ===
+=== CRYPTO 2026-11-08T00:39:56+00:00 ===
+=== STORAGE 2026-11-08T00:40:50+00:00 ===
+=== INFERENCE 2026-11-08T00:42:00+00:00 ===
+FINAL DONE 2026-11-08T00:45:03+00:00
+total 56
+drwx------ 2 pi pi  300 Nov  8 00:45 .
+drwx------ 3 pi pi  660 Nov  8 00:35 ..
+-rw------- 1 pi pi  974 Nov  8 00:35 build.txt
+-rw------- 1 pi pi  603 Nov  8 00:39 cpu.txt
+-rw------- 1 pi pi 1146 Nov  8 00:40 crypto.txt
+-rw------- 1 pi pi  311 Nov  8 00:35 gpu-anomaly.txt
+-rw------- 1 pi pi  221 Nov  8 00:35 gpu-opencl.txt
+-rw------- 1 pi pi 1285 Nov  8 00:35 gpu-radv.txt
+-rw------- 1 pi pi  715 Nov  8 00:45 inference.txt
+-rw------- 1 pi pi  506 Nov  8 00:42 storage.txt
+-rw------- 1 pi pi  472 Nov  8 00:45 suite.log
+-rw------- 1 pi pi 3196 Nov  8 00:35 sysinfo.txt
+-rw------- 1 pi pi  123 Nov  8 00:45 thermal-end.txt
+-rw------- 1 pi pi 4794 Nov  8 00:45 thermal.log
+-rw------- 1 pi pi    6 Nov  8 00:35 thermal.pid

@@ -1,0 +1,11 @@
+TUNED RUN 1: gen 12.74 tok/s (128 tok in 10.05 s), prompt 31.7 tok/s (27 tok), load 4.10 s
+TUNED RUN 2: gen 12.81 tok/s (128 tok in 9.99 s), prompt 26.6 tok/s (21 tok), load 0.00 s
+TUNED RUN 3: gen 12.80 tok/s (128 tok in 10.00 s), prompt 28.6 tok/s (23 tok), load 0.00 s
+TUNED RUN 4: gen 12.87 tok/s (128 tok in 9.95 s), prompt 35.3 tok/s (17 tok), load 0.00 s
+TUNED RUN 5: gen 12.65 tok/s (128 tok in 10.12 s), prompt 40.3 tok/s (35 tok), load 0.00 s
+TUNED MEDIAN gen 12.80 tok/s; runs: 12.74, 12.81, 12.80, 12.87, 12.65
+T2 RUN 1: gen 7.07 tok/s (128 tok in 18.09 s)
+T2 RUN 2: gen 7.04 tok/s (128 tok in 18.18 s)
+T2 MEDIAN gen 7.06 tok/s
+STOCK RUN: gen 0.46 tok/s (32 tok in 69.91 s), load 7.62 s
+INFERFINAL DONE

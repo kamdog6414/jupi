@@ -1,0 +1,6 @@
+/dev/loop0      350G   18G  329G   6% /
+  WRITE: bw=28.1MiB/s (29.4MB/s), 28.1MiB/s-28.1MiB/s (29.4MB/s-29.4MB/s), io=1024MiB (1074MB), run=36466-36466msec
+   READ: bw=180MiB/s (189MB/s), 180MiB/s-180MiB/s (189MB/s-189MB/s), io=1024MiB (1074MB), run=5683-5683msec
+  read: IOPS=54.6k, BW=213MiB/s (224MB/s)(256MiB/1200msec)
+   iops        : min=55916, max=57308, avg=56612.00, stdev=984.29, samples=2
+   READ: bw=213MiB/s (224MB/s), 213MiB/s-213MiB/s (224MB/s-224MB/s), io=256MiB (268MB), run=1200-1200msec

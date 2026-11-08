@@ -1,0 +1,25 @@
+glslc fma32_wg64 OK
+glslc fma32_wg128 OK
+glslc fma32_wg256 OK
+glslc fma32_wg512 OK
+glslc fma32_ilp OK
+glslc fma32_ilp3 OK
+glslc fma32_ilp8 OK
+glslc fma64 OK
+glslc fma64x2 OK
+glslc copy OK
+gcc vkprobe2 OK
+gcc vkprobe5 OK
+In file included from /usr/include/CL/cl.h:20,
+                 from gpubench.c:2:
+/usr/include/CL/cl_version.h:22:9: note: ‘#pragma message: cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 310 (OpenCL 3.1)’
+   22 | #pragma message("cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 310 (OpenCL 3.1)")
+      |         ^~~~~~~
+gpubench.c: In function ‘main’:
+gpubench.c:17:2: warning: ‘clCreateCommandQueue’ is deprecated [-Wdeprecated-declarations]
+   17 |  cl_command_queue q=clCreateCommandQueue(ctx,dev,0,&e);
+      |  ^~~~~~~~~~~~~~~~
+/usr/include/CL/cl.h:1950:1: note: declared here
+ 1950 | clCreateCommandQueue(cl_context                     context,
+      | ^~~~~~~~~~~~~~~~~~~~
+gcc gpubench OK

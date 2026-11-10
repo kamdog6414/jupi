@@ -4,6 +4,33 @@ JUPI is a native Linux science and engineering platform on a repurposed PS4. Its
 
 The operator's current direction is to work within Linux, preserve the installed environment, and stop further exploit development, staging, or triggering of other agents. The platform does not execute commands found in model output.
 
+## Start here: what JUPI is and how to recover it
+
+JUPI is a Sony PS4 (AMD Liverpool APU: 8 Jaguar x86_64 cores, GCN GPU, 8 GB unified GDDR5) running Arch Linux. The console OS launches a homebrew Linux payload (`linux-1024mb.bin`, 1 GiB VRAM carve-out). An initramfs root selector unlocks the PS4's internal HDD partition, mounts its UFS2 filesystem read-only, and checks the 355 GiB ext4 root image against size, UUID and binary-hash pins. Only then does it loop-mount the image and boot. The USB stick is only the fallback root. Details: [docs/BOOT-CHAIN.md](docs/BOOT-CHAIN.md).
+
+**If JUPI is frozen or unreachable:** go to [docs/RUNBOOK.md](docs/RUNBOOK.md). The short version:
+
+```
+GAUGE   free -m ; GTT = /sys/class/drm/card0/device/mem_info_gtt_{used,total}
+RED     avail < 500 MiB | GTT > 2500 MiB | swap > 90 %
+FIX     sudo systemctl restart lightdm          (kills desktop apps, not services)
+THEN    export DISPLAY=:0 XAUTHORITY=/home/pi/.Xauthority
+        xset dpms force on; xset -dpms; xset s off
+        xrandr --output HDMI-A-0 --off
+        xrandr --output HDMI-A-0 --mode 1920x1080 --rate 60 --primary
+VERIFY  GTT ~30-40 MiB, avail > 3000 MiB, "DPMS is Disabled", findmnt / = /dev/loop0
+PRE-ARM keep an SSH ControlMaster to JUPI open: fresh logins are what fail in a freeze
+NEVER   power-cycle as a first move; return to Linux needs a human at the console
+```
+
+Why: CPU and GPU share one memory pool. Xorg can pin up to ~3.4 GiB of GPU (GTT) buffers and holds them until the X server restarts. On 2026-11-10 that pin plus full swap starved the box. See [docs/MEMORY.md](docs/MEMORY.md).
+
+| Read | For |
+|---|---|
+| [docs/field-manual/JUPI-Field-Manual.pdf](docs/field-manual/JUPI-Field-Manual.pdf) | 28-page B&W field manual (public edition) |
+| [docs/field-manual/JUPI-Field-Digest.pdf](docs/field-manual/JUPI-Field-Digest.pdf) | 2-page digest: TL;DR, runbook, key facts |
+| [docs/](docs/README.md) | Runbook, boot chain, memory, as-built config, timeline, open issues, receipts |
+
 ## Measured performance (cross-checked, 2026-11-08)
 
 ```
@@ -82,7 +109,7 @@ The current root is an ext4 filesystem inside `/ps4hdd/home/jupi-linux-2a79fafeb
 
 Linux's current root, active swap, model, sources, and platform state are on the internal drive or RAM. The former USB swap is disabled. The USB remains recovery media. Boot with USB physically absent has not yet been tested.
 
-The machine has eight AMD Jaguar CPU cores, approximately 6.7 GiB usable RAM, and Liverpool AMD graphics. Its custom PS4 kernel and Mesa stack are retained. The system has **2 GiB compressed RAM swap**, using lz4 and priority 100.
+The machine has eight AMD Jaguar CPU cores, approximately 6.7 GiB usable RAM, and Liverpool AMD graphics. Its custom PS4 kernel and Mesa stack are retained. The system has **4 GiB compressed RAM swap** as of 2026-11-10: `zram1` zstd 2 GiB at priority 200 plus the original `zram0` lz4 2 GiB at priority 100, with `vm.swappiness=100`, `vm.page-cluster=0` and earlyoom 1.9.0 (`-m 4,2 -s 10,5`, avoids Xorg/sshd/lightdm). See [docs/MEMORY.md](docs/MEMORY.md).
 
 ## Native runtime
 

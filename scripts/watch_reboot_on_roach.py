@@ -15,8 +15,11 @@ import time
 OLD_BOOT = "b00c61e1-6e1e-4d26-ab31-0caf281bcd82"
 ROOT_UUID = "2ec1035f-9275-4d5b-bd46-c6e40122ea8d"
 DIRECTORY = Path("/var/backups/jupi/reboot-watch")
+# JUPI_LAN_IP defaults to an RFC 5737 documentation address (TEST-NET-1).
+# Export the real lab JUPI LAN IP before running this watcher.
+JUPI_LAN_IP = os.environ.get("JUPI_LAN_IP", "192.0.2.52")
 SSH = ["runuser", "-u", "roach", "--", "ssh", "-T", "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes",
-       "-o", "HostKeyAlias=192.168.77.52", "-o", "ConnectTimeout=3", "-o", "ConnectionAttempts=1", "pi@192.168.77.52"]
+       "-o", "HostKeyAlias=" + JUPI_LAN_IP, "-o", "ConnectTimeout=3", "-o", "ConnectionAttempts=1", "pi@" + JUPI_LAN_IP]
 PROBE = r'''
 import json,os,subprocess
 from pathlib import Path

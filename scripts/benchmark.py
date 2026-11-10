@@ -156,7 +156,7 @@ def offline(directory):
         procs[1]=subprocess.Popen([str(LIB/'runtime.py'),'serve'],env=env,stdout=logs[1],stderr=logs[1],start_new_session=True)
         recalled=cli('recall','offline-proof');assert recalled['value']=='persistent local instrument state'
         assert cli('job',art['id'])['status']=='succeeded'
-        with socket.socket() as s:s.settimeout(2);peer_error=s.connect_ex(('192.168.77.3',22))
+        with socket.socket() as s:s.settimeout(2);peer_error=s.connect_ex(('192.0.2.3',22))
         assert peer_error!=0
         result={'utc':utc(),'network_namespace':str(Path('/proc/self/ns/net').readlink()),'host_network_namespace':host_netns,'interfaces':{p.name:(p/'operstate').read_text().strip() for p in Path('/sys/class/net').iterdir()},'ipv4_routes':Path('/proc/net/route').read_text(),'peer_connect_errno':peer_error,'local_models':models,'prompt':prompt,'translated_reference':cmd,'rover_job':rover_job,'gpu_job':gpu,'art':art,'art_job':art_job,'memory_after_agent_restart':recalled,'job_record_after_restart':'succeeded','live_host_agent_restarted':False,'scope':'Separate instances of installed native agent and model inside PrivateNetwork=yes; live SDK/SSH/agent untouched. Hybrid science requires the peer and is not claimed offline.'}
         save(directory/'offline.json',result);print(json.dumps({'offline':'pass','directory':str(directory),'peer_connect_errno':peer_error}))

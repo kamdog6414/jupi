@@ -70,7 +70,7 @@ def main():
     if independent.stdout.split()[0] != actual:
         raise RuntimeError("Independent remote hash check failed")
     result_receipt = {"utc": datetime.now(timezone.utc).isoformat(), "local_archive": str(source),
-                      "remote_host": "roach@192.168.77.3", **remote,
+                      "remote_host": "roach@<roach-lan-ip>", **remote,
                       "independent_remote_process_readback": "pass", "independent_device_backup": True}
     (receipt_path.parent / "REMOTE-BACKUP-RECEIPT.json").write_text(json.dumps(result_receipt, indent=2) + "\n")
     print(json.dumps(result_receipt, indent=2), flush=True)

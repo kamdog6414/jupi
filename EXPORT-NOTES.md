@@ -51,10 +51,16 @@ box), `AGENTS.md`, `MODEL-CONTEXT.txt`, and `config/mission.txt`.
 - All keys and device secrets. Key-*handling* code is included (it is
   part of the platform's recovery design); no key material exists in
   this tree. It was scanned before export: no credentials, no private
-  keys, no personal email addresses, no home-network identifiers.
-- Lab addresses (192.168.77.0/24) appear in code and firewall rules
-  where they are load-bearing (peer discovery, FC-Link allowlists).
-  They are RFC1918 addresses of an isolated lab segment.
+  keys, no personal email addresses.
+- Lab LAN addresses and the Roach SSH host-key pin that originally
+  appeared in example configs, scripts, and the README have been
+  replaced. Prose and receipts use placeholders such as `<jupi-lan-ip>`,
+  `<roach-lan-ip>`, `<lab-gateway-ip>`, `<lab-lan-cidr>`, and
+  `SHA256:<roach-hostkey-fingerprint>`. Executable configs, nftables,
+  and tests use RFC 5737 documentation addresses in `192.0.2.0/24`.
+  Substitute the real lab values locally before use. The enrollment
+  helper `scripts/prepare_roach.py` reads `JUPI_ROACH_HOSTKEY_FP` and
+  fails closed if the placeholder remains.
 
 ## Provenance
 

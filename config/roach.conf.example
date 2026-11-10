@@ -1,7 +1,9 @@
 # Enable only after the peer host key is independently verified and the
 # JUPI public key is authorized by the intended account on Roach.
+# HostName is an RFC 5737 documentation address (TEST-NET-1).
+# Replace it with the lab Roach LAN IP before installing this file.
 Host jupi-peer
-    HostName 192.168.77.3
+    HostName 192.0.2.3
     User roach
     Port 22
     IdentityFile /home/pi/.ssh/jupi_roach_ed25519

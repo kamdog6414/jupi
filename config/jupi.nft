@@ -1,5 +1,7 @@
 #!/usr/bin/nft -f
 # Own table only; leave other software's tables in place.
+# The peer allowlist below uses RFC 5737 documentation addresses
+# (192.0.2.0/24). Replace them with verified lab peer IPs before loading.
 destroy table inet jupi
 table inet jupi {
     chain input {
@@ -11,7 +13,7 @@ table inet jupi {
         udp sport 67 udp dport 68 accept comment "DHCPv4 renewal"
         udp sport 547 udp dport 546 accept comment "DHCPv6 renewal"
         tcp dport 22 accept comment "JUPI SSH access"
-        iifname "eth0" ip saddr { 192.168.77.1, 192.168.77.3 } tcp dport 8765 accept comment "Signed FC-Link from verified lab peers"
+        iifname "eth0" ip saddr { 192.0.2.1, 192.0.2.3 } tcp dport 8765 accept comment "Signed FC-Link from verified lab peers (RFC5737 examples; replace before use)"
         counter drop
     }
 }

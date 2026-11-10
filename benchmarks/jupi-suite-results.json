@@ -81,7 +81,7 @@
    "initramfs-fc.cpio.gz_bytes": 6773849,
    "linux-1024mb.bin_bytes": 329088
   },
-  "vantage": "Roach, via SSH to pi@192.168.77.52, during the run"
+  "vantage": "Roach, via SSH to pi@<jupi-lan-ip>, during the run"
  },
  "session": "second (refined)",
  "storage_fio": "Sequential write 1 GiB (1M blocks, libaio, iodepth 8, direct): 15.4 MB/s (69.8 s). Sequential read 1 GiB: 67.9 MB/s (15.8 s). Random read 4k over 256 MiB: 34.9k IOPS / 143 MB/s but CACHE-RESIDENT (file freshly laid out by fio, in page cache) - not a device figure. Root stack: ext4 image (loop0) on UFS, 5400rpm HGST, Sony USB-SATA bridge.",

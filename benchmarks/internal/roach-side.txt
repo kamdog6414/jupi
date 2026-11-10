@@ -5,10 +5,10 @@ roach
 5 packets transmitted, 5 received, 0% packet loss, time 4112ms
 rtt min/avg/max/mdev = 0.397/0.455/0.549/0.053 ms
 lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
-eno1             UP             2c:f0:5d:19:fe:89 <BROADCAST,MULTICAST,UP,LOWER_UP> 
-wlp1s0           UP             cc:d9:ac:e7:c6:ec <BROADCAST,MULTICAST,UP,LOWER_UP> 
+eno1             UP             00:00:5E:00:53:01 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+wlp1s0           UP             00:00:5E:00:53:02 <BROADCAST,MULTICAST,UP,LOWER_UP> 
 tailscale0       UNKNOWN        <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> 
-docker0          DOWN           96:27:3b:a0:b8:27 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+docker0          DOWN           00:00:5E:00:53:03 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
 /sys/class/net/docker0/speed = -1
 /sys/class/net/eno1/speed = 1000
 /sys/class/net/lo/speed = 

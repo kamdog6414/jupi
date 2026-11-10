@@ -169,7 +169,7 @@ kernel setting was changed. This is a useful next source-diagnosis gate, not
 proof that a kernel patch or affinity change would improve end-to-end work.
 
 FC-Link was restarting because its required bind included an obsolete WiFi DHCP
-address. A reversible drop-in now retains only static Ethernet 192.168.77.52 and
+address. A reversible drop-in now retains only static Ethernet <jupi-lan-ip> and
 loopback. The original service is backed up at
 /var/backups/jupi/20261108T073417Z-cluster-reconnect.
 The health unit was cleared and run after service recovery. Local runtime and

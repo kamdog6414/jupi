@@ -12,9 +12,12 @@ def main():
     root = Path(__file__).resolve().parents[1]
     known = Path("/home/pi/.ssh/jupi_roach_known_hosts")
     result = subprocess.run(["ssh-keygen", "-lf", str(known)], text=True, capture_output=True, check=True)
-    expected = "SHA256:KveFQm/My8G/bOY69fBs5ZFsPVymXK1I5URSzRGZH7A"
-    if expected not in result.stdout:
-        raise SystemExit("Peer's observed host key changed; inspect before enrollment")
+    # Fail closed unless the operator supplies an independently verified pin.
+    # The committed default is a placeholder, not a real host-key fingerprint.
+    expected = os.environ.get("JUPI_ROACH_HOSTKEY_FP", "SHA256:<roach-hostkey-fingerprint>")
+    if expected.startswith("SHA256:<") or expected not in result.stdout:
+        raise SystemExit("Set JUPI_ROACH_HOSTKEY_FP to the independently verified "
+                         "Roach ED25519 host-key fingerprint (SHA256:...) before enrollment")
     directory = Path("/etc/jupi/ssh")
     directory.mkdir(parents=True, exist_ok=True)
     config = (root / "config/roach.conf.example").read_text()
@@ -28,7 +31,7 @@ def main():
         target.write_text(text)
         os.chmod(target, 0o644)
     public_key = Path("/home/pi/.ssh/jupi_roach_ed25519.pub").read_text().strip()
-    receipt = {"host": "192.168.77.3", "user": "roach", "port": 22,
+    receipt = {"host": "<roach-lan-ip>", "user": "roach", "port": 22,
                "host_key_fingerprint": expected,
                "host_trust": "pinned key corroborated by NIKOLAI's independently measured endpoint in NIKOLAI-DEVICE-CONTEXT-20261106.txt",
                "public_key": public_key,

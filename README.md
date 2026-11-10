@@ -168,9 +168,9 @@ The GTK desktop theme is Adwaita Dark, with the system color preference set to p
 
 ## SSH and services
 
-SSH requires keys and denies direct root login. The Ethernet profile reconnects indefinitely. The JUPI nftables input policy allows established traffic, loopback, ICMP, DHCP renewal and SSH. FC-Link TCP 8765 is additionally accepted on eth0 from the verified lab peer addresses 192.168.77.1 and 192.168.77.3; requests still require the native HMAC authentication. Journald persists with a 128 MiB limit and fourteen-day retention.
+SSH requires keys and denies direct root login. The Ethernet profile reconnects indefinitely. The JUPI nftables input policy allows established traffic, loopback, ICMP, DHCP renewal and SSH. FC-Link TCP 8765 is additionally accepted on eth0 from the verified lab peer addresses <lab-gateway-ip> and <roach-lan-ip>; requests still require the native HMAC authentication. Journald persists with a 128 MiB limit and fourteen-day retention.
 
-`jupi-link@roach.service` maintains an authenticated SSH connection with a strict host pin, keepalives and automatic reconnection. Its reverse listener is bound to the peer's loopback only, `127.0.0.1:22052`, forwarding to this machine's local SSH server. The private identity stays on JUPI. The peer is `roach@192.168.77.3`; its pinned ED25519 fingerprint is `SHA256:KveFQm/My8G/bOY69fBs5ZFsPVymXK1I5URSzRGZH7A`.
+`jupi-link@roach.service` maintains an authenticated SSH connection with a strict host pin, keepalives and automatic reconnection. Its reverse listener is bound to the peer's loopback only, `127.0.0.1:22052`, forwarding to this machine's local SSH server. The private identity stays on JUPI. The peer is `roach@<roach-lan-ip>`; its pinned ED25519 fingerprint is `SHA256:<roach-hostkey-fingerprint>`.
 
 `jupi-health.timer` records baseline health and current native-system status. Use `jupi-system` for the current internal-root facts. The original `jupi` program is retained byte-for-byte because the boot selector pins its hash; its old generic pending-migration message is historical. `jupi map` and `jupi run` remain available for operating-system mappings and timed explicit commands.
 

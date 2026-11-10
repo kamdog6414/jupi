@@ -196,7 +196,7 @@ def main(argv=None):
     if args.command == "links":
         for name in sorted(Path("/etc/jupi/ssh").glob("*.conf")):
             print(f"Peer {name.stem}: {unit_state('jupi-link@' + name.stem + '.service')['stdout']}")
-        print("Roach discovered from recovery records and accepted incoming SSH: 192.168.77.3")
+        print("Roach discovered from recovery records and accepted incoming SSH: <roach-lan-ip>")
         print(probe(["systemctl", "status", "jupi-link@roach.service", "--no-pager", "-l"])["stdout"])
         print("Peer host trust and authentication are required before enabling an outbound link.")
         return 0

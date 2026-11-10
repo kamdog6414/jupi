@@ -1,0 +1,254 @@
+[
+  {
+    "samples": 65536,
+    "policy": "first-coherent",
+    "staging_type": 1,
+    "median_seconds": {
+      "roundtrip": 0.045826386,
+      "resident": 0.005787747,
+      "fused": 0.005752728,
+      "cpu": 0.000223349,
+      "cpu-fused-1": 0.000923519,
+      "cpu-fused-4": 7.96239999e-05,
+      "cpu-staged-4": 0.000108387
+    },
+    "resident_vs_roundtrip": 7.917828128976612,
+    "fused_vs_roundtrip": 7.96602690062871,
+    "fused_vs_best_cpu": 0.013841085464148487,
+    "environment": {
+      "utc": "2026-11-08T07:46:51.166160+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.9755859375,
+        3.400390625,
+        2.640625
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 1048576,
+    "policy": "first-coherent",
+    "staging_type": 1,
+    "median_seconds": {
+      "roundtrip": 0.806250456,
+      "resident": 0.101259309,
+      "fused": 0.100576341,
+      "cpu": 0.005814616,
+      "cpu-fused-1": 0.014931945,
+      "cpu-fused-4": 0.001279747,
+      "cpu-staged-4": 0.00295155
+    },
+    "resident_vs_roundtrip": 7.962235412844858,
+    "fused_vs_roundtrip": 8.016303317298052,
+    "fused_vs_best_cpu": 0.012724135589700961,
+    "environment": {
+      "utc": "2026-11-08T07:46:51.760494+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.9755859375,
+        3.400390625,
+        2.640625
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 1,
+    "policy": "cached",
+    "staging_type": 3,
+    "median_seconds": {
+      "roundtrip": 0.000678155,
+      "resident": 0.000107609,
+      "fused": 8.6215e-05,
+      "cpu": 2.07999847e-07,
+      "cpu-fused-1": 1.69300006e-06,
+      "cpu-fused-4": 2.59300009e-06,
+      "cpu-staged-4": 8.21799995e-06
+    },
+    "resident_vs_roundtrip": 6.302028640727076,
+    "fused_vs_roundtrip": 7.865858609290726,
+    "fused_vs_best_cpu": 0.0024125714434843127,
+    "environment": {
+      "utc": "2026-11-08T07:47:00.506407+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.75146484375,
+        3.37060546875,
+        2.638671875
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 4099,
+    "policy": "cached",
+    "staging_type": 3,
+    "median_seconds": {
+      "roundtrip": 0.000788958,
+      "resident": 0.000123646,
+      "fused": 9.98580001e-05,
+      "cpu": 1.41630001e-05,
+      "cpu-fused-1": 5.8998e-05,
+      "cpu-fused-4": 7.85899988e-06,
+      "cpu-staged-4": 1.75310001e-05
+    },
+    "resident_vs_roundtrip": 6.380780615628488,
+    "fused_vs_roundtrip": 7.900799126859341,
+    "fused_vs_best_cpu": 0.0787017552137017,
+    "environment": {
+      "utc": "2026-11-08T07:47:00.630290+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.75146484375,
+        3.37060546875,
+        2.638671875
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 65536,
+    "policy": "cached",
+    "staging_type": 3,
+    "median_seconds": {
+      "roundtrip": 0.002894253,
+      "resident": 0.000499409,
+      "fused": 0.000406799,
+      "cpu": 0.000225336,
+      "cpu-fused-1": 0.000920149,
+      "cpu-fused-4": 7.9725e-05,
+      "cpu-staged-4": 0.000108637
+    },
+    "resident_vs_roundtrip": 5.795356110923111,
+    "fused_vs_roundtrip": 7.114700380286087,
+    "fused_vs_best_cpu": 0.19598130772199537,
+    "environment": {
+      "utc": "2026-11-08T07:47:00.735943+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.75146484375,
+        3.37060546875,
+        2.638671875
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 1048576,
+    "policy": "cached",
+    "staging_type": 3,
+    "median_seconds": {
+      "roundtrip": 0.029963201,
+      "resident": 0.004348589,
+      "fused": 0.003631963,
+      "cpu": 0.005974415,
+      "cpu-fused-1": 0.014903518,
+      "cpu-fused-4": 0.0012817,
+      "cpu-staged-4": 0.002769004
+    },
+    "resident_vs_roundtrip": 6.890327184288973,
+    "fused_vs_roundtrip": 8.249864054231828,
+    "fused_vs_best_cpu": 0.35289456417920556,
+    "environment": {
+      "utc": "2026-11-08T07:47:00.895306+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.75146484375,
+        3.37060546875,
+        2.638671875
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  },
+  {
+    "samples": 4194304,
+    "policy": "cached",
+    "staging_type": 3,
+    "median_seconds": {
+      "roundtrip": 0.113503117,
+      "resident": 0.015931447,
+      "fused": 0.014128831,
+      "cpu": 0.02336895,
+      "cpu-fused-1": 0.059598942,
+      "cpu-fused-4": 0.00513845,
+      "cpu-staged-4": 0.022109959
+    },
+    "resident_vs_roundtrip": 7.124470049707349,
+    "fused_vs_roundtrip": 8.033440063088022,
+    "fused_vs_best_cpu": 0.3636854315831225,
+    "environment": {
+      "utc": "2026-11-08T07:47:01.872218+00:00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load": [
+        3.75146484375,
+        3.37060546875,
+        2.638671875
+      ],
+      "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+    }
+  }
+]

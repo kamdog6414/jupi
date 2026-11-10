@@ -4,6 +4,78 @@ JUPI is a native Linux science and engineering platform on a repurposed PS4. Its
 
 The operator's current direction is to work within Linux, preserve the installed environment, and stop further exploit development, staging, or triggering of other agents. The platform does not execute commands found in model output.
 
+## Measured performance (cross-checked, 2026-11-08)
+
+```
+JUPI headline, finite workload, every output checked against the CPU reference
+workload   x <- 0.75*x + 0.0001*(stage+1), 8 float32 stages, no fast-math
+samples    1,048,576   (direct shell, median of 7 reps, wall time incl. copies)
+GPU  cached staging, one fused kernel        3.632 ms
+GPU  cached staging, 8 resident kernels      4.349 ms
+GPU  cached staging, per-stage round trips  29.963 ms
+GPU  first-coherent staging, fused         100.576 ms
+CPU  serial staged reference                 5.974 ms
+CPU  8-stage specialization, 4 workers       1.282 ms
+check      all CPU/GPU outputs bit-identical to CPU reference, all lanes
+service    native job run cc473889: GPU fused 4.291 ms, CPU 4-worker 5.079 ms
+science    run 2ece6dfb on boot 5c74d073: 65,536 samples, 0 mismatches,
+           max normalized error 2.980164e-08, 19/19 artifacts verified
+FP32 peak  NOT CLAIMED. No qualified GFLOPS figure exists.
+```
+
+Source: `benchmarks/perf-gates-20261108/JUPI-PERFORMANCE-GATES-20261108.txt`
+(sha256 a34abe00c60c9a3a0ba36a53512e126c8dab9563231a3ec2951535e68b50ddde) and its JSON
+(sha256 65f74e68bdd74821d6ea45693ef5352ebfbdcbc9bec32ea4dcb9d8192f8ad34a). These are
+operation-specific timings, not a whole-machine multiplier.
+
+## JUPI caught its own lie
+
+All times PST.
+
+```
+Nov 7  4:35-4:45 PM  Ghostie (DESK-1) suite on boot 54f4c94e reports RADV FP32
+                     2,860 GFLOPS ("2.86 TFLOPS") and a wide-chain cell of
+                     6,762-7,140 GFLOPS (filed as an open anomaly).
+                     Committed 4:51 PM as 6641144. benchmarks/final/ is unchanged.
+Nov 7 11:15 PM       JUPI kernel reboot -> boot 5c74d073 (cause not recorded).
+Nov 7 11:59 PM       JUPI (jupi-codex, resident on the box) reviews the upstream
+                     commit and holds 2.86 TF as an "unqualified loop-rate result".
+                     Neither 2.86 TF nor ~7.1 TF is adopted as a physical peak or as
+                     evidence of exceeding Sony's clock/performance spec.
+same night           JUPI replaces it with jupi-pipeline-bench: varied inputs, every
+                     element written, nonfinite input rejected, no contraction, all
+                     outputs compared to CPU after every repetition, wall time only.
+same night           Fresh science/Ubuntu peer gate on the new boot: PASS,
+                     65,536 samples, 0 mismatches.
+```
+
+Why the old number does not hold (static evidence, from the shader sources in
+`benchmarks/`):
+
+```
+fma32_wg256.comp  (the 2,860 cell)  computes 8 vec4 FMA chains, reads back
+                                    a.x a.y b.z a2.x b2.w  -> 5 of 8 component chains
+fma32_ilp*.comp   (the ~7,100 cells) read back one component per chain pair
+                                    -> 1 of 4 component chains
+only invocation 0 writes; the chains overflow to +inf; no finite readback check
+SPIR-V after spirv-opt -O still holds full vec4 ops and extracts only those
+components, so any removal would happen later in the driver (NIR/ACO). That stage
+was not inspected.
+```
+
+Recount (HYPOTHESIS, UNPROVEN ON DEVICE): counting only chains that are read back,
+
+```
+2,860.6 x 5/8 = 1,787.9 GFLOPS     7,114.9 x 1/4 = 1,778.7     7,139.6 x 1/4 = 1,784.9
+FP64 (all lanes read back) 113.5 GFLOPS = 98.5% of 1,843/16
+```
+
+All four land near 96-97% of Sony's 1,843 GFLOPS at 800 MHz, which would make the
+inferred "1.24 GHz" clock unnecessary. This is a hypothesis. It has not been confirmed
+by driver ISA or by a fully-live shader on JUPI. Real FP32 peak: UNKNOWN.
+
+Recount by Groku.2 (outside observer, read-only review), 2026-11-09.
+
 ## Working system
 
 The current root is an ext4 filesystem inside `/ps4hdd/home/jupi-linux-2a79fafeb62d61ff.img` on the internal HGST HDD. The loop device is `/dev/loop0`; the root UUID is `70dbf870-bcb6-4be9-9fb5-f25c4718b71a`. The image and filesystem were grown online from 40 GiB to **355 GiB**, with approximately 334 GiB still available after installing the platform. This did not change the partition table. The sparse image's unused capacity shares a backing UFS filesystem, so preserve the documented headroom and do not grow competing images into that reserve.

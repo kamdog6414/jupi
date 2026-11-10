@@ -1,0 +1,420 @@
+{
+  "schema": "jupi.performance.gates.summary.v1",
+  "created_utc": "2026-11-08T07:57:28.211397+00:00",
+  "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa",
+  "upstream": {
+    "repository": "https://github.com/kamdog6414/jupi",
+    "commit": "66411447b39d9df6e97b177ee75e021b03da0463",
+    "pointer": "/home/pi/ChatGPT/JUPI/inbox/GHOSTIE-BENCH-POINTER-20261107.md",
+    "pointer_sha256": "714e3dc2e945179697e3b105fc8d7f214c9883bb0db2266498ba2c74dd707891",
+    "audit": "Identical vec4 initial values and zero-invocation-only output; overflowing arithmetic; full finite output and emitted instruction-count qualification absent. Loop rate is not adopted as a hardware peak."
+  },
+  "base_profile": {
+    "profile_id": "589c1d7f5f6ddda597b21fb2012aa0e3a2a37f936a8eedd1a4020e01597d85ba",
+    "baseline_matches": true,
+    "drift": [],
+    "benchmark": "/var/lib/jupi-agent/benchmarks/eb4a6b26-0642-4259-af1b-33a1219d4901",
+    "offline_qualification": "/var/lib/jupi-agent/benchmarks/7efbbc72-769f-47ce-a8f5-39f10bfcc50d",
+    "scope": "Read-only drift detection; no automatic system changes"
+  },
+  "extension": {
+    "manifest": "/etc/jupi/gpu-pipeline-bench.json",
+    "software_id": "6eb7d641122485137236b5ad511807c5ac99f16876d6abad5bcdf75d49284a45",
+    "cli": "/usr/local/bin/jupi-pipeline-bench",
+    "classification": "synthetic benchmark",
+    "source": "/home/pi/ChatGPT/JUPI/scripts/gpu_pipeline.c",
+    "no_automatic_routing": true
+  },
+  "gates": {
+    "science_peer": {
+      "state": "passed",
+      "run_id": "2ece6dfb-ccab-49ed-8363-3568cbfa5a9f",
+      "receipt": "/var/lib/jupi-agent/science/runs/2ece6dfb-ccab-49ed-8363-3568cbfa5a9f/receipt.json",
+      "receipt_sha256": "51d8518a1cc5289cb113b843d00007747285c592de050b1c600bbd0453ccc4a8",
+      "samples": 65536,
+      "peer_verification": {
+        "dataset_sha256": "a7f6d2685cdb1ee1f67c9a531a31addd521076a7cfa0a77f55d6c07980ca0d69",
+        "execution_host": {
+          "boot_id": "f510033a-0a27-4900-9756-6ed4678f7f65",
+          "hostname": "roach",
+          "kernel": "7.0.0-38-generic",
+          "python": "3.14.4"
+        },
+        "maximum_normalized_error": 2.9801640266668983e-08,
+        "maximum_prediction_error_vs_float64_in_y_units": 1.528669957994211e-06,
+        "mismatches": 0,
+        "resource_bounds": {
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 15
+        },
+        "samples": 65536,
+        "scope": "Arithmetic agreement with the supplied model; not physical sensor validation",
+        "scope_note": "Computation on the pinned SSH peer; not an independent model acknowledgment",
+        "tolerance_policy": "8*float32_epsilon*(abs(gain32*u32)+abs(v32)+1), centered/scaled data",
+        "verified": true,
+        "worker_sha256": "c8a435b538a22c1a6b7bbb85e2351744d64c1a023e3732862085ab81418c51eb"
+      },
+      "artifacts_verified": 19
+    },
+    "finite_array": {
+      "state": "passed",
+      "repetitions": 7,
+      "steps": 8,
+      "results": [
+        {
+          "samples": 65536,
+          "policy": "first-coherent",
+          "staging_type": 1,
+          "median_seconds": {
+            "roundtrip": 0.045826386,
+            "resident": 0.005787747,
+            "fused": 0.005752728,
+            "cpu": 0.000223349,
+            "cpu-fused-1": 0.000923519,
+            "cpu-fused-4": 7.96239999e-05,
+            "cpu-staged-4": 0.000108387
+          },
+          "resident_vs_roundtrip": 7.917828128976612,
+          "fused_vs_roundtrip": 7.96602690062871,
+          "fused_vs_best_cpu": 0.013841085464148487,
+          "environment": {
+            "utc": "2026-11-08T07:46:51.166160+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.9755859375,
+              3.400390625,
+              2.640625
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 1048576,
+          "policy": "first-coherent",
+          "staging_type": 1,
+          "median_seconds": {
+            "roundtrip": 0.806250456,
+            "resident": 0.101259309,
+            "fused": 0.100576341,
+            "cpu": 0.005814616,
+            "cpu-fused-1": 0.014931945,
+            "cpu-fused-4": 0.001279747,
+            "cpu-staged-4": 0.00295155
+          },
+          "resident_vs_roundtrip": 7.962235412844858,
+          "fused_vs_roundtrip": 8.016303317298052,
+          "fused_vs_best_cpu": 0.012724135589700961,
+          "environment": {
+            "utc": "2026-11-08T07:46:51.760494+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.9755859375,
+              3.400390625,
+              2.640625
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 1,
+          "policy": "cached",
+          "staging_type": 3,
+          "median_seconds": {
+            "roundtrip": 0.000678155,
+            "resident": 0.000107609,
+            "fused": 8.6215e-05,
+            "cpu": 2.07999847e-07,
+            "cpu-fused-1": 1.69300006e-06,
+            "cpu-fused-4": 2.59300009e-06,
+            "cpu-staged-4": 8.21799995e-06
+          },
+          "resident_vs_roundtrip": 6.302028640727076,
+          "fused_vs_roundtrip": 7.865858609290726,
+          "fused_vs_best_cpu": 0.0024125714434843127,
+          "environment": {
+            "utc": "2026-11-08T07:47:00.506407+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.75146484375,
+              3.37060546875,
+              2.638671875
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 4099,
+          "policy": "cached",
+          "staging_type": 3,
+          "median_seconds": {
+            "roundtrip": 0.000788958,
+            "resident": 0.000123646,
+            "fused": 9.98580001e-05,
+            "cpu": 1.41630001e-05,
+            "cpu-fused-1": 5.8998e-05,
+            "cpu-fused-4": 7.85899988e-06,
+            "cpu-staged-4": 1.75310001e-05
+          },
+          "resident_vs_roundtrip": 6.380780615628488,
+          "fused_vs_roundtrip": 7.900799126859341,
+          "fused_vs_best_cpu": 0.0787017552137017,
+          "environment": {
+            "utc": "2026-11-08T07:47:00.630290+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.75146484375,
+              3.37060546875,
+              2.638671875
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 65536,
+          "policy": "cached",
+          "staging_type": 3,
+          "median_seconds": {
+            "roundtrip": 0.002894253,
+            "resident": 0.000499409,
+            "fused": 0.000406799,
+            "cpu": 0.000225336,
+            "cpu-fused-1": 0.000920149,
+            "cpu-fused-4": 7.9725e-05,
+            "cpu-staged-4": 0.000108637
+          },
+          "resident_vs_roundtrip": 5.795356110923111,
+          "fused_vs_roundtrip": 7.114700380286087,
+          "fused_vs_best_cpu": 0.19598130772199537,
+          "environment": {
+            "utc": "2026-11-08T07:47:00.735943+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.75146484375,
+              3.37060546875,
+              2.638671875
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 1048576,
+          "policy": "cached",
+          "staging_type": 3,
+          "median_seconds": {
+            "roundtrip": 0.029963201,
+            "resident": 0.004348589,
+            "fused": 0.003631963,
+            "cpu": 0.005974415,
+            "cpu-fused-1": 0.014903518,
+            "cpu-fused-4": 0.0012817,
+            "cpu-staged-4": 0.002769004
+          },
+          "resident_vs_roundtrip": 6.890327184288973,
+          "fused_vs_roundtrip": 8.249864054231828,
+          "fused_vs_best_cpu": 0.35289456417920556,
+          "environment": {
+            "utc": "2026-11-08T07:47:00.895306+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.75146484375,
+              3.37060546875,
+              2.638671875
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        },
+        {
+          "samples": 4194304,
+          "policy": "cached",
+          "staging_type": 3,
+          "median_seconds": {
+            "roundtrip": 0.113503117,
+            "resident": 0.015931447,
+            "fused": 0.014128831,
+            "cpu": 0.02336895,
+            "cpu-fused-1": 0.059598942,
+            "cpu-fused-4": 0.00513845,
+            "cpu-staged-4": 0.022109959
+          },
+          "resident_vs_roundtrip": 7.124470049707349,
+          "fused_vs_roundtrip": 8.033440063088022,
+          "fused_vs_best_cpu": 0.3636854315831225,
+          "environment": {
+            "utc": "2026-11-08T07:47:01.872218+00:00",
+            "affinity": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "load": [
+              3.75146484375,
+              3.37060546875,
+              2.638671875
+            ],
+            "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa"
+          }
+        }
+      ],
+      "timing_scope": "Live direct-shell session; host wall time includes command recording, host copies and GPU transfers. GPU initialization and every-element validation excluded. CPU setup also excluded. Not an idle-system, power or sustained-peak qualification."
+    },
+    "independent_numeric": {
+      "state": "passed",
+      "unittest_methods": 4,
+      "independent_python_numeric_cases": 18,
+      "rejections": [
+        "nonfinite input",
+        "existing output"
+      ],
+      "artifact_tests": [
+        "changed artifact bytes",
+        "changed input binding even with updated artifact hash"
+      ],
+      "source": "/home/pi/ChatGPT/JUPI/tests/test_gpu_pipeline.py",
+      "observed_result": "Ran 4 tests in 1.885s; OK"
+    },
+    "native_agent_benchmark": {
+      "state": "passed",
+      "job_id": "cea0c4d3-8d95-4481-aab9-ccf7701d7e20",
+      "run_id": "cc473889-93e4-4a77-a3e7-42d1cdf5f51e",
+      "receipt": "/var/lib/jupi-agent/performance-gates/cc473889-93e4-4a77-a3e7-42d1cdf5f51e/receipt.json",
+      "context_note": "Separate live service context with Nice=10. Retained separately from the direct-shell medians."
+    },
+    "inference_workers": {
+      "state": "retain_four_workers",
+      "evidence": "/home/pi/ChatGPT/JUPI/evidence/performance-gates-20261108/inference-sweep.json",
+      "six_workers": "15.01 then 10.99 tokens/s; not stable improvement",
+      "eight_workers": "0.463 tokens/s on eight generated tokens; regression reproduced",
+      "default_changed": false,
+      "scope": "One synthetic prompt, unequal generation lengths at eight workers; no broad model quality or latency claim"
+    },
+    "inference_placement": {
+      "state": "candidate_not_promoted",
+      "median_tokens_per_second": {
+        "baseline": 13.314485938793307,
+        "avoid-irq-core": 13.426160313948381
+      },
+      "candidate_relative_change": 0.008387434232792756,
+      "restoration": "original masks restored; new threads restored to leader baseline",
+      "restored_threads": 15,
+      "restore_errors": [],
+      "scope": "One synthetic prompt, fixed model and four workers; no persistent setting or model quality claim"
+    },
+    "network_cpu": {
+      "state": "observed_unresolved",
+      "evidence": "/home/pi/ChatGPT/JUPI/evidence/performance-gates-20261108/irq-sample.json",
+      "observations": "Ethernet IRQ24: 7181 interrupts in two seconds on CPU1; NET_RX 1001 on CPU1; ksoftirqd/1 near one CPU in process-time sample. Mechanism unqualified. No NIC, IRQ or kernel changes."
+    }
+  },
+  "aviatr": {
+    "identity": "Air Vehicle Integration and Technology Research; Boeing, Huntington Beach; Condition-Based Maintenance Plus Structural Integrity Demonstration",
+    "sources": [
+      {
+        "report": "AFRL-RQ-WP-TR-2013-0036",
+        "dtic": "ADA573734",
+        "period": "April-August 2009",
+        "url": "https://archive.org/download/DTIC_ADA573734/DTIC_ADA573734.pdf",
+        "path": "/home/pi/ChatGPT/JUPI/evidence/aviatr-source/ADA573734.pdf",
+        "sha256": "05d546b3c983c5ab085d720cae2d3202c66200749a3faefea05a1c244edec5cf",
+        "relevant_pages": "Printed pages 16-29 Appendix B; 30-38 Appendix C; numerical thresholds/objectives, measurement uncertainty and host compatibility"
+      },
+      {
+        "report": "AFRL-RQ-WP-TM-2013-0135",
+        "dtic": "ADA586666",
+        "period": "April-August 2011",
+        "url": "https://archive.org/download/DTIC_ADA586666/DTIC_ADA586666.pdf",
+        "path": "/home/pi/ChatGPT/JUPI/evidence/aviatr-source/ADA586666.pdf",
+        "sha256": "b32e8be6ab735f72e790aea1402ab5717dde742e56c395f051cd6c399c5b7d3e",
+        "relevant_pages": "Printed pages 22-29: detection probability, false calls, noise and threshold tradeoffs"
+      }
+    ],
+    "application": "Requirements and measured comparisons guide JUPI experiment gates; no aircraft limits, physical reliability certification or declassification claim is transferred."
+  },
+  "runtime_repair": {
+    "dropin": "/etc/systemd/system/fclink.service.d/90-jupi-stable-binds.conf",
+    "backup": "/var/backups/jupi/20261108T073417Z-cluster-reconnect",
+    "effect": "Required binds now static Ethernet and loopback; stale DHCP WiFi address removed; firewall and credentials retained. FC-Link and health recovered."
+  },
+  "preserved": [
+    "working internal root",
+    "kernel and graphics stack",
+    "existing measured profile",
+    "SSH pins and private keys",
+    "production science backend",
+    "four-worker inference default",
+    "sleep/hibernate masks",
+    "all preceding recovery copies"
+  ],
+  "limitations": [
+    "Physical shared GDDR5 is not proof of OpenCL shared virtual memory; this driver reports no unified host/device memory.",
+    "No new GPU inference backend or whole-machine speedup is claimed.",
+    "GPU setup cost is excluded from hot operation timing; new processes still initialize Vulkan.",
+    "Benchmarks run under a live desktop and native services; scheduling and memory placement matter.",
+    "Cold boot and early GPU firmware remain outside this performance change."
+  ],
+  "next_gates": [
+    "Finite-data dense matrix kernels with checked emitted work and residuals",
+    "Amortize setup and validate persistent-buffer APIs through source-pinned native science operations",
+    "Network NAPI/softirq source diagnosis without changing the running kernel",
+    "Workload-specific latency and quality tests before any inference-profile promotion",
+    "Sensor/rover fault-detection evaluation on held-out measured data when hardware is attached"
+  ]
+}

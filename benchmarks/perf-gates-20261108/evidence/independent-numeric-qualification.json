@@ -1,0 +1,59 @@
+[
+  {
+    "steps": 1,
+    "mode": "roundtrip",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 1,
+    "mode": "resident",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 1,
+    "mode": "fused",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 8,
+    "mode": "roundtrip",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 8,
+    "mode": "resident",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 8,
+    "mode": "fused",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 32,
+    "mode": "roundtrip",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 32,
+    "mode": "resident",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "steps": 32,
+    "mode": "fused",
+    "samples": 259,
+    "independent_python_f32": "bitwise pass"
+  },
+  {
+    "nonfinite_input": "rejected; no output"
+  }
+]

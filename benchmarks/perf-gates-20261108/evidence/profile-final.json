@@ -1,0 +1,8 @@
+{
+  "profile_id": "589c1d7f5f6ddda597b21fb2012aa0e3a2a37f936a8eedd1a4020e01597d85ba",
+  "baseline_matches": true,
+  "drift": [],
+  "benchmark": "/var/lib/jupi-agent/benchmarks/eb4a6b26-0642-4259-af1b-33a1219d4901",
+  "offline_qualification": "/var/lib/jupi-agent/benchmarks/7efbbc72-769f-47ce-a8f5-39f10bfcc50d",
+  "scope": "Read-only drift detection; no automatic system changes"
+}

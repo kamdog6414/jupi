@@ -1,0 +1,225 @@
+JUPI — finite-workload performance gates, 2026-11-08
+Joint Unix Platform Integrator; operator-authorized humanitarian laboratory work
+
+RESULT
+
+Ghostie's inbox pointer and the exact upstream commit were reviewed. A new,
+separately pinned, offline finite-array benchmark is installed and has passed a
+durable native-agent job. Its useful tuning results are CPU-cached GPU staging,
+GPU-resident batches, fused kernels, and an eight-stage CPU specialization using
+four OpenMP workers and SIMD. Every output is checked. The existing production
+profile 589c1d7f... still verifies with zero drift. These are operation-specific
+results, not a whole-machine speed multiplier or a new GPU inference backend.
+
+The working internal root, kernel, graphics stack, model, native science backend,
+SSH identities and preceding recovery copies were preserved. No boot transition,
+driver replacement, frequency/voltage/fan setting or firmware write occurred.
+
+SOURCE GATE
+
+Pointer: inbox/GHOSTIE-BENCH-POINTER-20261107.md.
+Upstream: https://github.com/kamdog6414/jupi
+Commit: 66411447b39d9df6e97b177ee75e021b03da0463.
+Fetched into an isolated .cache/ghostie-benchmark-upstream checkout. Upstream
+scripts were read as data; its full suite and storage writes were not replayed.
+
+The final upstream suite records scoped OpenBLAS SGEMM 27.2/DGEMM 11.7 GFLOPS
+and qwen3:0.6b at 12.80 generated tokens/s. Those are its capture-time results.
+The local measured configuration still matches the profile used there.
+
+The advertised RADV 2.86 TFLOPS is held as an unqualified loop-rate result.
+fma32_wg256.comp initializes identical components of vec4 values, and only
+invocation zero writes a result. The chain overflows; the recorded readback is
+not a finite useful-work check. Compiler elimination, component folding and
+emitted instruction counts have not been resolved. This source review does not
+prove which optimization occurred or establish a different clock. Neither the
+2.86 figure nor the separately boxed ~7.1 anomaly is adopted as a physical peak
+or evidence of exceeding the manufacturer's clock/performance specification.
+
+The new kernel reads varied stored samples, writes every element, rejects
+nonfinite input, uses precise float32 operations without contraction, and checks
+all outputs after every repetition. It reports wall time, not a GFLOPS estimate.
+
+SCIENCE / UBUNTU GATE — PASSED
+
+Explicit new native science run: 2ece6dfb-ccab-49ed-8363-3568cbfa5a9f.
+Native job: b31290c5-81ee-45a3-9745-5d7d8f0fb60d.
+Boot: 5c74d073-6f75-42c5-b5d4-566cc6090faa.
+65,536 synthetic samples; pinned Ubuntu Roach fit and verification; zero
+mismatches. Maximum normalized error 2.980164e-08; maximum prediction error
+against float64 1.528670e-06 in the synthetic response units. All 19 artifacts
+verified with jupi-science verify. End-to-end recorded total was 16.26 seconds,
+including reference work, setup, verification and rendering. This closes the
+fresh peer qualification that Ghostie explicitly left open. It is arithmetic
+qualification, not physical sensor calibration or a peer-model acknowledgment.
+
+FINITE ARRAY / MEMORY GATES — PASSED
+
+Workload: x <- gain*x + offset*(stage+1), eight ordered float32 stages,
+gain=0.75, offset=float32(0.0001). Deterministic varied inputs. No fast-math.
+Seven measured repetitions per lane, plus an untimed warmup. 1, 4,099, 65,536,
+1,048,576 and 4,194,304 samples cover a tiny batch, dispatch tails and bulk data.
+All CPU/GPU outputs matched the CPU reference bit for bit in all recorded lanes.
+
+Direct-shell live-session medians at 1,048,576 samples:
+
+  GPU first-coherent staging, fused kernel        100.576 ms
+  GPU CPU-cached staging, per-stage round trips    29.963 ms
+  GPU CPU-cached staging, eight resident kernels    4.349 ms
+  GPU CPU-cached staging, one fused kernel          3.632 ms
+  CPU serial staged reference                      5.974 ms
+  CPU eight-stage specialization, four workers     1.282 ms
+
+Changing only the fused GPU lane's staging policy reduced 100.576 to 3.632 ms
+(27.69x). With cached staging fixed, eliminating intermediate host round trips
+reduced 29.963 to 3.632 ms (8.25x). The best CPU lane was 4.66x faster than the
+serial staged CPU reference and 2.83x faster than transfer-inclusive GPU fusion
+for this simple recurrence. These ratios share one workload; they do not
+multiply into a whole-system gain or compare this machine to a newer GPU.
+
+At 4,194,304 samples the cached GPU roundtrip/resident/fused medians were
+113.503 / 15.931 / 14.129 ms; the four-worker CPU specialization was 5.138 ms.
+At 4,099 samples the best CPU lane was 0.00786 ms versus 0.09986 ms GPU fused.
+Compute intensity, batch size, data origin and placement therefore belong in
+any future routing decision. No automatic CPU substitution was added.
+
+Vulkan reports memory type 1 as HOST_VISIBLE|HOST_COHERENT (0x6), and type 3 as
+HOST_VISIBLE|HOST_COHERENT|HOST_CACHED (0xe). The latter is explicitly required
+by the new default benchmark lane; absence fails rather than quietly changing
+the memory policy. Device-local working storage and staging copies are explicit.
+Physical shared GDDR5 does not imply OpenCL shared virtual memory: the retained
+Clover driver reports unified host/device memory as NO. API heap advertisements
+are not a claim that all physical memory can be allocated by a GPU job.
+
+CPU build: GCC -O3 -march=btver2 -ffp-contract=off -fopenmp. This matches Jaguar's
+instruction set; no AVX2/FMA dependency was introduced. Compiler vectorization
+output is retained. Shader: glslc -O --target-env=vulkan1.0; NoContraction and
+per-element stores checked in the retained SPIR-V disassembly. Vulkan 1.0
+transfer/compute/host barriers and fence completion provide the synchronization.
+The driver retains its own testing/nonconformance warning; qualification is for
+these specific checked operations, not the entire Vulkan API.
+
+Timing includes host copies, command recording, submissions, GPU work and
+readback. Device initialization, pipeline creation, warmup and correctness
+comparison are outside the timed operation. Each process still pays setup cost,
+which is separately recorded. No energy, calibrated die-temperature, sustained
+peak or idle-system claim is made. These are live desktop measurements.
+
+NATIVE AGENT / PERSISTENCE GATE — PASSED
+
+CLI: jupi-pipeline-bench status
+Manifest: /etc/jupi/gpu-pipeline-bench.json
+Software ID: 6eb7d641122485137236b5ad511807c5ac99f16876d6abad5bcdf75d49284a45
+Five root-owned component hashes cover launcher, C source, shader source,
+SPIR-V and executable. The extension does not rewrite the original profile.
+
+Explicit job:
+  jupi-agent run --timeout 90 -- /usr/local/bin/jupi-pipeline-bench run --batch
+
+--batch expands only that benchmark process's affinity to the available CPUs;
+normal agent jobs retain CPUs 0,2. OpenMP uses four workers with spread placement.
+Bounds: 1..4,194,304 floats, 1..32 stages, 1..15 repetitions; 60-second child
+deadline, five-second GPU fence bound, memory-headroom preflight, no CPU fallback.
+The benchmark compares both CPUs and GPU by explicit design; it is not a native
+science calibration action. Scientific jobs continue through jupi-science.
+
+Native job cea0c4d3-8d95-4481-aab9-ccf7701d7e20 succeeded.
+Benchmark run cc473889-93e4-4a77-a3e7-42d1cdf5f51e passed and verified all four
+stored artifacts. Receipt:
+/var/lib/jupi-agent/performance-gates/cc473889-93e4-4a77-a3e7-42d1cdf5f51e/receipt.json
+
+That native service-context run recorded GPU fused 4.291 ms and four-worker CPU
+5.079 ms at 1,048,576 samples. It is retained separately from direct-shell
+results: Nice=10, live scheduling and cache state matter. Do not use the direct
+CPU win as an unconditional service-routing threshold. No router was installed.
+
+Verify any returned benchmark run UUID:
+  jupi-pipeline-bench verify RUN_UUID
+
+Four unittest methods passed, including 18 live GPU cases against an independent
+Python float32 recurrence, dispatch tails, negative coefficients, 1/8/32 stages,
+nonfinite-input rejection, existing-output preservation and artifact/binding
+tamper detection. The final installed executable is byte-identical to the
+direct-shell measured executable; subsequent source assertions only established
+IEEE float32, little endian and push-constant layout at compile time. Exact
+source lineage is in evidence/performance-gates-20261108/final/.
+
+INFERENCE GATES — RETAIN THE CURRENT DEFAULT
+
+Exploratory fixed-prompt measurements reproduced the eight-worker collapse:
+0.463 generated tokens/s, with only eight output tokens requested to bound it.
+Four workers measured 12.92 and 13.34 tokens/s; six measured 15.01 then 10.99.
+These exploratory samples had differing live background work and the eight-
+worker request had a shorter output. No stable six-worker improvement qualified.
+The final exploratory request restored four-worker options.
+
+A subsequent fixed-four-worker placement experiment used six requests in
+baseline/candidate/candidate/baseline/baseline/candidate order, 24 output tokens,
+one prompt, fixed seed and temperature. Baseline all-core median 13.314 tokens/s;
+candidate CPUs 0,2,4,6 median 13.426, only +0.84%. This is not a material or
+broadly qualified gain. All 15 worker-thread affinities were restored without
+errors. No persistent inference configuration changed.
+
+NETWORK OBSERVATION / RUNTIME REPAIR
+
+A two-second read-only sample found 7,181 Ethernet IRQ24 interrupts on CPU1 and
+1,001 NET_RX softirq events there; ksoftirqd/1 had accumulated near one core of
+CPU time. The source mechanism and a safe remedy remain open. No IRQ, NIC or
+kernel setting was changed. This is a useful next source-diagnosis gate, not
+proof that a kernel patch or affinity change would improve end-to-end work.
+
+FC-Link was restarting because its required bind included an obsolete WiFi DHCP
+address. A reversible drop-in now retains only static Ethernet 192.168.77.52 and
+loopback. The original service is backed up at
+/var/backups/jupi/20261108T073417Z-cluster-reconnect.
+The health unit was cleared and run after service recovery. Local runtime and
+cluster checks returned healthy; SSH links were active. Credentials and firewall
+rules were retained. Rollback removes only the new drop-in, then reloads systemd
+and restarts FC-Link; the obsolete DHCP bind may fail again.
+
+AVIATR / HUNTINGTON BEACH — THE EXACT REFERENCE
+
+The identified program is Air Vehicle Integration and Technology Research,
+not the unrelated Titan aircraft concept or NASA F-15 ACTIVE. Boeing's
+Condition-Based Maintenance Plus Structural Integrity demonstration is the
+relevant work. Original publicly released reports were retained and hashed:
+
+  ADA573734: AFRL-RQ-WP-TR-2013-0036; April-August 2009.
+  Fitzwater, Torng, Davis; Boeing, 5301 Bolsa Avenue, Huntington Beach.
+  SHA256 05d546b3c983c5ab085d720cae2d3202c66200749a3faefea05a1c244edec5cf
+  https://archive.org/download/DTIC_ADA573734/DTIC_ADA573734.pdf
+
+  ADA586666: AFRL-RQ-WP-TM-2013-0135; April-August 2011.
+  Fitzwater, Torng, Halbert; Boeing.
+  SHA256 b32e8be6ab735f72e790aea1402ab5717dde742e56c395f051cd6c399c5b7d3e
+  https://archive.org/download/DTIC_ADA586666/DTIC_ADA586666.pdf
+
+2009 Appendix B records demonstration capability requirements; Appendix C
+(printed pp.30-38) defines draft FS626 bulkhead monitoring requirements,
+threshold versus objective, uncertainty and compatibility with the host.
+2011 printed pp.22-29 distinguish detection probability, false calls, background
+noise and threshold tradeoffs. Relevant complete pages/figures were inspected.
+They are public-release reports; no prior classified status is asserted.
+
+The engineering method applies to JUPI: choose a real workload; preserve a known
+baseline; define a correctness threshold and performance objective; record
+conditions; compare alternatives; retain rejected candidates; measure false
+alarms and detection performance when measured sensor data actually exists.
+Aircraft-specific limits and reliability claims are not transferred to JUPI.
+Hash agreement is artifact integrity, not a reliability certificate.
+
+NEXT QUALIFICATION GATES
+
+1. Finite-data dense matrix kernels: inspect actual emitted work, validate
+   residuals against CPU/Ubuntu references and price transfer/setup costs.
+2. Persistent buffers: qualify reusable compute APIs before integrating them
+   into source-pinned native science actions. Never silently replace an action.
+3. Ethernet NAPI/softirq source diagnosis while preserving the running driver.
+4. End-to-end inference latency and quality over several fixed workloads before
+   promoting a new inference profile. Keep four workers until it qualifies.
+5. Fault detection on held-out measured sensor/rover data when hardware exists;
+   synthetic replay remains explicitly synthetic and never actuates hardware.
+
+Evidence and machine-readable results: JUPI-PERFORMANCE-GATES-20261108.json and
+evidence/performance-gates-20261108/. Recovery delta details are in
+JUPI-PERFORMANCE-RECOVERY-20261108.json after independent peer readback.

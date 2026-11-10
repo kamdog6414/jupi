@@ -1,0 +1,181 @@
+{
+  "schema": "jupi.inference.placement.gate.v1",
+  "worker_pid": 7524,
+  "boot_id": "5c74d073-6f75-42c5-b5d4-566cc6090faa",
+  "baseline_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "candidate_cpus": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "warmup": {
+    "eval_count": 1,
+    "eval_duration": 1000,
+    "prompt_eval_count": 43,
+    "prompt_eval_duration": 86631000,
+    "load_duration": 2566586,
+    "total_duration": 98246824,
+    "wall_seconds": 0.14393296599973837,
+    "response_sha256": "3973e022e93220f9212c18d0d0c543ae7c309e46640da93a4a0314de999f5112"
+  },
+  "results": [
+    {
+      "eval_count": 24,
+      "eval_duration": 1811850000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 78352000,
+      "load_duration": 2132903,
+      "total_duration": 1897476333,
+      "wall_seconds": 1.9021743830003288,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "baseline",
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load_average": [
+        1.79541015625,
+        2.0048828125,
+        2.25341796875
+      ]
+    },
+    {
+      "eval_count": 24,
+      "eval_duration": 1787555000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 77849000,
+      "load_duration": 3386684,
+      "total_duration": 1876360852,
+      "wall_seconds": 1.8815438030001133,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "avoid-irq-core",
+      "cpus": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "load_average": [
+        1.79541015625,
+        2.0048828125,
+        2.25341796875
+      ]
+    },
+    {
+      "eval_count": 24,
+      "eval_duration": 1800909000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 78003000,
+      "load_duration": 2506094,
+      "total_duration": 1893676623,
+      "wall_seconds": 1.9036450429998695,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "avoid-irq-core",
+      "cpus": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "load_average": [
+        2.37255859375,
+        2.12109375,
+        2.2900390625
+      ]
+    },
+    {
+      "eval_count": 24,
+      "eval_duration": 1785610000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 76217000,
+      "load_duration": 3063104,
+      "total_duration": 1870368125,
+      "wall_seconds": 1.8744912909996856,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "baseline",
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load_average": [
+        2.37255859375,
+        2.12109375,
+        2.2900390625
+      ]
+    },
+    {
+      "eval_count": 24,
+      "eval_duration": 1802548000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 79986000,
+      "load_duration": 2482208,
+      "total_duration": 1891979386,
+      "wall_seconds": 1.898284357999728,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "baseline",
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "load_average": [
+        2.37255859375,
+        2.12109375,
+        2.2900390625
+      ]
+    },
+    {
+      "eval_count": 24,
+      "eval_duration": 1776110000,
+      "prompt_eval_count": 43,
+      "prompt_eval_duration": 80689000,
+      "load_duration": 3223887,
+      "total_duration": 1865262436,
+      "wall_seconds": 1.8700021679997008,
+      "response_sha256": "7896a369aa4addbf802f8db7808ff196d1d25860998fe7f69732a7a2376fc7f2",
+      "placement": "avoid-irq-core",
+      "cpus": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "load_average": [
+        2.6630859375,
+        2.185546875,
+        2.31005859375
+      ]
+    }
+  ],
+  "restoration": "original masks restored; new threads restored to leader baseline",
+  "scope": "One synthetic prompt, fixed model and four workers; no persistent setting or model quality claim",
+  "restored_threads": 15,
+  "restore_errors": []
+}

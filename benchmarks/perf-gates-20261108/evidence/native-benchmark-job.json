@@ -1,0 +1,11 @@
+{
+  "id": "cea0c4d3-8d95-4481-aab9-ccf7701d7e20",
+  "kind": "command",
+  "payload": "{\"peer\": false, \"argv\": [\"/usr/local/bin/jupi-pipeline-bench\", \"run\", \"--batch\", \"--samples\", \"1048576\", \"--steps\", \"8\", \"--reps\", \"7\"], \"cwd\": \"/home/pi/ChatGPT/JUPI\", \"timeout\": 90}",
+  "status": "succeeded",
+  "created": "2026-11-08T07:50:23.511812+00:00",
+  "started": "2026-11-08T07:50:23.765299+00:00",
+  "finished": "2026-11-08T07:50:25.230825+00:00",
+  "code": 0,
+  "output": "{\n  \"run_id\": \"cc473889-93e4-4a77-a3e7-42d1cdf5f51e\",\n  \"state\": \"passed\",\n  \"receipt\": \"/var/lib/jupi-agent/performance-gates/cc473889-93e4-4a77-a3e7-42d1cdf5f51e/receipt.json\",\n  \"median_seconds\": {\n    \"roundtrip\": 0.034010311,\n    \"resident\": 0.00464477,\n    \"fused\": 0.004291061,\n    \"cpu\": 0.006722628,\n    \"cpu-fused-1\": 0.01490605,\n    \"cpu-fused-4\": 0.005079036,\n    \"cpu-staged-4\": 0.005420976\n  },\n  \"error\": null\n}\n"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "samples": 1,
+    "median_seconds": {
+      "roundtrip": 0.000668623,
+      "resident": 0.00010714,
+      "fused": 8.4542e-05,
+      "cpu": 2.63000175e-07
+    },
+    "resident_vs_roundtrip": 6.2406477506066835,
+    "fused_vs_roundtrip": 7.9087672399517395,
+    "fused_vs_cpu": 0.003110881869366705
+  },
+  {
+    "samples": 4099,
+    "median_seconds": {
+      "roundtrip": 0.003598312,
+      "resident": 0.000476705,
+      "fused": 0.000470761,
+      "cpu": 1.765e-05
+    },
+    "resident_vs_roundtrip": 7.548299262646711,
+    "fused_vs_roundtrip": 7.643606840838558,
+    "fused_vs_cpu": 0.037492485571234656
+  },
+  {
+    "samples": 65536,
+    "median_seconds": {
+      "roundtrip": 0.045762639,
+      "resident": 0.005819327,
+      "fused": 0.005958956,
+      "cpu": 0.00027584
+    },
+    "resident_vs_roundtrip": 7.863905740302959,
+    "fused_vs_roundtrip": 7.679640359821419,
+    "fused_vs_cpu": 0.04628998770925646
+  },
+  {
+    "samples": 1048576,
+    "median_seconds": {
+      "roundtrip": 0.812813547,
+      "resident": 0.101657958,
+      "fused": 0.101249011,
+      "cpu": 0.006791135
+    },
+    "resident_vs_roundtrip": 7.995572240394598,
+    "fused_vs_roundtrip": 8.027866533925947,
+    "fused_vs_cpu": 0.06707359343984111
+  },
+  {
+    "samples": 4194304,
+    "median_seconds": {
+      "roundtrip": 3.24181699,
+      "resident": 0.405083203,
+      "fused": 0.403004311,
+      "cpu": 0.026946873
+    },
+    "resident_vs_roundtrip": 8.002842295092645,
+    "fused_vs_roundtrip": 8.044124843121095,
+    "fused_vs_cpu": 0.06686497455358487
+  }
+]

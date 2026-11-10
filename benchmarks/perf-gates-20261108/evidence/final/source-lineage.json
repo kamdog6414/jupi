@@ -1,0 +1,6 @@
+{
+  "change": "Added compile-time assertions only for IEEE float32, push-constant size and little endian",
+  "measured_source_sha256": "2ad37ce8b538c3bb94022911d221617c1010031c6418c4890a02e14bb11079ae",
+  "installed_source_sha256": "564e3c88a11865816294eba2e1ba763f100b1c5a3bf5d0daa31071016b9ce8bb",
+  "measured_and_installed_binary_identical": true
+}

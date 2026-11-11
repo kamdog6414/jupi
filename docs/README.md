@@ -13,6 +13,8 @@ Start with **[RUNBOOK.md](RUNBOOK.md)** if JUPI is frozen or unreachable right n
 | [RECEIPTS.md](RECEIPTS.md) | Hashes, sizes, boot list, identity anchors |
 | [field-manual/](field-manual/) | Typeset PDFs (28-page manual, 2-page digest) + sources + build script |
 | [jupi2/](jupi2/) | JUPI 2 (PS4 Pro) final public study PDF, 11 Nov 2026 |
+| [jupi2/BENCHMARKS.md](jupi2/BENCHMARKS.md) | JUPI 2 full benchmark tables, thermals, server latency, GPU probe, reproduce commands |
+| [jupi2/RESCUE-SHELL.md](jupi2/RESCUE-SHELL.md) | JUPI 2 boot path: PayLoader sends, rescue shell, `HOLD_NO_USB` cause and Pro selector fix, root image, switch_root |
 | [BENCHMARK-BASELINE-20261107.txt](BENCHMARK-BASELINE-20261107.txt) | Nov 7 benchmark baseline (pre-existing) |
 
 All of this is the public edition. Addresses and key paths are role placeholders, and fingerprints are truncated.

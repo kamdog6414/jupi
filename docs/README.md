@@ -12,6 +12,7 @@ Start with **[RUNBOOK.md](RUNBOOK.md)** if JUPI is frozen or unreachable right n
 | [OPEN-ISSUES.md](OPEN-ISSUES.md) | Known open issues ranked by risk |
 | [RECEIPTS.md](RECEIPTS.md) | Hashes, sizes, boot list, identity anchors |
 | [field-manual/](field-manual/) | Typeset PDFs (28-page manual, 2-page digest) + sources + build script |
+| [jupi2/](jupi2/) | JUPI 2 (PS4 Pro) final public study PDF, 11 Nov 2026 |
 | [BENCHMARK-BASELINE-20261107.txt](BENCHMARK-BASELINE-20261107.txt) | Nov 7 benchmark baseline (pre-existing) |
 
 All of this is the public edition. Addresses and key paths are role placeholders, and fingerprints are truncated.

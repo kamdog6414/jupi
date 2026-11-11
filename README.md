@@ -29,6 +29,7 @@ Why: CPU and GPU share one memory pool. Xorg can pin up to ~3.4 GiB of GPU (GTT)
 |---|---|
 | [docs/field-manual/JUPI-Field-Manual.pdf](docs/field-manual/JUPI-Field-Manual.pdf) | 28-page B&W field manual (public edition) |
 | [docs/field-manual/JUPI-Field-Digest.pdf](docs/field-manual/JUPI-Field-Digest.pdf) | 2-page digest: TL;DR, runbook, key facts |
+| [docs/jupi2/JUPI2-FINAL-20261111.pdf](docs/jupi2/JUPI2-FINAL-20261111.pdf) | JUPI 2 (PS4 Pro) final public study, 15 pages, with PS3 20th-anniversary opener |
 | [docs/](docs/README.md) | Runbook, boot chain, memory, as-built config, timeline, open issues, receipts |
 
 ## Measured performance (cross-checked, 2026-11-08)

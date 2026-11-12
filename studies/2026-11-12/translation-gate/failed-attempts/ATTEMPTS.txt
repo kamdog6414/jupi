@@ -1,0 +1,7 @@
+Preserved attempt log (2026-11-12 PST)
+1) 08:08:58  Translator launch on JUPI 2: the launching ssh exited 124 (my 30 s client timeout; the nohup'd job kept
+             the channel open). The translator itself was unaffected and ran to completion (150 calls, rc 0).
+2) 08:19:5x  First verifier invocation wrapped in /usr/bin/time -v; JUPI has no /usr/bin/time ("No such file"),
+             so verify.py never started (no output written). Re-ran without the wrapper; verify.py records its own
+             peak RSS. verify.py was never edited after freezing.
+No model call was repeated or discarded. No protocol or code change after the 08:08:42 PST freeze.

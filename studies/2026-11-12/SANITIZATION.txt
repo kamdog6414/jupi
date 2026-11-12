@@ -1,0 +1,103 @@
+SANITIZATION (public edition, 2026-11-12)
+
+This file describes categories of redaction. It does not restate the
+removed addresses, ports, aliases, home paths, or private-file names.
+
+Redacted or rewritten in the published copies
+---------------------------------------------
+translation-gate/protocol/PROTOCOL.json
+  - translator.endpoint: replaced a loopback model-server URL with
+    the placeholder <local-model-endpoint>
+  - seats.translator: removed the on-node address and port
+  - seats.verifier_primary: removed an ssh alias
+  - seats.orchestration: replaced a hop-by-hop access path with
+    "orchestration host via the lab peer; analysis on the
+    orchestration host"
+  - translator.server_facts_read_only: removed a local GPU server port
+  - rules: removed a radio-interface operational rule and the
+    phrase "nothing posted"
+
+translation-gate/code/translate.py
+  - file-header comment: removed a loopback address and port
+  - the client still reads an API stats field named after the
+    translator node; that is a response-key, not an access path
+
+translation-gate/code/make_protocol.py
+translation-gate/protocol/make_protocol.py
+  - same endpoint, alias, orchestration-path and radio-interface
+    strings as in PROTOCOL.json
+
+translation-gate/REPORT.md
+  - removed "Private. Nothing posted."
+  - redacted the loopback model-server address and port, the local
+    GPU server port, an ssh alias, and the hop-by-hop access path
+
+translation-gate/raw/outputs.jsonl
+  - prompts and model texts are synthetic and were left intact
+  - server gate snapshots had a node alias; it is published as
+    "JUPI 2"
+
+translation-gate/failed-attempts/ATTEMPTS.txt
+  - wording aligned to the public node name JUPI (no address or
+    alias remained)
+
+condor-sar/REPORT.md
+  - removed "PRIVATE. NOTHING POSTED."
+  - "box" as the control machine -> "orchestration host"
+  - FILES list no longer points at unpublished node binaries or
+    exchange partials
+
+condor-sar/failed-attempts/ATTEMPTS.txt
+  - ssh aliases replaced with the public node names JUPI / JUPI 2
+  - "box-relative" / "Box-side" -> orchestration-host wording
+  - the already-public lab-peer name Roach is retained; no
+    user@host or address was present
+
+native-contour/REPORT.md
+  - rewritten as a public edition
+  - removed hashes and identifiers of the private photograph and
+    challenge packet
+  - removed hashes of unpublished RESULTS/RECEIPT/PROGRESS/FROZEN-SPLIT
+    files and of the R2 protocol (that protocol pins private-file hashes)
+  - removed home-directory paths on the nodes and the lab peer
+  - removed ssh aliases and the hop-by-hop access path
+  - removed a radio-interface operational note
+  - removed a local venv project name; retained Python/Pillow versions
+  - removed local /opt filesystem-layout notes
+
+Left unchanged (and why)
+------------------------
+- condor-sar/protocol/PROTOCOL.json and code/condor_sar.py: no
+  addresses, ports, aliases, home paths or radio-interface notes;
+  frozen hashes still match.
+- native-contour/code/*.py and VARIANT-TABLES.txt: no addresses or
+  home paths, and no embedded photographs. The measurement code
+  still names the local challenge inputs it expects; those files
+  are not in this repository.
+- translation-gate/code/keys.py, verify.py, analyze.py, figure.py,
+  and the two PNG figures: no addresses, paths, aliases or private
+  imagery. Item prompts and model outputs are synthetic (radar math,
+  unit conversion, JP/EN hardware terms, traps, fictional
+  home-assistant commands).
+- Public study-artifact hashes (frozen protocol and published code
+  sha256, translation-gate VERDICTS and answer-key hashes recorded
+  in FROZEN-HASHES.txt) are retained as reproducibility anchors.
+- Node names JUPI and JUPI 2, and the already-public peer name
+  Roach, are retained. Standard paths such as /proc/meminfo and
+  /usr/bin/python3 are retained.
+
+Deliberately omitted from this packet
+-------------------------------------
+- Private contour photograph(s) and the entire challenge packet
+- Launch-vehicle photographs used as private reference evidence
+- Per-node contour RESULTS/RECEIPT/PROGRESS JSON (derived from the
+  private photograph) and the R2 protocol JSON (pins private hashes)
+- Condor SAR produce/witness binaries (.c128), exchange partials,
+  compare products and negative-control grids (synthetic; not
+  requested for this public packet, and some receipts contained
+  home paths)
+- Translation-gate per-seat VERDICTS.json / VERIFY-RECEIPT.json and
+  compare/ANALYSIS.json (summarized in the report; not required)
+- Keys, tokens, fingerprints, Wi-Fi names or PSKs, serials, UUIDs,
+  lab IPs, MACs, tailnet hostnames, user@host strings
+- Sony SDK material (none was present in the source study folders)

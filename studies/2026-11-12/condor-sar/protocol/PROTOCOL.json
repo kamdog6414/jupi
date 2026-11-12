@@ -1,0 +1,1060 @@
+{
+ "budgets": {
+  "gate": "MemAvailable > 800 MB and swap < 25% before each job",
+  "gpu": false,
+  "installs": false,
+  "rlimit_as_bytes": 536870912,
+  "wall_s_per_node": 600
+ },
+ "created_local": "2026-11-12 America/Los_Angeles",
+ "cross_witness": {
+  "K": 512,
+  "abs_tol": 1e-07,
+  "method": "stdlib-only (system python3, no numpy) re-generation of the needed range bins from the protocol targets + re-backprojection of the peer pulse half",
+  "seed_rule": "int(sha256(peer partial_grid.c128 bytes)[:16],16) -> random.Random(seed).sample(range(98304),512)"
+ },
+ "decimation": {
+  "M": [
+   1,
+   2,
+   4,
+   8
+  ],
+  "alias_metric": "max |I| outside 3 m of in-image targets and outside y>1034 (edge zone), dB rel T0 peak",
+  "alias_threshold_db": -20.0,
+  "rule": "keep pulses n%M==0, normalize by M"
+ },
+ "fine_cuts": {
+  "O1": "range cut through O1 from y=1036 to 1048",
+  "irf_halfspan_m": 8.0,
+  "irf_targets": [
+   "T0",
+   "T1",
+   "T2",
+   "E"
+  ],
+  "pairs": "cut along pair axis from a-3m to b+3m",
+  "step_m": 0.0625
+ },
+ "image_grid": {
+  "dx": 0.25,
+  "nx": 256,
+  "ny": 384,
+  "order": "row-major [iy][ix], y outer",
+  "x0": -32.0,
+  "y0": 952.0
+ },
+ "lineage_note": "AFRL Condor (2010, PS3+GPU COTS cluster; SAR image formation among its workloads) is architectural inspiration only. No AFRL code, data or benchmark numbers are used or compared.",
+ "pairs": [
+  {
+   "a": "PA0a",
+   "axis": "az",
+   "b": "PA0b",
+   "factor": 0.7,
+   "name": "PA0",
+   "phi_rel_rad_mod2pi": 4.956967549239115,
+   "sep_m": 0.6831208352864583,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -27,
+   "yc": 975.0
+  },
+  {
+   "a": "PR0a",
+   "axis": "rg",
+   "b": "PR0b",
+   "factor": 0.7,
+   "name": "PR0",
+   "phi_rel_rad_mod2pi": 4.928941058517552,
+   "sep_m": 0.6995157353333333,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -27,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA1a",
+   "axis": "az",
+   "b": "PA1b",
+   "factor": 0.8,
+   "name": "PA1",
+   "phi_rel_rad_mod2pi": 0.4843105376365511,
+   "sep_m": 0.7807095260416667,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -18,
+   "yc": 975.0
+  },
+  {
+   "a": "PR1a",
+   "axis": "rg",
+   "b": "PR1b",
+   "factor": 0.8,
+   "name": "PR1",
+   "phi_rel_rad_mod2pi": 1.2070444765536692,
+   "sep_m": 0.7994465546666667,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -18,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA2a",
+   "axis": "az",
+   "b": "PA2b",
+   "factor": 0.9,
+   "name": "PA2",
+   "phi_rel_rad_mod2pi": 3.0209014796537677,
+   "sep_m": 0.878298216796875,
+   "theory": {
+    "dip_db": -21.677654552612143,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -9,
+   "yc": 975.0
+  },
+  {
+   "a": "PR2a",
+   "axis": "rg",
+   "b": "PR2b",
+   "factor": 0.9,
+   "name": "PR2",
+   "phi_rel_rad_mod2pi": 3.7559608499609354,
+   "sep_m": 0.899377374,
+   "theory": {
+    "dip_db": -7.568133204413286,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": -9,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA3a",
+   "axis": "az",
+   "b": "PA3b",
+   "factor": 1.0,
+   "name": "PA3",
+   "phi_rel_rad_mod2pi": 0.0,
+   "sep_m": 0.9758869075520833,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 0,
+   "yc": 975.0
+  },
+  {
+   "a": "PR3a",
+   "axis": "rg",
+   "b": "PR3b",
+   "factor": 1.0,
+   "name": "PR3",
+   "phi_rel_rad_mod2pi": 6.326672519207932e-11,
+   "sep_m": 0.9993081933333333,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 0,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA4a",
+   "axis": "az",
+   "b": "PA4b",
+   "factor": 1.1,
+   "name": "PA4",
+   "phi_rel_rad_mod2pi": 3.9872355894479097,
+   "sep_m": 1.0734755983072917,
+   "theory": {
+    "dip_db": -7.352259223393939,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 9,
+   "yc": 975.0
+  },
+  {
+   "a": "PR4a",
+   "axis": "rg",
+   "b": "PR4b",
+   "factor": 1.1,
+   "name": "PR4",
+   "phi_rel_rad_mod2pi": 2.496223712548314,
+   "sep_m": 1.0992390126666667,
+   "theory": {
+    "dip_db": -9.747110120711355,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 9,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA5a",
+   "axis": "az",
+   "b": "PA5b",
+   "factor": 1.25,
+   "name": "PA5",
+   "phi_rel_rad_mod2pi": 2.777555474238527,
+   "sep_m": 1.2198586344401041,
+   "theory": {
+    "dip_db": -16.843015150274788,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 18,
+   "yc": 975.0
+  },
+  {
+   "a": "PR5a",
+   "axis": "rg",
+   "b": "PR5b",
+   "factor": 1.25,
+   "name": "PR5",
+   "phi_rel_rad_mod2pi": 6.205696876511659,
+   "sep_m": 1.2491352416666666,
+   "theory": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": 0.0,
+    "resolved": false
+   },
+   "xc": 18,
+   "yc": 1025.0
+  },
+  {
+   "a": "PA6a",
+   "axis": "az",
+   "b": "PA6b",
+   "factor": 1.5,
+   "name": "PA6",
+   "phi_rel_rad_mod2pi": 3.739489508282624,
+   "sep_m": 1.463830361328125,
+   "theory": {
+    "dip_db": -16.51074864711918,
+    "resolved": true
+   },
+   "theory_inphase": {
+    "dip_db": -2.4355967847471907,
+    "resolved": false
+   },
+   "xc": 27,
+   "yc": 975.0
+  },
+  {
+   "a": "PR6a",
+   "axis": "rg",
+   "b": "PR6b",
+   "factor": 1.5,
+   "name": "PR6",
+   "phi_rel_rad_mod2pi": 6.074026961341836,
+   "sep_m": 1.49896229,
+   "theory": {
+    "dip_db": -2.539311121217312,
+    "resolved": false
+   },
+   "theory_inphase": {
+    "dip_db": -2.4355967847471907,
+    "resolved": false
+   },
+   "xc": 27,
+   "yc": 1025.0
+  }
+ ],
+ "pass_criteria": {
+  "cross_node_float": "max|A-B| <= 1e-9 * peak|T0| for float64 images (summed partials vs single-node full; JUPI vs JUPI2 full); f32 sweep outputs rel 1e-4",
+  "cross_node_int": "exact sha256 match of integer detection table (argmax pixel per in-image target window) between JUPI-full, JUPI2-full and summed partials",
+  "irw": "measured -3 dB IRW of T0,T1,T2 within +/-10% of 0.8859*rho (both axes, full summed image fine cuts)",
+  "outside_target": "O1 level at its true pixel < -40 dB rel T0",
+  "position": "|position error| < 0.5 image pixel (0.125 m) for T0,T1,T2, parabolic peak on main image grid",
+  "pslr": "measured PSLR of T0,T1,T2 in [-14.0,-12.5] dB (both axes)",
+  "report_only": [
+   "pair resolution vs theory",
+   "swath-edge target E loss/bias",
+   "alias onset vs predicted M",
+   "precision cliff vs prediction",
+   "throughput"
+  ],
+  "witness": "all K=512 witnessed pixels within abs 1e-7 on both nodes"
+ },
+ "precision": {
+  "N": "256*R0/1km (az resolution held constant)",
+  "R0_sweep_m": [
+   1000.0,
+   4000.0,
+   16000.0,
+   64000.0,
+   256000.0
+  ],
+  "cliff_definition": "gain loss worse than -1.0 dB vs f64 at the target pixel",
+  "cut": "azimuth cut 129 px at 1/16 m about target",
+  "modes": {
+   "f32_naive": "float32 coordinates, R=sqrt in f32, phase=k32*R32 in f32, complex64, sequential cumsum accumulation (SPU-like)",
+   "f32_refdiff": "reference range Rref_n per pulse in float64 (PPE-side) reduced mod 2pi and stored as complex64 rotation; per-pixel dR via (2(c-a_n).d+|d|^2)/(R+Rref) in f32; complex64 sequential accumulation",
+   "f64": "all float64, np.sum"
+  },
+  "pulse_spacing_m": 0.0625,
+  "target": "single point at (0,R0)"
+ },
+ "radar": {
+  "R0_m": 1000.0,
+  "aperture_m": 16.0,
+  "backprojection": "I(p)=sum_n lerp(s_n, R_pn) exp(+j 4pi R_pn/lambda); lerp valid iff 0<=floor((R-r0)/dr)<=NB-2 else 0",
+  "bandwidth_hz": 150000000.0,
+  "c": 299792458.0,
+  "fc_hz": 9600000000.0,
+  "geometry": "2-D slant plane; platform on y=0 at x_n=-L/2+(n+0.5)d; broadside to scene center (0,R0)",
+  "lambda_m": 0.031228381041666666,
+  "n_pulses": 256,
+  "n_range_bins": 1281,
+  "platform_speed_mps": 100.0,
+  "prf_hz": 1600.0,
+  "pulse_spacing_m": 0.0625,
+  "range_bin_m": 0.0625,
+  "range_window_m": [
+   960.0,
+   1040.0
+  ],
+  "signal": "range-compressed, unweighted: s_n(r)=sum_k a_k exp(j phi_k) sinc(2B(r-R_kn)/c) exp(-j 4pi R_kn/lambda) (np.sinc convention)"
+ },
+ "seed": 20261112,
+ "split": {
+  "JUPI": "pulses [0,128)",
+  "JUPI2": "pulses [128,256)",
+  "gather": "coherent complex sum on box"
+ },
+ "study": "CONDOR-LINEAGE SAR v0",
+ "targets": [
+  {
+   "amp": 1.0,
+   "name": "T0",
+   "phase": 0.0,
+   "role": "isolated IRF, scene center",
+   "x": 0.0,
+   "y": 1000.0
+  },
+  {
+   "amp": 1.0,
+   "name": "T1",
+   "phase": 0.0,
+   "role": "isolated IRF",
+   "x": -20.0,
+   "y": 985.0
+  },
+  {
+   "amp": 1.0,
+   "name": "T2",
+   "phase": 0.0,
+   "role": "isolated IRF",
+   "x": 20.0,
+   "y": 1015.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA0a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -27.34156041764323,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA0b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -26.65843958235677,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR0a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -27.0,
+   "y": 1024.6502421323332
+  },
+  {
+   "amp": 1.0,
+   "name": "PR0b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -27.0,
+   "y": 1025.3497578676668
+  },
+  {
+   "amp": 1.0,
+   "name": "PA1a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -18.390354763020834,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA1b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -17.609645236979166,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR1a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -18.0,
+   "y": 1024.6002767226666
+  },
+  {
+   "amp": 1.0,
+   "name": "PR1b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -18.0,
+   "y": 1025.3997232773334
+  },
+  {
+   "amp": 1.0,
+   "name": "PA2a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -9.439149108398437,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA2b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -8.560850891601563,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR2a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -9.0,
+   "y": 1024.550311313
+  },
+  {
+   "amp": 1.0,
+   "name": "PR2b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": -9.0,
+   "y": 1025.449688687
+  },
+  {
+   "amp": 1.0,
+   "name": "PA3a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": -0.48794345377604165,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA3b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 0.48794345377604165,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR3a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 0.0,
+   "y": 1024.5003459033333
+  },
+  {
+   "amp": 1.0,
+   "name": "PR3b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 0.0,
+   "y": 1025.4996540966667
+  },
+  {
+   "amp": 1.0,
+   "name": "PA4a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 8.463262200846355,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA4b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 9.536737799153645,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR4a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 9.0,
+   "y": 1024.4503804936667
+  },
+  {
+   "amp": 1.0,
+   "name": "PR4b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 9.0,
+   "y": 1025.5496195063333
+  },
+  {
+   "amp": 1.0,
+   "name": "PA5a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 17.39007068277995,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA5b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 18.60992931722005,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR5a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 18.0,
+   "y": 1024.3754323791666
+  },
+  {
+   "amp": 1.0,
+   "name": "PR5b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 18.0,
+   "y": 1025.6245676208334
+  },
+  {
+   "amp": 1.0,
+   "name": "PA6a",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 26.268084819335936,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PA6b",
+   "phase": 0.0,
+   "role": "dense-cluster azimuth pair",
+   "x": 27.731915180664064,
+   "y": 975.0
+  },
+  {
+   "amp": 1.0,
+   "name": "PR6a",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 27.0,
+   "y": 1024.250518855
+  },
+  {
+   "amp": 1.0,
+   "name": "PR6b",
+   "phase": 0.0,
+   "role": "dense-cluster range pair",
+   "x": 27.0,
+   "y": 1025.749481145
+  },
+  {
+   "amp": 0.5677532119548474,
+   "name": "S0",
+   "phase": 1.4721398881814922,
+   "role": "seeded random scatterer",
+   "x": -17.357764636158944,
+   "y": 1000.105637938598
+  },
+  {
+   "amp": 0.604757827132063,
+   "name": "S1",
+   "phase": -2.036370413092323,
+   "role": "seeded random scatterer",
+   "x": -23.04998566889214,
+   "y": 1005.2067406838352
+  },
+  {
+   "amp": 0.4620251040575431,
+   "name": "S2",
+   "phase": -0.4338949279602451,
+   "role": "seeded random scatterer",
+   "x": -1.5432006673866958,
+   "y": 994.1503268428623
+  },
+  {
+   "amp": 0.36413322962577804,
+   "name": "S3",
+   "phase": 1.17982708664554,
+   "role": "seeded random scatterer",
+   "x": -28.4793164493144,
+   "y": 996.0902905400741
+  },
+  {
+   "amp": 0.5388796419700682,
+   "name": "S4",
+   "phase": 2.1331065477315825,
+   "role": "seeded random scatterer",
+   "x": 21.701295934548845,
+   "y": 1003.407894241686
+  },
+  {
+   "amp": 0.7358325353865309,
+   "name": "S5",
+   "phase": -1.0856101144979013,
+   "role": "seeded random scatterer",
+   "x": 26.43218481879618,
+   "y": 990.3291447623355
+  },
+  {
+   "amp": 1.0,
+   "name": "E",
+   "phase": 0.0,
+   "role": "swath edge: min range exactly = last recorded range bin (partially supported)",
+   "x": 10.0,
+   "y": 1040.0
+  },
+  {
+   "amp": 1.0,
+   "name": "O1",
+   "phase": 0.0,
+   "role": "outside range window (no support) but inside image grid; must not appear",
+   "x": -10.0,
+   "y": 1046.0
+  },
+  {
+   "amp": 1.0,
+   "name": "O2",
+   "phase": 0.0,
+   "role": "outside image grid in azimuth, inside range window; alias source under PRF decimation",
+   "x": 60.0,
+   "y": 1005.0
+  }
+ ],
+ "theory": {
+  "decimation_ghosts": {
+   "1": {},
+   "2": {},
+   "4": {
+    "O2": [
+     {
+      "order": -1,
+      "x": -2.880809251149562,
+      "y": 1006.7853301166333
+     }
+    ]
+   },
+   "8": {
+    "E": [
+     {
+      "order": -1,
+      "x": -22.4790176131057,
+      "y": 1039.8051229760074
+     }
+    ],
+    "O1": [
+     {
+      "order": 1,
+      "x": 22.666379287916097,
+      "y": 1045.8021969999759
+     }
+    ],
+    "O2": [
+     {
+      "order": -2,
+      "x": -2.880809251149562,
+      "y": 1006.7853301166333
+     },
+     {
+      "order": -1,
+      "x": 28.559595374425218,
+      "y": 1006.384295143783
+     }
+    ],
+    "PA0a": [
+     {
+      "order": 1,
+      "x": 3.1180806003765227,
+      "y": 975.3783053253959
+     }
+    ],
+    "PA0b": [
+     {
+      "order": 1,
+      "x": 3.8006109087913424,
+      "y": 975.3569745266018
+     }
+    ],
+    "PA1a": [
+     {
+      "order": 1,
+      "x": 12.062732475696528,
+      "y": 975.0988132663938
+     }
+    ],
+    "PA1b": [
+     {
+      "order": 1,
+      "x": 12.842991980711924,
+      "y": 975.0744367289892
+     }
+    ],
+    "PA2a": [
+     {
+      "order": 1,
+      "x": 21.009949231128672,
+      "y": 974.8193061122641
+     }
+    ],
+    "PA2b": [
+     {
+      "order": 1,
+      "x": 21.887994278754906,
+      "y": 974.7918772099207
+     }
+    ],
+    "PA3a": [
+     {
+      "order": -1,
+      "x": -30.935618782287065,
+      "y": 974.5092229319182
+     },
+     {
+      "order": 1,
+      "x": 29.95973187473498,
+      "y": 974.5397131747932
+     }
+    ],
+    "PA3b": [
+     {
+      "order": -1,
+      "x": -29.95973187473498,
+      "y": 974.5397131747932
+     },
+     {
+      "order": 1,
+      "x": 30.935618782287065,
+      "y": 974.5092229319182
+     }
+    ],
+    "PA4a": [
+     {
+      "order": -1,
+      "x": -21.98555636456942,
+      "y": 974.788829500226
+     }
+    ],
+    "PA4b": [
+     {
+      "order": -1,
+      "x": -20.912390195232966,
+      "y": 974.8223537158821
+     }
+    ],
+    "PA5a": [
+     {
+      "order": -1,
+      "x": -13.062443482127707,
+      "y": 975.0675808007506
+     }
+    ],
+    "PA5b": [
+     {
+      "order": -1,
+      "x": -11.843288005459984,
+      "y": 975.1056691448429
+     }
+    ],
+    "PA6a": [
+     {
+      "order": -1,
+      "x": -4.1906349309915605,
+      "y": 975.3447856317022
+     }
+    ],
+    "PA6b": [
+     {
+      "order": -1,
+      "x": -2.728069984109903,
+      "y": 975.3904944963065
+     }
+    ],
+    "PR0a": [
+     {
+      "order": 1,
+      "x": 5.009275175682853,
+      "y": 1024.993671133663
+     }
+    ],
+    "PR0b": [
+     {
+      "order": 1,
+      "x": 5.031112344815664,
+      "y": 1025.6928457719964
+     }
+    ],
+    "PR1a": [
+     {
+      "order": 1,
+      "x": 14.001545009034835,
+      "y": 1024.6627170915926
+     }
+    ],
+    "PR1b": [
+     {
+      "order": 1,
+      "x": 14.026506582039424,
+      "y": 1025.4617738415877
+     }
+    ],
+    "PR2a": [
+     {
+      "order": 1,
+      "x": 22.99628193768856,
+      "y": 1024.33173895404
+     }
+    ],
+    "PR2b": [
+     {
+      "order": 1,
+      "x": 23.024366954409953,
+      "y": 1025.2306777279998
+     }
+    ],
+    "PR3a": [
+     {
+      "order": -1,
+      "x": -31.993487179188595,
+      "y": 1024.000671647321
+     },
+     {
+      "order": 1,
+      "x": 31.993487179188595,
+      "y": 1024.000671647321
+     }
+    ],
+    "PR4a": [
+     {
+      "order": -1,
+      "x": -22.993161380392408,
+      "y": 1024.2318568680403
+     }
+    ],
+    "PR4b": [
+     {
+      "order": -1,
+      "x": -23.02748751194064,
+      "y": 1025.3305598139912
+     }
+    ],
+    "PR5a": [
+     {
+      "order": -1,
+      "x": -13.994524567709377,
+      "y": 1024.4379823806457
+     }
+    ],
+    "PR5b": [
+     {
+      "order": -1,
+      "x": -14.033527025527743,
+      "y": 1025.6865085525135
+     }
+    ],
+    "PR6a": [
+     {
+      "order": -1,
+      "x": -4.996796797964185,
+      "y": 1024.594142768978
+     }
+    ],
+    "PR6b": [
+     {
+      "order": -1,
+      "x": -5.043590731813419,
+      "y": 1026.092374136835
+     }
+    ],
+    "S0": [
+     {
+      "order": 1,
+      "x": 13.878618886790331,
+      "y": 1000.159968688774
+     }
+    ],
+    "S1": [
+     {
+      "order": 1,
+      "x": 8.34924524780415,
+      "y": 1005.43631496945
+     }
+    ],
+    "S2": [
+     {
+      "order": 1,
+      "x": 29.502541955435124,
+      "y": 993.7136679387265
+     }
+    ],
+    "S3": [
+     {
+      "order": 1,
+      "x": 2.6396820305508535,
+      "y": 996.4938386424709
+     }
+    ],
+    "S4": [
+     {
+      "order": -1,
+      "x": -9.64083574001774,
+      "y": 1003.5962349261815
+     }
+    ],
+    "S5": [
+     {
+      "order": -1,
+      "x": -4.505204655675058,
+      "y": 990.6715795312816
+     }
+    ],
+    "T0": [
+     {
+      "order": -1,
+      "x": -31.228381041666665,
+      "y": 999.5122751710038
+     },
+     {
+      "order": 1,
+      "x": 31.228381041666665,
+      "y": 999.5122751710038
+     }
+    ],
+    "T1": [
+     {
+      "order": 1,
+      "x": 10.766295460667221,
+      "y": 985.1441959845542
+     }
+    ],
+    "T2": [
+     {
+      "order": -1,
+      "x": -11.702959535697675,
+      "y": 1015.1295684483364
+     }
+    ]
+   }
+  },
+  "inphase_pair_resolve_threshold_x_rho": 1.5250000000000008,
+  "irw3db_az_m": 0.8645382114003906,
+  "irw3db_range_m": 0.885287128474,
+  "precision_prediction": [
+   {
+    "N_pulses": 256,
+    "R0_m": 1000.0,
+    "aperture_m": 16.0,
+    "pred_gain_loss_db": -0.0005717449545570365,
+    "pred_phase_rms_rad": 0.011473845952239195
+   },
+   {
+    "N_pulses": 1024,
+    "R0_m": 4000.0,
+    "aperture_m": 64.0,
+    "pred_gain_loss_db": -0.009147919272909569,
+    "pred_phase_rms_rad": 0.04589538380895678
+   },
+   {
+    "N_pulses": 4096,
+    "R0_m": 16000.0,
+    "aperture_m": 256.0,
+    "pred_gain_loss_db": -0.1463667083665534,
+    "pred_phase_rms_rad": 0.18358153523582713
+   },
+   {
+    "N_pulses": 16384,
+    "R0_m": 64000.0,
+    "aperture_m": 1024.0,
+    "pred_gain_loss_db": -2.341867333864852,
+    "pred_phase_rms_rad": 0.7343261409433085
+   },
+   {
+    "N_pulses": 65536,
+    "R0_m": 256000.0,
+    "aperture_m": 4096.0,
+    "pred_gain_loss_db": -37.46987734183763,
+    "pred_phase_rms_rad": 2.937304563773234
+   }
+  ],
+  "predicted_alias_onset_M": 4,
+  "pslr_db": -13.26,
+  "rho_az_nominal_m": 0.9758869075520833,
+  "rho_range_nominal_m": 0.9993081933333333
+ }
+}

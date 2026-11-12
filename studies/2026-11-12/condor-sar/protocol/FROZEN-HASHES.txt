@@ -1,0 +1,4 @@
+FROZEN LAB HASHES (published protocol and condor_sar.py are unchanged)
+
+0206d588ee6f51fd5c6b2aaeab38d9dfb0775dd4ed8f2b2ddd4b533f40a28e84  protocol/PROTOCOL.json
+bf59089336374f230c8df4addd175a8270220a2a30b9abd24c919c022220977e  code/condor_sar.py

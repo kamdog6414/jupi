@@ -1,0 +1,16 @@
+FROZEN LAB HASHES (pre-sanitization originals)
+These are the reproducibility anchors of the 2026-11-12 run. The published
+PROTOCOL.json, translate.py and make_protocol.py differ from these bytes
+because local endpoints, an ssh alias and a radio-interface operational
+rule were redacted. keys.py and verify.py are published unchanged.
+
+18659f43cfff982d9f1c94f79211272201f83a42ce0c03b900aad92ff9416d8f  protocol/PROTOCOL.json
+aaed3691e33a57c0b53b6eba57cb8e0ec39238afd71a758674e3aeaeb2e10ed4  code/keys.py
+93f708984f08a7fd96207b8a9dcaae9f0eed82fb22ab358cc3c313374664093c  code/translate.py
+608e7e8a5427046504d8896f6ef250bc2def1d5b01d779072aed6f88c25cf8c7  code/verify.py
+
+VERDICTS.json (both seats, not included in this public packet):
+c3cd5acf0cf94cdb2327987b9e14e1fee796591747b5a5c4b38135aed4e4c2d0
+
+Re-derived answer key (both seats):
+67c54de1afaf68eee63376325f40cb975278629a8c0141098fcac52a5d0145cc

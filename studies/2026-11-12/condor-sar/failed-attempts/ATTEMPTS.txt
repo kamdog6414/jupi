@@ -1,0 +1,8 @@
+Preserved attempt log (2026-11-12 PST)
+1) 07:49  Roach: first push loop used `sha256sum -c` with orchestration-host-relative paths inside the .sha256 files.
+          Check failed on JUPI ("FAILED open or read"); set -e stopped the loop before JUPI 2 got files.
+          No computation ran. Fix: compared plain sha256sum output to the frozen hashes instead.
+2) 07:50  Second invocation: JUPI 2 dir missing (consequence of 1). No computation ran. Fix: copied to JUPI 2.
+3) 07:51  Production run on both nodes: rc=0. Witness 07:52: rc=0. No failed compute attempts.
+Orchestration host: analyze.py crashed 3x on log10(0) (the swath-edge az cut and the beyond-window region are EXACTLY
+zero, which is itself a finding); guarded and re-ran. Node code (condor_sar.py) was never changed after freezing.

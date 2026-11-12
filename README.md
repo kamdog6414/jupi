@@ -347,3 +347,7 @@ jupi-agent run --timeout 30 -- /usr/local/bin/jupi-rover demo
 ```
 
 CSV schema: `time_s,left_m,right_m`. Wheel distances must already be calibrated. The initial pose is `(0,0,0)`; positive yaw is counterclockwise. Encoder-only odometry assumes no wheel slip and supplies no absolute localization, gyro fusion or uncertainty certificate. A 501-frame synthetic curved path passed both a native agent job and the network-isolated qualification. Tests also cover a straight path with nonzero encoder origins, in-place rotation, a known quarter circle, invalid frames and tampered artifacts. No physical rover, camera, IMU or encoder is attached yet.
+
+## Studies (2026-11-12)
+
+Three additive public study packets from 2026-11-12 are in [studies/2026-11-12/](studies/2026-11-12/): a local-model translation gate (qwen3-0.6b; 17/50 raw T0 correct; 0 silent wrongs out of 150 gated outputs on both seats), a synthetic two-node SAR imaging run (IRW within 1.5% of theory; JUPI and JUPI 2 images bit-identical), and a native contour uncertainty study (code and variant tables only; the reference photograph is not included). Each packet states its limits. This is a public edition: lab endpoints, ssh aliases, home paths and private reference imagery were omitted or redacted.

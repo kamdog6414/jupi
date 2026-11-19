@@ -1,0 +1,25 @@
+SANITIZATION (public edition, 2026-11-19)
+
+This file lists categories of change. It does not restate what was removed.
+
+data/*.jsonl
+  - The lab client recorded two extra fields per row: the model-server port,
+    and the live-service health at that moment. Both were dropped. Every
+    other field, including the generated text, is copied unchanged, so the
+    byte-identity counts reproduce from these files.
+
+tools/client.py, tools/deep.py
+  - The model-server host now comes from JUPI_MODEL_HOST (default localhost)
+    and the port from the command line. The live-service health probe was
+    removed. Sampling and request bodies are unchanged.
+
+README.md command line
+  - Home-directory paths, the loopback address and the port are shown as
+    placeholders.
+
+Not published
+  - Lab receipts, node addresses, access paths, ssh configuration, unit-file
+    hashes, and the internal sortie reports these numbers come from.
+
+data/prompts20.json, data/deep_rows.json, data/deep-prompt-2048.json
+  - Synthetic test inputs, published unchanged.

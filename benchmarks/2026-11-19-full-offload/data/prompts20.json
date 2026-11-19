@@ -1,0 +1,122 @@
+[
+ {
+  "id": "short-1",
+  "kind": "raw",
+  "prompt": "The three primary colors are",
+  "n_predict": 64
+ },
+ {
+  "id": "short-2",
+  "kind": "raw",
+  "prompt": "The capital of France is",
+  "n_predict": 64
+ },
+ {
+  "id": "short-3",
+  "kind": "raw",
+  "prompt": "Once upon a time, in a small village by the sea,",
+  "n_predict": 64
+ },
+ {
+  "id": "short-4",
+  "kind": "raw",
+  "prompt": "The best way to learn a new language is",
+  "n_predict": 64
+ },
+ {
+  "id": "short-5",
+  "kind": "raw",
+  "prompt": "Water boils at",
+  "n_predict": 64
+ },
+ {
+  "id": "long-1",
+  "kind": "raw",
+  "prompt": "The history of the printing press begins in the fifteenth century, when Johannes Gutenberg, a goldsmith from Mainz, developed a system of movable metal type that could be arranged, inked, and pressed onto paper. Before this invention, books in Europe were copied by hand, usually by monks working in monasteries, and a single volume could take months or even years to complete. Because of this, books were rare and expensive, and literacy was limited to a small part of the population. Gutenberg combined several existing technologies, including the screw press used for making wine and olive oil, with his own innovations in metallurgy and ink. His most famous work, the Gutenberg Bible, was printed around 1455 and is still admired for its quality. Within a few decades, printing shops had spread to more than two hundred cities across Europe. In summary, the most important effect of the printing press was",
+  "n_predict": 64
+ },
+ {
+  "id": "long-2",
+  "kind": "raw",
+  "prompt": "Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy into chemical energy. It takes place mainly in the chloroplasts of leaf cells, which contain the pigment chlorophyll. Chlorophyll absorbs light most strongly in the blue and red parts of the spectrum and reflects green light, which is why leaves look green. The process has two main stages. In the light-dependent reactions, which occur in the thylakoid membranes, light energy is used to split water molecules, releasing oxygen as a by-product and producing the energy carriers ATP and NADPH. In the second stage, called the Calvin cycle, which takes place in the stroma, the plant uses ATP and NADPH to fix carbon dioxide from the air into sugars. These sugars provide energy for the plant and are the starting point for nearly every food chain on Earth. Scientists study photosynthesis closely because improving it could raise crop yields. The two stages of photosynthesis are",
+  "n_predict": 64
+ },
+ {
+  "id": "long-3",
+  "kind": "raw",
+  "prompt": "The PlayStation 4 was released by Sony in November 2013. Its main processor is an accelerated processing unit built by AMD that combines eight Jaguar CPU cores with a graphics processor based on the Graphics Core Next architecture. The console uses eight gigabytes of GDDR5 memory that is shared between the CPU and the GPU, which allows both to work on the same data without copying it. In 2016 Sony released the PlayStation 4 Pro, which doubled the number of GPU compute units and raised the clock speeds of both the processor and the graphics chip. Developers used the extra power for higher resolutions and smoother frame rates. Over its lifetime the PS4 sold more than one hundred million units, making it one of the best-selling consoles in history. Because so many units exist, the hardware is now cheap on the used market, and hobbyists have found ways to run Linux on it. One reason the PS4 is interesting for computing today is that",
+  "n_predict": 64
+ },
+ {
+  "id": "long-4",
+  "kind": "raw",
+  "prompt": "The history of the printing press begins in the fifteenth century, when Johannes Gutenberg, a goldsmith from Mainz, developed a system of movable metal type that could be arranged, inked, and pressed onto paper. Before this invention, books in Europe were copied by hand, usually by monks working in monasteries, and a single volume could take months or even years to complete. Because of this, books were rare and expensive, and literacy was limited to a small part of the population. Gutenberg combined several existing technologies, including the screw press used for making wine and olive oil, with his own innovations in metallurgy and ink. His most famous work, the Gutenberg Bible, was printed around 1455 and is still admired for its quality. Within a few decades, printing shops had spread to more than two hundred cities across Europe. In summary, the most important effect of the printing press was Photosynthesis is the process by which green plants, algae, and some bacteria convert light energy into chemical energy. Comparing these two inventions, the printing press and photosynthesis research,",
+  "n_predict": 64
+ },
+ {
+  "id": "code-1",
+  "kind": "raw",
+  "prompt": "def fibonacci(n):\n    \"\"\"Return the n-th Fibonacci number.\"\"\"\n",
+  "n_predict": 64
+ },
+ {
+  "id": "code-2",
+  "kind": "raw",
+  "prompt": "# Python: read a CSV file and print the average of the 'price' column\nimport csv\n\n",
+  "n_predict": 64
+ },
+ {
+  "id": "code-3",
+  "kind": "raw",
+  "prompt": "// C function that reverses a string in place\n#include <string.h>\n\nvoid reverse(char *s) {\n",
+  "n_predict": 64
+ },
+ {
+  "id": "code-4",
+  "kind": "chat",
+  "prompt": "<|im_start|>user\nWrite a bash one-liner that counts the lines in every .txt file in the current directory.<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ },
+ {
+  "id": "math-1",
+  "kind": "raw",
+  "prompt": "Question: What is 17 multiplied by 23?\nAnswer:",
+  "n_predict": 64
+ },
+ {
+  "id": "math-2",
+  "kind": "raw",
+  "prompt": "Question: A train travels 120 kilometers in 1.5 hours. What is its average speed in kilometers per hour?\nAnswer: Let's think step by step.",
+  "n_predict": 64
+ },
+ {
+  "id": "math-3",
+  "kind": "chat",
+  "prompt": "<|im_start|>user\nSolve for x: 3x + 7 = 22. Show your steps. /no_think<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ },
+ {
+  "id": "multi-1",
+  "kind": "chat",
+  "prompt": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nMy name is Kam and I build compute clusters out of old game consoles.<|im_end|>\n<|im_start|>assistant\nThat sounds like a great project, Kam! Which consoles are you using?<|im_end|>\n<|im_start|>user\nPS4s. What is one thing I should watch out for? /no_think<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ },
+ {
+  "id": "multi-2",
+  "kind": "chat",
+  "prompt": "<|im_start|>user\nWhat is the largest planet in our solar system?<|im_end|>\n<|im_start|>assistant\nThe largest planet in our solar system is Jupiter.<|im_end|>\n<|im_start|>user\nHow many moons does it have, roughly? /no_think<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ },
+ {
+  "id": "multi-3",
+  "kind": "chat",
+  "prompt": "<|im_start|>user\nGive me a name for a small robot.<|im_end|>\n<|im_start|>assistant\nHow about Bolt?<|im_end|>\n<|im_start|>user\nNow give it a one-sentence backstory. /no_think<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ },
+ {
+  "id": "multi-4",
+  "kind": "chat",
+  "prompt": "<|im_start|>system\nAnswer in one short sentence.<|im_end|>\n<|im_start|>user\nWhy is the sky blue?<|im_end|>\n<|im_start|>assistant\n",
+  "n_predict": 64
+ }
+]

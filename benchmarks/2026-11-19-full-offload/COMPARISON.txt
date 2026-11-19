@@ -1,0 +1,36 @@
+A = old live (-nkvo -ub 8 -b 8)   B = full offload, test window   C = CPU reference (-ngl 0)   D = full offload, live service
+div = first differing character index, '-' = byte-identical
+
+id        n_prompt    A tg    B tg    D tg    C tg  D vs A D vs B A vs C D vs C
+short-1          5   29.17   75.54   74.92   18.86       -      -     51     51
+short-2          5   29.13   76.14   75.15   19.24       -      -      6      6
+short-3         13   28.71    76.1   76.03    19.1     245      -     86     86
+short-4          9   22.41   76.14   74.44   19.35       -      -     16     16
+short-5          3    29.3   76.08    75.0   19.47       -      -     49     49
+long-1         183   31.29   76.38   74.85    18.2       -      -     96     96
+long-2         196   27.96   75.03   74.87   19.93       -      -     32     32
+long-3         193   31.12   76.19    75.2    21.0       -      -     22     22
+long-4         219    28.0   73.11    73.4   19.34       -      -     29     29
+code-1          13   28.45   76.02   75.87   19.38       -      -      9      9
+code-2          21   29.08   76.17   75.91   18.99       -      -      0      0
+code-3          23   28.75   75.36   75.89   19.57       -      -      -      -
+code-4          28   26.77   75.65   76.01   19.52       -      -     31     31
+math-1          15   29.41    76.2   75.88   20.18       -      -     29     29
+math-2          36   29.52   75.72   75.88   19.31       -      -      1      1
+math-3          32   28.05    76.5   76.64   19.55       -      -      -      -
+multi-1         77    29.4   76.44   76.22    20.0       -      -      -      -
+multi-2         51    29.8   76.25   76.32   19.34       -      -     45     45
+multi-3         44   29.64   76.18   76.74   18.38       -      -     86     86
+multi-4         25   29.45   75.98   76.04    16.5       -      -    177    177
+
+byte-identical  D vs A 19/20   D vs B 20/20   B vs A 19/20   A vs C 3/20   D vs C 3/20
+A old live             tg tok/s min  22.41  median  29.15  max  31.29   pp median  74.73
+B full offload test    tg tok/s min  73.11  median  76.12  max  76.50   pp median  95.20
+D full offload live    tg tok/s min  73.40  median  75.88  max  76.74   pp median  94.94
+C CPU reference        tg tok/s min  16.50  median  19.34  max  21.00   pp median  26.83
+
+2048-context check (truth: Day 37 temperature = 10 degrees)
+E full offload test  n_prompt 1888  n_pred 120  tg  54.29  pp  76.77  starts ' 10 degrees.\n'
+F old live           n_prompt 1888  n_pred 120  tg  14.65  pp  43.99  starts ' 10 degrees.\n'
+G full offload live  n_prompt 1888  n_pred 120  tg  54.22  pp  77.79  starts ' 10 degrees.\n'
+E==F True   G==F True

@@ -1,0 +1,17 @@
+c5f9805144582c0bf08e4fdfdc8325ef18623dc0558f8ecf652cf3c97070611f  ./COMPARISON.txt
+c94cee0e2a69eeb8b25f81e9f1aa10d3d49712acc1952bcfed9d9ea00924aa0e  ./data/A-old-live-nkvo-20.jsonl
+14514fca2cd99fbf36eaa221d67f8d439880099d8e907627e7420f8ce2c1be42  ./data/B-full-offload-test-20.jsonl
+b30a855d0954147bca0aaacc20d42642289cba7ba6d475bc1efceb3cc081ef73  ./data/C-cpu-reference-20.jsonl
+108f35519a01250c900bd29c6976f1e6c61a58f4ede9773eef780e7f388ddffe  ./data/deep-prompt-2048.json
+0ef18292e3ce459db364678b345799c1f085df1093d4b14ac5bf3e99a9356f87  ./data/deep_rows.json
+ef6e081f466b871186ef74a67b7fdcd94b2f36be32a14096f877911f33a1ac7a  ./data/D-full-offload-live-20.jsonl
+3edd781280c3b99260222b3809ac9a089dac752a6d94a9b904452d18c60cbc95  ./data/E-deep2048-full-offload-test.jsonl
+f2b4b9281610af375b2baaae27e8ffc17796c57eaf2ca0bdaece7582e07b0b20  ./data/F-deep2048-old-live-nkvo.jsonl
+d2190da0d1aa0a38f7d85c630c9c8cf043d0fba317801edb6c831c727c20c0e0  ./data/G-deep2048-full-offload-live.jsonl
+fedfb6c26c14ac4960c84e7a78eac54b2544e0aff7fbb24ee5a8201dc46fd8c5  ./data/prompts20.json
+3b3bb3c52a587d9472f87e15651b835327aa1deebb7c2ee0de808fe53b4e8922  ./memory/DEAD-CGROUPS.md
+0c0085da06aea8b06641773c56e7ec42b853fac814cf6240252764d2dd9e7694  ./README.md
+855cccb832944b64fa772fc2ceda7b83304838a86383c951f0ac4fe30d8d0f06  ./SANITIZATION.txt
+26a76da2ee0e1d0c61f37a70452b8481a26a1811d7d1a97ee52f7668bc91724e  ./tools/client.py
+a73bea273e33d0d70329adb6f4d3a4540fc897c1b5af2966264ec2234ea7948f  ./tools/compare.py
+79a928a5bcea10464fe6cf41b5db725e12a68189e34d3d179107fbb35ef83848  ./tools/deep.py

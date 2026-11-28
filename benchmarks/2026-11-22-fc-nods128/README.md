@@ -7,6 +7,9 @@ VERDICT   JUPI 2 (PS4 Pro, RADV GLADIUS): PASS.
           control, 13:38): the same first ring timeout and the same failed reset.
           Patch cleared of a patch-exclusive hang attribution only. Root cause and
           general patch safety are UNKNOWN. Both JUPI 1 sweeps are incomplete.
+          Stable run on real workloads (16:29): PASS. 60-min patched -ub 64 soak
+          1380/1380 byte-identical to JUPI 2, 60-min stock control 1180/1180,
+          0 ring faults, swap 0 MiB. (See "Stable run on real workloads".)
 
 patch     2 hunks in src/amd/compiler/aco_instruction_selection.cpp,
           on mesa-ps4 21.3.2. On CHIP_LIVERPOOL and CHIP_GLADIUS, ACO no
@@ -151,9 +154,54 @@ of defective silicon.
 
 Both JUPI 1 sweeps are incomplete. There is no successful JUPI 1 op aggregate
 (data/jupi1/ops/COUNTS.json stays empty; see data/jupi1/ops/STATUS.json), no JUPI 1
-ISA count and no valid stock ub1 timing. Full op sweeps stay unsafe on JUPI 1 with
+ISA count. (A valid stock ub1 timing was taken later, in the stable run.) Full op sweeps stay unsafe on JUPI 1 with
 either driver. The same full sweep ran on JUPI 2 with 0 faults. JUPI 1 had also frozen
 under Vulkan op testing on 2026-11-10, before this patch existed [R].
+
+### JUPI 1 stable run on real workloads, 2026-11-22 14:25-16:29 [M]
+
+Why: the hang above comes from the op stress sweep, with either driver. The
+question that matters for using the patch is whether real inference stays stable
+on JUPI 1. No test-backend-ops was run in this window.
+
+```
+llama-bench qwen3-0.6b Q4_K_M, -ngl 99 -fa 0 -t 6 -r 3 (tok/s, +- sd)
+config    stock pp512      patched pp512    stock tg128     patched tg128
+-ub 1      56.18 +-0.05     56.15 +-0.05    75.14 +-0.08    74.73 +-0.06
+-ub 64    527.24 +-0.32    552.84 +-0.16    75.25 +-0.28    74.92 +-0.19   (+4.9% pp)
+-ub 512   760.14 +-0.15    796.57 +-0.23    74.56 +-0.10    74.98 +-0.09   (+4.8% pp)
+(-ub 1 runs with -b 2. Stock at -ub 64/512 is fast but gives WRONG output; it is
+ a speed reference only. The stock -ub 1 row replaces the morning's contaminated one.)
+
+soak: llama-server, the 20 prompts on repeat, temp 0, seed 1, prompt cache off
+                       patched -ub 64 -b 2048     stock -ub 1 -b 2 (control)
+window (PST)           14:27:56-15:28:10          15:28:14-16:29:15
+rounds                 69                         59
+byte-identical         1380/1380                  1180/1180
+  reference            JUPI 2 patched -ub 64      JUPI 2 accepted live (2026-11-19)
+tg med (min-max)       61.92 (61.45-62.21)        65.89 (65.57-66.05)
+pp med (min-max)       236.19 (234.86-236.58)     80.57 (80.20-80.74)
+tg drift, 2nd vs 1st half  -0.10%                 +0.13%
+round wall med         52.15 s                    61.81 s
+server RSS             329 -> 364 MB, flat        364 -> 400 MB, flat
+MemAvailable min       5461 MiB                   5473 MiB
+swap peak              0 MiB                      0 MiB
+new amdgpu faults      0                          0
+```
+
+The driver each soak server loaded was read from /proc/<pid>/maps
+(data/jupi1/stable/LOADED-DRIVER.txt): patched libvulkan_radeon.so 117805de...ff0d5
+with VK_ICD_FILENAMES set, and the system acf91948...a34ae5 with no VK_ variable.
+Guards: tools/guard4.sh (pidfile root; kills the run tree on any new amdgpu ring
+timeout/reset line, swap above start + 256 MiB, or MemAvailable under 1000 MiB;
+5 s checks, 60 s dmesg heartbeat) and per-round dmesg/swap checks in
+tools/stable.py. All logs are fsynced per line. Data: data/jupi1/stable/.
+Short-3 matches here because the reference for the patched soak is JUPI 2's own
+patched -ub 64 output (it holds the near-tie token covered below).
+
+What this shows: the patched batched path ran 60 minutes of real inference on
+JUPI 1 with no fault, no drift and exact cross-node output. What it does not show:
+that the op stress sweep is safe, or what causes its hang.
 
 ### Logit check on the one difference (JUPI 2) [M]
 
@@ -188,7 +236,9 @@ loading    VK_ICD_FILENAMES=<dir>/radeon_icd.json (per process); system ICD unto
 
 Data: data/jupi2/ and data/jupi1/ (bench JSON, 20-prompt JSONL, deep-2048, op counts
 plus per-case results as .json.xz, soak/chain logs, ISA summary, logit tops).
-Stock control: data/jupi1/stock-control/ and tools/stockdrv.py. Independent review:
+Stock control: data/jupi1/stock-control/ and tools/stockdrv.py.
+Stable run: data/jupi1/stable/ and tools/stable.py, tools/guard4.sh, tools/finish.py.
+Hang receipts as filed in the lab: receipts/ (morning patched hang, afternoon stock hang). Independent review:
 review/ (public copy, lab paths replaced; original sha256 in RECEIPTS.txt).
 Log times in data/jupi1/stock-control/*.log are UTC (13:38 PST = 21:38 UTC).
 
@@ -196,8 +246,9 @@ Log times in data/jupi1/stock-control/*.log are UTC (13:38 PST = 21:38 UTC).
 
 - One model, one seat grading. No second key yet.
 - The ISA count covers 11 shaders. The JUPI 2 op sweeps are the behavioral proof.
-- Both JUPI 1 MUL_MAT sweeps (patched, stock) hung the GPU. MUL_MAT_ID, the soak and
-  the ISA count were never run on JUPI 1. The single hanging case was not isolated,
+- Both JUPI 1 MUL_MAT sweeps (patched, stock) hung the GPU. MUL_MAT_ID and the ISA
+  count were never run on JUPI 1. The op-test soak was replaced on JUPI 1 by the
+  real-workload soak above (60 + 60 min), which is not an op-coverage test. The single hanging case was not isolated,
   because that needs a deliberate hang plus a recovery reboot and owner approval.
 - During the JUPI 2 windows an earlier worker stopped the live service for about 15
   minutes to free VRAM. It was restored each time. [R]

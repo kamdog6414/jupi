@@ -1,0 +1,17 @@
+{
+ "tag": "stock-ub1",
+ "rounds": 59,
+ "clean": true,
+ "rounds_ge19": 59,
+ "min_same": 20,
+ "diff_ids": [],
+ "other_mismatch": [],
+ "tg_min": 65.57,
+ "tg_med": 65.89,
+ "tg_max": 66.05,
+ "tg_first": 65.84,
+ "max_dev_vs_first": 0.0041,
+ "swap_peak": 0,
+ "rss_peak": 400,
+ "bad_new": 0
+}

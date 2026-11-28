@@ -1,0 +1,9 @@
+patched soak server pid=3002 22:30:20
+117805de2dd841a42532ffd371ab3077d88a59f2c3686eb090d6eed2749ff0d5  <jupi1-home>/groku-infer/mesa-nods128-j1/patched/libvulkan_radeon.so
+22afcdef45c93ca9a550cfd3b85923c1aa00d751649e83248d3617bbefead19f  /usr/lib/libvulkan.so.1.4.363
+VK_ICD_FILENAMES=<jupi1-home>/groku-infer/mesa-nods128-j1/patched/radeon_icd.json
+stock soak server pid=12859 23:28:41
+22afcdef45c93ca9a550cfd3b85923c1aa00d751649e83248d3617bbefead19f  /usr/lib/libvulkan.so.1.4.363
+e76671547a907b112f87bcd00f9388b7fdf91aed2ce540c983355e8acc5d3c22  /usr/lib/libvulkan_lvp.so
+acf91948754480ed906e0b90df2a908abe4cde446fe45e94d75a9ee408a34ae5  /usr/lib/libvulkan_radeon.so
+no VK_ env

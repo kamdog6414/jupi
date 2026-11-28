@@ -1,0 +1,12 @@
+22:25:33 START bad0=0 mem=5945 swap0=0
+22:26:27 BENCH stock-ub1 rc=0 [(512, 0, 56.18, 0.05), (0, 128, 75.14, 0.08)] mem=5945 swap=0 bad_new=0
+22:26:38 BENCH stock-ub64 rc=0 [(512, 0, 527.24, 0.32), (0, 128, 75.25, 0.28)] mem=5936 swap=0 bad_new=0
+22:26:48 BENCH stock-ub512 rc=0 [(512, 0, 760.14, 0.15), (0, 128, 74.56, 0.1)] mem=5951 swap=0 bad_new=0
+22:27:32 BENCH patched-ub1 rc=0 [(512, 0, 56.15, 0.05), (0, 128, 74.73, 0.06)] mem=5950 swap=0 bad_new=0
+22:27:43 BENCH patched-ub64 rc=0 [(512, 0, 552.84, 0.16), (0, 128, 74.92, 0.19)] mem=5944 swap=0 bad_new=0
+22:27:52 BENCH patched-ub512 rc=0 [(512, 0, 796.57, 0.23), (0, 128, 74.98, 0.09)] mem=5937 swap=0 bad_new=0
+22:27:56 SOAK patched-ub64 START pid=3002 ub=64 b=2048 icd=patched
+23:28:10 SOAK patched-ub64 END {"tag": "patched-ub64", "rounds": 69, "clean": true, "rounds_ge19": 69, "min_same": 20, "diff_ids": [], "other_mismatch": [], "tg_min": 61.45, "tg_med": 61.92, "tg_max": 62.21, "tg_first": 61.69, "max_dev_vs_first": 0.0084, "swap_peak": 0, "rss_peak": 364, "bad_new": 0}
+23:28:14 SOAK stock-ub1 START pid=12859 ub=1 b=2 icd=system
+00:29:15 SOAK stock-ub1 END {"tag": "stock-ub1", "rounds": 59, "clean": true, "rounds_ge19": 59, "min_same": 20, "diff_ids": [], "other_mismatch": [], "tg_min": 65.57, "tg_med": 65.89, "tg_max": 66.05, "tg_first": 65.84, "max_dev_vs_first": 0.0041, "swap_peak": 0, "rss_peak": 400, "bad_new": 0}
+00:29:15 DONE bad_new=0

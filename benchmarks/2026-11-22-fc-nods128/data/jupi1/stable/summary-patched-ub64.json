@@ -1,0 +1,17 @@
+{
+ "tag": "patched-ub64",
+ "rounds": 69,
+ "clean": true,
+ "rounds_ge19": 69,
+ "min_same": 20,
+ "diff_ids": [],
+ "other_mismatch": [],
+ "tg_min": 61.45,
+ "tg_med": 61.92,
+ "tg_max": 62.21,
+ "tg_first": 61.69,
+ "max_dev_vs_first": 0.0084,
+ "swap_peak": 0,
+ "rss_peak": 364,
+ "bad_new": 0
+}

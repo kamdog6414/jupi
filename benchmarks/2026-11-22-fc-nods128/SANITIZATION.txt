@@ -34,3 +34,16 @@ review/REVIEW-NODS128-STOCK-HANG-20261122-public.md
   - Lab home-directory prefixes are replaced by <lab-home> and <jupi1-home>.
     Nothing else changed. The original sha256 is in RECEIPTS.txt.
 Not published: the stock devcoredump, full dmesg, the pre-reboot process list.
+
+Added 2026-11-22 evening (stable run)
+data/jupi1/stable/
+  - bench/*.bench.json: model_filename reduced to the file name.
+  - LOADED-DRIVER.txt: /home/pi/ replaced by <jupi1-home>/.
+  - soak-*.jsonl, summary-*.json, STATS.json, run.log, guard.log,
+    RESULT-STABLE-J1-as-written.md: unchanged copies (no paths, hosts or ports in them).
+tools/stable.py, tools/guard4.sh, tools/finish.py
+  - Work dir, llama.cpp bin dir and model path come from the environment.
+receipts/
+  - The two lab hang receipts, unchanged. They hold sha256s and home-relative lab paths only.
+Not published: the two llama-server logs (local paths, port), the JUPI 2 reference copy
+(already in data/jupi2/p20/A-patched-ub64.p20.jsonl).

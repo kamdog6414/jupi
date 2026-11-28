@@ -1,0 +1,212 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 9 0 R /MediaBox [ 0 0 612 792 ] /Parent 8 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/PageMode /UseNone /Pages 8 0 R /Type /Catalog
+>>
+endobj
+7 0 obj
+<<
+/Author (anonymous) /CreationDate (D:20000101000000+00'00') /Creator (anonymous) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (unspecified) /Title (untitled) /Trapped /False
+>>
+endobj
+8 0 obj
+<<
+/Count 1 /Kids [ 5 0 R ] /Type /Pages
+>>
+endobj
+9 0 obj
+<<
+/Length 6797
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 752 Tm (JUPI 2  \(the PS4 Pro\)  -  RECOVERY CARD  v1.1 \(Nov 24 2026\)) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 740.4 Tm (===========================================================) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 728.8 Tm (How it normally starts: you turn it on, then YOU start the) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 717.2 Tm (Linux loader "linux-1024mb.bin" \(out of scope how; kept) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 705.6 Tm (private\). It is on the PS4PROBIN stick, and a spare copy is) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 694 Tm (on the PS4's own disk. Nothing starts Linux by itself on) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 682.4 Tm (JUPI 2.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 670.8 Tm  T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 659.2 Tm (GOLDEN RULE: If anything goes wrong, turn it fully OFF and) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 647.6 Tm (PULL THE AC CORD FOR 60 SECONDS before trying again.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 636 Tm (NEVER choose "Initialize PS4". It erases Linux \(Nov 11\).) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 624.4 Tm  T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 612.8 Tm (-----------------------------------------------------------) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 601.2 Tm (IF: Linux won't start \(error "Failed to load file", or) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 589.6 Tm (    you are back at the PS4 home screen\)) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 578 Tm (DO: 1. Turn fully off. Check the stick is pushed in.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 566.4 Tm (    2. Turn on, then start the loader. Wait 3 minutes.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 554.8 Tm (    3. Still nothing? Use the BACKUP BOOT \(below\).) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 543.2 Tm (    4. Tell Groku what you saw on screen.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 531.6 Tm  T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 520 Tm (-----------------------------------------------------------) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 508.4 Tm (IF: It keeps going into a bad boot \(dies or freezes every) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 496.8 Tm (    time you start the loader\)) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 485.2 Tm (DO: 1. Hold the power button until the light goes OFF.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 473.6 Tm (    2. Pull the AC cord for 60 seconds. Plug back in.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 462 Tm (    3. BACKUP BOOT: pull the PS4PROBIN stick. Turn on, then) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 450.4 Tm (       start the INTERNAL copy of the loader) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 438.8 Tm (       \(/data/payloads/linux-1024mb.bin, added Nov 24 2026,) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 427.2 Tm (       sha256 e11da9d2...6646\).) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 415.6 Tm (       Linux starts from the backup on the PS4's disk.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 404 Tm (       \(Tested on JUPI 2 on Nov 24: it came up on the HDD kernel; see) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 392.4 Tm (       flown-20261127/STATUS-20261127.md.\)) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 380.8 Tm (    4. Once Linux is up, plug the stick back in and run) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 369.2 Tm (       sudo jupi-trial-guard.sh revert   \(if a trial was) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 357.6 Tm (       armed\), or tell Groku.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 346 Tm  T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 334.4 Tm (-----------------------------------------------------------) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 322.8 Tm (IF: Linux is up on the TV but nobody can reach it) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 311.2 Tm (    \(no network / locked out\)) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 299.6 Tm (DO: 1. Wait 15 minutes. If a test kernel is on, it fixes) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 288 Tm (       the stick by itself \(trial guard\).) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 276.4 Tm (    2. Check the network cable at both ends.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 264.8 Tm (    3. Turn off fully, turn on, start the loader again.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 253.2 Tm (       It comes back on the good kernel.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 241.6 Tm (    4. Still locked out: BACKUP BOOT \(above\).) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 230 Tm  T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 218.4 Tm (-----------------------------------------------------------) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 206.8 Tm (IF: Black screen, nothing on the TV) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 195.2 Tm (DO: 1. Wait 3 full minutes. Black for 1-2 min is normal.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 183.6 Tm (    2. Ask Groku: "can you reach JUPI 2?" If yes, it is) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 172 Tm (       only the picture. Leave it running.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 160.4 Tm (    3. If not: hold power until OFF, pull the AC cord for) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 148.8 Tm (       60 seconds, plug back in, try once more.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 137.2 Tm (    4. Then BACKUP BOOT.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 125.6 Tm  T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 114 Tm (-----------------------------------------------------------) Tj T* ET
+BT /F2 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 102.4 Tm (LAST RESORT \(PS4 itself won't start normally\):) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 90.8 Tm (    Don't start the loader. Without it, Linux can't start,) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 79.2 Tm (    and the PS4 is just a normal PS4.) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 67.6 Tm (    Safe Mode: from OFF, hold power until the SECOND beep) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 56 Tm (    \(about 7 seconds\). Plug in the controller with a cable,) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 44.4 Tm (    press PS. Choose "Restart PS4".) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 32.8 Tm (    NEVER "Initialize PS4". NEVER "Update System Software".) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 21.2 Tm (- groku) Tj T* ET
+BT /F3 9.6 Tf 11.52 TL ET
+BT 1 0 0 1 40 9.6 Tm  T* ET
+ 
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000061 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000329 00000 n 
+0000000434 00000 n 
+0000000627 00000 n 
+0000000695 00000 n 
+0000000956 00000 n 
+0000001015 00000 n 
+trailer
+<<
+/ID 
+[<1c178198fbdfa51b25995d89d4102043><1c178198fbdfa51b25995d89d4102043>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 7 0 R
+/Root 6 0 R
+/Size 10
+>>
+startxref
+7863
+%%EOF

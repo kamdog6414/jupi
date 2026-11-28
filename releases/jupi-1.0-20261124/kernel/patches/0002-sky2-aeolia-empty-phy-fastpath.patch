@@ -1,0 +1,40 @@
+diff --git a/drivers/net/ethernet/marvell/sky2.c b/drivers/net/ethernet/marvell/sky2.c
+index d83834a..0aceb50 100644
+--- a/drivers/net/ethernet/marvell/sky2.c
++++ b/drivers/net/ethernet/marvell/sky2.c
+@@ -91,6 +91,11 @@ static int disable_msi = -1;
+ module_param(disable_msi, int, 0);
+ MODULE_PARM_DESC(disable_msi, "Disable Message Signaled Interrupt (MSI)");
+ 
++static bool aeolia_skip_empty_phy_stat __read_mostly;
++module_param(aeolia_skip_empty_phy_stat, bool, 0444);
++MODULE_PARM_DESC(aeolia_skip_empty_phy_stat,
++		 "Skip unused PHY status reads on empty Aeolia port 0 IRQs");
++
+ static bool aeolia_poll_phy __read_mostly;
+ module_param(aeolia_poll_phy, bool, 0444);
+ MODULE_PARM_DESC(aeolia_poll_phy, "Poll the single-port Aeolia PHY instead of using its IRQ");
+@@ -2398,13 +2403,21 @@ static void sky2_phy_intr(struct sky2_hw *hw, unsigned port)
+ {
+ 	struct net_device *dev = hw->dev[port];
+ 	struct sky2_port *sky2 = netdev_priv(dev);
+-	u16 istatus, phystat;
++	u16 istatus = 0, phystat;
++	int err;
+ 
+ 	if (!netif_running(dev))
+ 		return;
+ 
+ 	spin_lock(&sky2->phy_lock);
+-	istatus = gm_phy_read(hw, port, PHY_MARV_INT_STAT);
++	err = __gm_phy_read(hw, port, PHY_MARV_INT_STAT, &istatus);
++	/* With no PHY event, PHY_STAT is only used for interrupt logging. */
++	if (aeolia_skip_empty_phy_stat && !err && !istatus && !port &&
++	    hw->pdev->vendor == PCI_VENDOR_ID_SONY &&
++	    hw->pdev->device == PCI_DEVICE_ID_SONY_AEOLIA_GBE &&
++	    !netif_msg_intr(sky2))
++		goto out;
++
+ 	phystat = gm_phy_read(hw, port, PHY_MARV_PHY_STAT);
+ 
+ 	netif_info(sky2, intr, sky2->netdev, "phy interrupt status 0x%x 0x%x\n",

@@ -47,3 +47,9 @@ receipts/
   - The two lab hang receipts, unchanged. They hold sha256s and home-relative lab paths only.
 Not published: the two llama-server logs (local paths, port), the JUPI 2 reference copy
 (already in data/jupi2/p20/A-patched-ub64.p20.jsonl).
+
+Added 2026-11-24 (jupi-1.0 release)
+README.md
+  - The op-count note now gives the reason for 2754/1109 vs 2722/1093 (duplicate case names).
+    Evidence: releases/jupi-1.0-20261124/opcount/. The review file keeps its original wording
+    ("not established") as the record of what was known on 2026-11-22.

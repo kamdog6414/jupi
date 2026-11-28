@@ -1,0 +1,64 @@
+JUPI 2  (the PS4 Pro)  -  RECOVERY CARD  v1.1 (Nov 24 2026)
+===========================================================
+How it normally starts: you turn it on, then YOU start the
+Linux loader "linux-1024mb.bin" (out of scope how; kept
+private). It is on the PS4PROBIN stick, and a spare copy is
+on the PS4's own disk. Nothing starts Linux by itself on
+JUPI 2.
+
+GOLDEN RULE: If anything goes wrong, turn it fully OFF and
+PULL THE AC CORD FOR 60 SECONDS before trying again.
+NEVER choose "Initialize PS4". It erases Linux (Nov 11).
+
+-----------------------------------------------------------
+IF: Linux won't start (error "Failed to load file", or
+    you are back at the PS4 home screen)
+DO: 1. Turn fully off. Check the stick is pushed in.
+    2. Turn on, then start the loader. Wait 3 minutes.
+    3. Still nothing? Use the BACKUP BOOT (below).
+    4. Tell Groku what you saw on screen.
+
+-----------------------------------------------------------
+IF: It keeps going into a bad boot (dies or freezes every
+    time you start the loader)
+DO: 1. Hold the power button until the light goes OFF.
+    2. Pull the AC cord for 60 seconds. Plug back in.
+    3. BACKUP BOOT: pull the PS4PROBIN stick. Turn on, then
+       start the INTERNAL copy of the loader
+       (/data/payloads/linux-1024mb.bin, added Nov 24 2026,
+       sha256 e11da9d2...6646).
+       Linux starts from the backup on the PS4's disk.
+       (Tested on JUPI 2 on Nov 24: it came up on the HDD kernel; see
+       flown-20261127/STATUS-20261127.md.)
+    4. Once Linux is up, plug the stick back in and run
+       sudo jupi-trial-guard.sh revert   (if a trial was
+       armed), or tell Groku.
+
+-----------------------------------------------------------
+IF: Linux is up on the TV but nobody can reach it
+    (no network / locked out)
+DO: 1. Wait 15 minutes. If a test kernel is on, it fixes
+       the stick by itself (trial guard).
+    2. Check the network cable at both ends.
+    3. Turn off fully, turn on, start the loader again.
+       It comes back on the good kernel.
+    4. Still locked out: BACKUP BOOT (above).
+
+-----------------------------------------------------------
+IF: Black screen, nothing on the TV
+DO: 1. Wait 3 full minutes. Black for 1-2 min is normal.
+    2. Ask Groku: "can you reach JUPI 2?" If yes, it is
+       only the picture. Leave it running.
+    3. If not: hold power until OFF, pull the AC cord for
+       60 seconds, plug back in, try once more.
+    4. Then BACKUP BOOT.
+
+-----------------------------------------------------------
+LAST RESORT (PS4 itself won't start normally):
+    Don't start the loader. Without it, Linux can't start,
+    and the PS4 is just a normal PS4.
+    Safe Mode: from OFF, hold power until the SECOND beep
+    (about 7 seconds). Plug in the controller with a cable,
+    press PS. Choose "Restart PS4".
+    NEVER "Initialize PS4". NEVER "Update System Software".
+- groku

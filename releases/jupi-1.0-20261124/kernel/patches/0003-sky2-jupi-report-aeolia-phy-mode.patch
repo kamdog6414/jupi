@@ -1,0 +1,23 @@
+diff --git a/drivers/net/ethernet/marvell/sky2.c b/drivers/net/ethernet/marvell/sky2.c
+index 0aceb50..a928025 100644
+--- a/drivers/net/ethernet/marvell/sky2.c
++++ b/drivers/net/ethernet/marvell/sky2.c
+@@ -5204,6 +5204,18 @@ static int sky2_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+ 
+ 	sky2_show_addr(dev);
+ 
++	/* JUPI: say at probe which opt-in Aeolia PHY path is live. */
++	if (sky2_aeolia_phy_poll(hw))
++		netdev_info(dev, "jupi: Aeolia PHY poll mode on (PHY IRQ masked, link polled once per second)\n");
++	else if (aeolia_poll_phy && pdev->vendor == PCI_VENDOR_ID_SONY)
++		netdev_warn(dev, "jupi: aeolia_poll_phy requested but not active on %04x:%04x (ports=%d, aeolia_msi=%d)\n",
++			    pdev->vendor, pdev->device, hw->ports,
++			    !!(hw->flags & SKY2_HW_USE_AEOLIA_MSI));
++	if (aeolia_skip_empty_phy_stat && !sky2_aeolia_phy_poll(hw) &&
++	    pdev->vendor == PCI_VENDOR_ID_SONY &&
++	    pdev->device == PCI_DEVICE_ID_SONY_AEOLIA_GBE)
++		netdev_info(dev, "jupi: Aeolia empty PHY IRQ fast path on\n");
++
+ 	if (hw->ports > 1) {
+ 		dev1 = sky2_init_netdev(hw, 1, using_dac, wol_default);
+ 		if (!dev1) {

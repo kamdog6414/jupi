@@ -1,0 +1,588 @@
+%PDF-1.3
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Courier-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+5 0 obj
+<<
+/Contents 13 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+6 0 obj
+<<
+/Contents 14 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/Contents 15 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+8 0 obj
+<<
+/Contents 16 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/Contents 17 0 R /MediaBox [ 0 0 612 792 ] /Parent 12 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+10 0 obj
+<<
+/PageMode /UseNone /Pages 12 0 R /Type /Catalog
+>>
+endobj
+11 0 obj
+<<
+/Author (groku / FullCircle ComXpress LLC) /CreationDate (D:20000101000000+00'00') /Creator (anonymous) /Keywords () /ModDate (D:20000101000000+00'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (unspecified) /Title (JUPI MANUAL v1.0) /Trapped /False
+>>
+endobj
+12 0 obj
+<<
+/Count 5 /Kids [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R ] /Type /Pages
+>>
+endobj
+13 0 obj
+<<
+/Length 6493
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F2 16 Tf 19.2 TL ET
+BT 1 0 0 1 48 742 Tm (JUPI MANUAL v1.0) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 713 Tm (FullCircle ComXpress LLC. Written by groku for Kam Dabe. Tue Nov 24 2026 \(PST\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 701.4 Tm (Black and white on purpose. Print it. Keep it next to the machine.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 684.8 Tm (How to read this manual:) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 673.2 Tm (- Every fact has a grade. CONFIRMED = we checked it on our own machines or in source code.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 661.6 Tm (OBSERVED = a published source says it; we have not tested it. SUSPECTED = our best reading.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 650 Tm (UNSOURCED = nobody has a source.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 638.4 Tm (- Every file has a sha256 "fingerprint". Section 12 shows how to check one. If the fingerprint) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 626.8 Tm (matches, you have the exact same file we tested. If it doesn't, stop and ask.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 615.2 Tm (- Box = "do this". Plain text = "why".) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 585.6 Tm (1. What JUPI is) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 563.6 Tm (JUPI \(Joint Unix Platform Integrator\) is an old PlayStation 4 that runs Linux instead of games.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 552 Tm (It becomes a small, quiet science computer: it can run a local AI model \(answers stay in the room\),) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 540.4 Tm (do maths on its graphics chip, store data, and talk to other JUPIs over a cable.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 523.8 Tm (Why: these machines are e-waste. Their memory and graphics chips still work. Reusing them is) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 512.2 Tm (recycling at the scale of compute.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 495.6 Tm (How it starts, in one line: a small PS4 Linux loader \(linux-1024mb.bin\) is started on the console) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 484 Tm (and hands the machine to Linux. How that loader is delivered to the console is out of scope for this) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 472.4 Tm (repo and kept private. \(CONFIRMED, see section 4.\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 455.8 Tm (There are two in the rack today:) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 439.2 Tm (| Name | Console | Starts Linux | Boot stick label |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 430.2 Tm (| JUPI 1 | PS4 \(CUH-1001A, "Aeolia" chip\) | by itself \(auto-start entry\) | PS4BOOT |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 421.2 Tm (| JUPI 2 | PS4 Pro \("Belize" chip\) | a person picks it each time | PS4PROBIN |) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 394.2 Tm (2. Hardware list) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 372.2 Tm (| Item | Why | Grade |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 363.2 Tm (| PS4 or PS4 Pro already able to start a PS4 Linux loader | the machine | CONFIRMED \(both units\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 354.2 Tm (| One USB stick, FAT32, for boot files \(512 MB is enough\) | holds the kernel | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 345.2 Tm (| Optional second small USB stick, "RESCUE", loader only | spare way in | design |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 336.2 Tm (| Wired network cable + switch | JUPI is used over the network | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 327.2 Tm (| TV/monitor \(HDMI\) + controller with USB cable | for start-up and Safe Mode | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 318.2 Tm (| Another computer on the same network \(any Linux/Mac/Windows\) | to log in, check fingerprints | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 309.2 Tm (| This manual + the recovery card for each unit, printed | | |) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 295.2 Tm (Firmware: keep the PS4 system software exactly as it is \(section 3\). Which firmware versions can start) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 283.6 Tm (the loader depends on how you start it; that is outside this manual.) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 254 Tm (3. NEVER do these) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 232 Tm (| Never | Why |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 223 Tm (| "Initialize PS4" \(Settings or Safe Mode\) | Erases the disk, Linux included. This is how JUPI 2 was lost on Nov) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 214 Tm (11. \(CONFIRMED\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 205 Tm (| "Update System Software" | A new firmware may not support your loader method. Then Linux can't start. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 196 Tm (| Set up an auto-start entry for the loader on JUPI 2 or on a new unit | A bad auto-started loader can trap the) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 187 Tm (console in a crash loop. Others report the same. \(OBSERVED\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 178 Tm (| Pull the power cord while Linux is writing | Can damage files. Hold the power button instead. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 169 Tm (| Swap boot sticks between JUPI 1 and JUPI 2 | Each stick has its own label and files. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 160 Tm (| Change the loader to "update" JUPI | Updates are files on the stick, done from Linux \(section 7\). The loader) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 151 Tm (stays fixed. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 142 Tm (| Run loaders or programs you didn't get from this manual's list | They can harm the console. |) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 115 Tm (4. How the start-up works \(the loader\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 93 Tm (Think of it as a key and a door. The key is the PS4 Linux loader. How the loader is started on the) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 81.4 Tm (console is out of scope for this repo and kept private. Everything below assumes you already have a) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 69.8 Tm (working way to start it.) Tj T* ET
+ 
+endstream
+endobj
+14 0 obj
+<<
+/Length 6628
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 742 Tm (1. The loader linux-1024mb.bin is started on the console. It can live on a USB stick \(payloads) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 730.4 Tm (folder\) and, as a spare, on the PS4's own disk \(/data/payloads\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 718.8 Tm (2. The loader reads up to four files, each one separately, first place wins) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 707.2 Tm (\(CONFIRMED in source and in our loader\):) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 695.6 Tm (1. USB stick 1, then USB stick 2, then the PS4 disk /data/linux/boot/) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 684 Tm (2. Files: bzImage \(the kernel, required\), initramfs.cpio.gz \(required\),) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 672.4 Tm (bootargs.txt \(options, optional\), vram.txt \(graphics memory, optional\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 660.8 Tm (3. Linux starts. The PS4 menu is gone until you power off.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 644.2 Tm (JUPI 1 starts Linux by itself on power-up \(an auto-start entry for the loader is set up on that unit\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 632.6 Tm (JUPI 2 has no such entry. Nothing starts by itself on JUPI 2 \(CONFIRMED Nov 24\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 616 Tm (The loader never copies anything to the disk on our units \(CONFIRMED\). It never changes by itself.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 599.4 Tm (The loader file, same on every unit:) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 587.8 Tm (linux-1024mb.bin, 329,088 bytes, sha256 e11da9d2f772bd2619587d1bc3bd49b257876d1b298fd4f01e1a1139414b6646) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 576.2 Tm (\(CONFIRMED\).) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 546.6 Tm (5. First setup \(per console\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 524.6 Tm (Before you start: you must already have a working way to start the PS4 Linux loader on the console.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 513 Tm (This manual does not cover how to get one.) Tj T* ET
+BT /F2 10 Tf 12 TL ET
+BT 1 0 0 1 48 493.4 Tm (5a. Both consoles) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 480.4 Tm (1. Format a USB stick FAT32. Label it \(PS4BOOT for a PS4, PS4PROBIN for a Pro, or your own name\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 468.8 Tm (2. Copy onto it: bzImage, initramfs.cpio.gz, and a payloads/linux-1024mb.bin \(the loader\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 457.2 Tm (Check each fingerprint against the list in section 13 before copying.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 445.6 Tm (3. Copy the loader a second time onto the PS4 disk at /data/payloads/linux-1024mb.bin) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 434 Tm (\(by any file transfer to the PS4 disk, or from Linux later\). This is your spare key when the stick is bad.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 422.4 Tm (4. Copy a known-good bzImage + initramfs.cpio.gz into /data/linux/boot/ on the PS4 disk.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 410.8 Tm (This is the backup kernel used when no stick is plugged in.) Tj T* ET
+BT /F2 10 Tf 12 TL ET
+BT 1 0 0 1 48 391.2 Tm (5b. PS4 \(like JUPI 1\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 378.2 Tm (- Start: start the loader linux-1024mb.bin the way you normally do.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 366.6 Tm (- Optional auto-start \(only once the unit has booted cleanly at least 3 times\): set up an auto-start) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 355 Tm (entry for the loader, then Linux starts by itself.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 343.4 Tm (- Escape when it auto-starts a bad kernel: pull the stick \(it falls back to the disk backup\).) Tj T* ET
+BT /F2 10 Tf 12 TL ET
+BT 1 0 0 1 48 323.8 Tm (5c. PS4 Pro \(like JUPI 2\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 310.8 Tm (- Start: start the loader linux-1024mb.bin the way you normally do. No auto-start. A person starts it every time.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 299.2 Tm (- Escape when the stick is bad: pull the stick, then start the INTERNAL copy of the loader,) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 287.6 Tm (/data/payloads/linux-1024mb.bin.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 276 Tm (JUPI 2 got this internal copy on Nov 24 2026 16:42 PST \(CONFIRMED, Nov 24 change receipt\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 264.4 Tm (JUPI 2 then booted jupi-1.0 with the stick out that evening, and it has no auto-start, so that start) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 252.8 Tm (can only have come from the internal copy \(inferred; see flown-20261127/STATUS-20261127.md\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 236.2 Tm (After Linux starts the first time:) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 224.6 Tm (- Wait 2-3 minutes. A black screen for 1-2 minutes is normal.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 213 Tm (- Log in from the other computer over SSH.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 201.4 Tm (- Run uname -v and write down what it says \(that is which kernel booted\).) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 171.8 Tm (6. Everyday use) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 149.8 Tm (| Want to | Do | Grade |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 140.8 Tm (| Ask the local AI something \(JUPI 1\) | ollama run llama3.2:1b \(also installed: qwen3:0.6b\) | CONFIRMED installed,) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 131.8 Tm (Nov 24 |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 122.8 Tm (| Run a local model on JUPI 2 | llama.cpp Vulkan build in <lab-home>/groku-infer/ | CONFIRMED installed |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 113.8 Tm (| Check the machine | jupi-system \(JUPI 1\) | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 104.8 Tm (| See the GPU engine | systemctl status jupi-engine | CONFIRMED running on both |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 95.8 Tm (| Turn it off | sudo poweroff, wait for the light to go off | |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 86.8 Tm (| Turn it on again | start the loader again \(section 4/5\) | |) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 72.8 Tm (Nothing restarts JUPI by itself: kernel panic=0, and the self-heal service has reboots turned off) Tj T* ET
+ 
+endstream
+endobj
+15 0 obj
+<<
+/Length 7188
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 742 Tm (\(CONFIRMED\). If it hangs, a person decides.) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 712.4 Tm (7. Updating JUPI \(the safe way\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 690.4 Tm (The rule: the launcher \(the loader\) never changes. An update only changes files on) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 678.8 Tm (the stick, from inside Linux, and every update can undo itself.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 662.2 Tm (The tool that does the undo is the TRIAL GUARD \(installed Nov 24 2026, idle, on both units; CONFIRMED\):) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 650.6 Tm (- /usr/local/sbin/jupi-trial-guard.sh sha256 15ea6e93b6fb6fae96a74519da752b10fd357ede12bc7e6a0dbb5497b05ef085) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 639 Tm (- /etc/systemd/system/jupi-trial-guard.service sha256) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 627.4 Tm (5fbe9332a2e963f4cb3d9d1fb7ae0ade0b0dcdb26fd6dd6a156af0f68a58fba5) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 610.8 Tm (How a kernel update goes:) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 599.2 Tm (1. Copy the new kernel to the stick with a new name, e.g. bzImage.jupi-1.0. Check its sha256.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 587.6 Tm (2. Arm one trial:) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 576 Tm (sudo jupi-trial-guard.sh arm bzImage.jupi-1.0 <new-sha> bzImage.pidfsfix-20261120 <good-sha> jupi-1.0) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 564.4 Tm (It refuses if a fingerprint is wrong.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 552.8 Tm (3. Restart JUPI the normal way.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 541.2 Tm (4. The guard checks every minute: network up, the peer answers, SSH running, no GPU hang/Oops.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 62 529.6 Tm (- 15 healthy minutes -> PASS. The new kernel stays.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 62 518 Tm (- 3 bad checks in a row -> REVERT. The old kernel is put back on the stick. Restart once more.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 62 506.4 Tm (- If the new kernel can't even start Linux: turn off, pull the stick, start \(disk backup kernel\),) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 494.8 Tm (plug the stick back in, then run sudo jupi-trial-guard.sh revert \(puts the old kernel back on) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 483.2 Tm (the stick; the guard does not watch for a re-plugged stick by itself\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 471.6 Tm (5. sudo jupi-trial-guard.sh status shows where you are. The log is /var/log/jupi-trial.log.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 455 Tm (Stop switch: sudo touch /etc/jupi-trial/DISABLE \(guard does nothing at all\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 443.4 Tm (The guard never restarts or powers off the machine \(CONFIRMED in code and in 11/11 simulated tests\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 431.8 Tm (When idle it only reads the stick \(CONFIRMED: whole-stick fingerprint identical before and after\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 415.2 Tm (Coming later: one command, sudo jupi-update <file> <sha256>, that does steps 1-2 for you) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 403.6 Tm (\(design only today; not published\).) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 387 Tm (Not used for updates: kexec \(Linux starting another Linux directly\). It is built in, but others) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 375.4 Tm (report it freezes on PS4 \(OBSERVED\). Untested by us.) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 345.8 Tm (8. Recovery card - JUPI 1 \(PS4, auto-start\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 323.8 Tm (GOLDEN RULE: something wrong -> PULL THE STICK first. Without the stick, JUPI 1 boots the) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 312.2 Tm (known-good backup kernel on its own disk. NEVER "Initialize PS4".) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 295.6 Tm (| If | Do |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 286.6 Tm (| Linux won't start \("Failed to load file", or back at PS4 home\) | Turn fully off. Push the stick in. Turn on,) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 277.6 Tm (start the loader, wait 3 min. Still nothing: off, PULL THE STICK, on, start the loader \(backup boot\). |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 268.6 Tm (| Bad boot every time \(black or frozen\) | Hold power until the light is OFF. Pull the stick. Turn on, start the) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 259.6 Tm (loader. Once Linux is up, plug the stick back in. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 250.6 Tm (| Linux is up but unreachable | Wait 15 min \(trial guard may be fixing it\). Check the cable. Off, on, start the) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 241.6 Tm (loader. Then pull-the-stick boot. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 232.6 Tm (| Black screen | Wait 3 full minutes. Ask the other computer "can you reach JUPI 1?". If not: hold power until) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 223.6 Tm (off, pull AC 60 s, pull the stick, start. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 214.6 Tm (| PS4 itself won't start normally | Safe Mode: from OFF, hold power until the SECOND beep \(~7 s\), connect the) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 205.6 Tm (controller by cable, press PS, choose "Restart PS4". NEVER Initialize. NEVER Update. |) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 178.6 Tm (9. Recovery card - JUPI 2 \(PS4 Pro, no auto-start\)) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 156.6 Tm (GOLDEN RULE: something wrong -> turn fully OFF and PULL THE AC CORD FOR 60 SECONDS. NEVER "Initialize PS4".) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 145 Tm (Normal start: start the loader linux-1024mb.bin \(from the stick\) the way you normally do.) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 128.4 Tm (| If | Do |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 119.4 Tm (| Linux won't start | Turn fully off. Push the stick in. Start the loader, wait 3 min. Still nothing: BACKUP BOOT.) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 110.4 Tm (|) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 101.4 Tm (| Bad boot every time | Hold power until OFF. Pull AC 60 s. BACKUP BOOT. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 92.4 Tm (| BACKUP BOOT | Pull the PS4PROBIN stick. Start the INTERNAL copy of the loader, /data/payloads/linux-1024mb.bin) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 83.4 Tm (\(exists since Nov 24 2026\). Linux starts from the disk backup kernel. Then plug the stick back in. \(Passed on JUPI) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 74.4 Tm (2 the evening of Nov 24, see flown-20261127/STATUS-20261127.md.\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 65.4 Tm (| Linux up but unreachable | Wait 15 min. Check the cable. Off, on, start the loader. Then BACKUP BOOT. |) Tj T* ET
+ 
+endstream
+endobj
+16 0 obj
+<<
+/Length 6931
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 742 Tm (| Black screen | Wait 3 min. Ask the other computer "can you reach JUPI 2?". If not: off, AC 60 s, try once more,) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 733 Tm (then BACKUP BOOT. |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 724 Tm (| PS4 itself won't start normally | Don't start the loader. Safe Mode: hold power to the SECOND beep, controller) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 715 Tm (by cable, PS, "Restart PS4". NEVER Initialize. NEVER Update. |) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 688 Tm (10. Troubleshooting table) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 666 Tm (| You see | Most likely | Do | Grade |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 657 Tm (| "Failed to load file" after starting the loader | stick not found or file missing | re-seat stick; check bzImage) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 648 Tm (and initramfs.cpio.gz on it | CONFIRMED \(loader source\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 639 Tm (| Loader file not found | stick not plugged, or no payloads folder | plug stick; use the internal copy | OBSERVED) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 630 Tm (|) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 621 Tm (| Crash/restart right after the loader starts, every time | a bad auto-start entry | pull the stick; remove the) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 612 Tm (entry | OBSERVED \(others\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 603 Tm (| Black screen 1-2 min | normal | wait 3 min | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 594 Tm (| Linux up, no network on JUPI 1 | known Aeolia network IRQ issue | wait; check cable; see kernel 1.0 notes |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 585 Tm (CONFIRMED \(issue known\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 576 Tm (| jupi-trial-guard status says ARMED | an update trial is running | wait 15 min | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 567 Tm (| TRIAL-REVERTED on the stick | the new kernel failed, old one restored | restart once; read) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 558 Tm (/var/log/jupi-trial.log | CONFIRMED \(sim\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 549 Tm (| Fingerprint doesn't match | wrong or damaged file | do not use it; ask | - |) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 522 Tm (11. Glossary) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 500 Tm (- Orbis: the PS4's own operating system.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 488.4 Tm (- Firmware: the PS4 system software version \(e.g. 13.52\). Don't update it.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 476.8 Tm (- Loader: a small program \(linux-1024mb.bin\) that starts Linux on the PS4 with 1024 MB of graphics memory.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 465.2 Tm (- Kernel \(bzImage\): the core of Linux. initramfs: a small start-up file system loaded with it.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 453.6 Tm (- Boot stick: the USB stick with the kernel files.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 442 Tm (- Trial guard: the program that keeps or undoes a kernel update by itself.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 430.4 Tm (- sha256: a 64-character fingerprint of a file. Same fingerprint = same file.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 418.8 Tm (- Receipt: a note of what changed, when \(PST\), who approved it, and the fingerprints.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 407.2 Tm (- kexec: Linux starting another Linux without the PS4 menu. Not used for updates.) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 377.6 Tm (12. Who to ask, and how to check a receipt) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 355.6 Tm (Owner and final say: Kam Dabe, FullCircle ComXpress LLC. Ask Kam before any restart test, any) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 344 Tm (change to the auto-start entry, the loader, or network settings.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 327.4 Tm (Check a fingerprint \(Linux/Mac\):) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 315.8 Tm (sha256sum linux-1024mb.bin) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 306.8 Tm (Windows PowerShell:) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 295.2 Tm (Get-FileHash linux-1024mb.bin -Algorithm SHA256) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 286.2 Tm (Compare all 64 characters with this manual or the package's SHA256SUMS.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 269.6 Tm (Check a whole package folder:) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 258 Tm (sha256sum -c SHA256SUMS) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 249 Tm (Every line must say OK.) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 232.4 Tm (A receipt is trusted when: it names what changed, when, who approved it, it has before/after) Tj T* ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 48 220.8 Tm (listings, it has a rollback line, and the fingerprints in it match the files.) Tj T* ET
+BT /F2 11.5 Tf 13.8 TL ET
+BT 1 0 0 1 48 191.2 Tm (13. Known-good fingerprints \(Nov 24 2026\)) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 169.2 Tm (| File | Where | sha256 | Grade |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 160.2 Tm (| linux-1024mb.bin \(loader\) | stick payloads/, and /data/payloads/ on JUPI 2 |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 151.2 Tm (e11da9d2f772bd2619587d1bc3bd49b257876d1b298fd4f01e1a1139414b6646 | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 142.2 Tm (| bzImage \(Nov 20, pidfs fix, running today\) | both sticks |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 133.2 Tm (0bd2726640d571c1c28fad7a721ba7db65e04472adcb7f7674312ecf9d72b289 \(also kept on the stick as) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 124.2 Tm (bzImage.pidfsfix-20261120\) | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 115.2 Tm (| bzImage \(original crashnt-4.7, disk backup\) | /data/linux/boot/ |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 106.2 Tm (f0008d466329d07d456fda63fe03129f7af0403a4040d357d3a62658e3d17293 | CONFIRMED |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 97.2 Tm (| bzImage-jupi-1.0 \(not published; hash only\) | internal HDD on both units since Nov 24 |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 88.2 Tm (a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e | CONFIRMED \(built; flown, see) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 79.2 Tm (flown-20261127/STATUS-20261127.md\) |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 70.2 Tm (| jupi-trial-guard.sh v2 | /usr/local/sbin/ | 15ea6e93b6fb6fae96a74519da752b10fd357ede12bc7e6a0dbb5497b05ef085 |) Tj T* ET
+BT /F3 7.4 Tf 8.88 TL ET
+BT 1 0 0 1 56 61.2 Tm (CONFIRMED |) Tj T* ET
+ 
+endstream
+endobj
+17 0 obj
+<<
+/Length 108
+>>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+BT /F1 9.3 Tf 11.16 TL ET
+BT 1 0 0 1 56 742 Tm (- groku) Tj T* ET
+ 
+endstream
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000061 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000329 00000 n 
+0000000434 00000 n 
+0000000629 00000 n 
+0000000824 00000 n 
+0000001019 00000 n 
+0000001214 00000 n 
+0000001409 00000 n 
+0000001479 00000 n 
+0000001772 00000 n 
+0000001856 00000 n 
+0000008401 00000 n 
+0000015081 00000 n 
+0000022321 00000 n 
+0000029304 00000 n 
+trailer
+<<
+/ID 
+[<02a7fe6911bf697436d43fc8caf52e18><02a7fe6911bf697436d43fc8caf52e18>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 11 0 R
+/Root 10 0 R
+/Size 18
+>>
+startxref
+29463
+%%EOF

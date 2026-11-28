@@ -1,0 +1,60 @@
+{
+  "schema": "fullcircle.receipt.v1",
+  "id": "JUPI-KERNEL-OFFICIAL-1.0-BUILD-20261124",
+  "author": "groku (Groku.2)",
+  "authorized_by": "pt3858u",
+  "written_pst": "2026-11-24 15:33:50 PST",
+  "what": "Built JUPI kernel 1.0 on NIKOLAI. Not installed, not staged, no reboot, no payload, no push, no xchain/HCDU append, no agent messages.",
+  "artifact": {
+    "path": "artifacts/bzImage-jupi-1.0",
+    "bytes": 15733760,
+    "sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+    "uname_r": "6.15.4-crashnt-4.7_no-built-in-fw",
+    "uname_v": "#jupi-1.0 SMP PREEMPT_DYNAMIC Tue Nov 24 15:26:06 PST 2026",
+    "embedded_config_sha256": "7e3c1e64f56203c08e6383898feb0804d64e5136fc664799deeda8f6c29ee001"
+  },
+  "source": {
+    "archive_sha256": "20b1cd805f6008f287a62644f7fa181efad3790e1c9336afb71f4d87c7dbc54c",
+    "git_tree": "d5a8c543909b61100dc5870697e141d5ebe932f9"
+  },
+  "patches": {
+    "0000-pidfs-task-reference.patch": "4cb6bb947713f48b0987b40532a5673e08e3e2586afd880afc9d0e1e8dfee030",
+    "0001-sky2-aeolia-poll-phy.patch": "3a47c4a8a27862bd9d3aa0ed118c9917ec964085c7c4d8286f8baeb43d281e51",
+    "0002-sky2-aeolia-empty-phy-fastpath.patch": "392448cfddaab63c962290ce6e91ef5681cc33f6aec2365285ee7def027b6a6b",
+    "0003-sky2-jupi-report-aeolia-phy-mode.patch": "aa6fb2cd9ea215081f3976fef72f43e01c17fec1aeed928e84db19ae5e14abfb"
+  },
+  "config_base_sha256": "946438262aba7eccc8cccca4a269bac248749d3c699e4f0dc8c5b3252ddd7cef",
+  "config_diff_lines": 19,
+  "firmware_embedded_identical": true,
+  "toolchain": "Ubuntu clang/LLD 18.1.8 (20ubuntu8), pahole 1.31, KCFLAGS -march=btver2 -mtune=btver2 -O3, ThinLTO",
+  "tests": {
+    "series_replay_from_pristine": "PASS, tree identical",
+    "codex_poll_policy_mock": "0 mismatches (4096 carrier, 8 lifecycle)",
+    "codex_fastpath_mock": "32256 cases, 24 skips, 0 other mismatches",
+    "qemu": "8 boots, all JUPI_VM_COMPLETE, 200 units each, 0 dying pids; A/B within +/-5% of live (n=9 each)",
+    "hardware": "NOT RUN"
+  },
+  "live_reference": {
+    "bzImage_sha256": "0bd2726640d571c1c28fad7a721ba7db65e04472adcb7f7674312ecf9d72b289",
+    "both_sticks_confirmed_read_only": true
+  },
+  "temp_files": {
+    "roach": [
+      "/tmp/gk-collect.sh",
+      "/tmp/gk-c2.sh",
+      "/tmp/gk-collect-out.txt",
+      "/tmp/gk-fatls.py"
+    ],
+    "jupi1": [],
+    "jupi2": []
+  },
+  "pending_kam": [
+    "stage file on sticks (per node)",
+    "Stage A boot JUPI 2",
+    "Stage A boot JUPI 1 (also expected to restore Wi-Fi)",
+    "Stage B poll option JUPI 1",
+    "held config options",
+    "release rename",
+    "delete build tree"
+  ]
+}

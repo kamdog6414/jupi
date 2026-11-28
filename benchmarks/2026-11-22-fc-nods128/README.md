@@ -50,10 +50,12 @@ test-backend-ops on Vulkan0 (chunk crashes re-run alone; SKIP = no CPU reference
 op                     stock OK/FAIL           patched OK/FAIL
 MUL_MAT     (2754)     1421 / 1067 (234 skip)  2488 / 0 (234 skip)
 MUL_MAT_ID  (1109)      500 / 593              1093 / 0
-(2754 / 1109 = nominal enumerations. The retained per-case files hold 2722 distinct
- MUL_MAT entries (2488 OK + 234 SKIP_CPU, no CPU reference) and 1093 MUL_MAT_ID.
- The reason for that gap was not established. "Passes" means every case with a
- CPU reference that was retained.)
+(2754 / 1109 = listed cases, counting repeats. test-backend-ops lists some cases
+ twice under the identical name; the per-case files are keyed by name, so they hold
+ 2722 distinct MUL_MAT cases (2488 OK + 234 SKIP_CPU, no CPU reference) and 1093
+ distinct MUL_MAT_ID. Gap = 32 and 16 duplicate names, nothing dropped. Evidence:
+ releases/jupi-1.0-20261124/opcount/. "Passes" means every distinct case with a
+ CPU reference.)
 amdgpu ring timeouts / resets in dmesg: 0 on all four sweeps
 
 llama-bench qwen3-0.6b Q4_K_M, -ngl 99 -fa 0 -t 6 -r 3

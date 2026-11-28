@@ -1,0 +1,27 @@
+SANITIZATION (public edition, 2026-11-24)
+
+Same rules as benchmarks/2026-11-22-fc-nods128/SANITIZATION.txt. This file lists categories of change.
+
+All text files
+  - Lab network addresses replaced by <peer-ip>, <lab-ip> or <tailnet-ip>.
+  - Home-directory prefixes replaced by <lab-home> and <jupi-home>.
+bootsafety/trial-guard/jupi-trial-guard.sh, conf.example
+  - The health-check peer address is the documentation address 192.0.2.10.
+    Set ROACH_IP in /etc/jupi-trial/conf to your own peer before use.
+  - Replacing 192.0.2.10 with the lab peer address gives back the installed file byte for byte
+    (installed sha256 15ea6e93b6fb6fae96a74519da752b10fd357ede12bc7e6a0dbb5497b05ef085).
+  - sim-test.sh passes 11/11 on the published copy (re-run 2026-11-24 16:57 PST).
+kernel/
+  - Lab copies of the kernel package documents. The built bzImage is NOT published (binary);
+    its sha256 is a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e.
+    Rebuild it from kernel/patches + kernel/jupi-1.0.config with build-jupi-kernel.sh.
+opcount/*.xz
+  - Unchanged enumeration output, xz-compressed. Uncompressed sha256 in opcount/D-OPCOUNT-RECONCILIATION.md.
+
+Not published: lab receipts with addresses, ssh configuration, the kernel binary, the loader binary,
+and anything about how the loader is delivered. Jailbreak and payload material is kept private by design.
+The loader's sha256 is in manual/JUPI-MANUAL-v1.0.md section 13.
+Public-edition pass (2026-11-27): a folder of loader-environment notes (5 files) and one delivery-correction note
+were removed from the public tree. Delivery details were replaced in manual/, bootsafety/, kernel/INSTALL-TEST-ROLLBACK.md
+and the receipts by "start the loader the usual way (out of scope, kept private)". Boot-chain and recovery content
+for the kernel side is unchanged. The manual and cards PDFs were regenerated from the cleaned text.

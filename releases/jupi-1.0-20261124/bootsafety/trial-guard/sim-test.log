@@ -1,0 +1,32 @@
+PASS T1 arm puts candidate in bzImage -> CAND TRIAL 
+PASS T2 second arm refused, state unchanged -> CAND TRIAL 
+PASS T3 rescue/old-kernel boot reverts -> GOOD TRIAL-REVERTED 
+PASS T4 healthy trial passes, keeps candidate -> CAND TRIAL-PASSED 
+PASS T5 unhealthy trial reverts -> GOOD TRIAL-REVERTED 
+PASS T6 2nd trial boot without pass reverts -> GOOD TRIAL-REVERTED 
+PASS T7 corrupted good copy: revert blocked, TRIAL kept -> CAND TRIAL 
+PASS T8 nothing armed: no-op rc0 -> GOOD  rc0
+PASS T9 arm refused if bzImage is not the good kernel -> CAND 
+PASS T10 DISABLE file: check does nothing -> CAND TRIAL 
+PASS T11 idle check writes nothing -> e409e2f3ffe1e756b4f8468b3f6ac44f  -
+RESULT pass=11 fail=0
+--- guard log
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST ARM REFUSED: a trial is already armed
+2026-11-24 16:41:30 PST REVERTED: bzImage is the known-good kernel again (25d3582ca29172bb918b9b3dff4f84e8db470c6e93e7cf270051883ec5f11873). Reason: booted without the trial kernel (rescue path). No reboot done.
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST trial boot 1 on #jupi-1.0: watching health for 2 min
+2026-11-24 16:41:30 PST PASSED: #jupi-1.0 healthy for 2 min. bzImage stays the trial kernel. Good copy kept on stick.
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST trial boot 1 on #jupi-1.0: watching health for 2 min
+2026-11-24 16:41:30 PST health check failed (1/3)
+2026-11-24 16:41:30 PST health check failed (2/3)
+2026-11-24 16:41:30 PST health check failed (3/3)
+2026-11-24 16:41:30 PST REVERTED: bzImage is the known-good kernel again (25d3582ca29172bb918b9b3dff4f84e8db470c6e93e7cf270051883ec5f11873). Reason: unhealthy 3 checks in a row. No reboot done.
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST REVERTED: bzImage is the known-good kernel again (25d3582ca29172bb918b9b3dff4f84e8db470c6e93e7cf270051883ec5f11873). Reason: trial kernel booted 2 times without passing. No reboot done.
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST REVERT BLOCKED: bzImage.good missing or hash changed
+2026-11-24 16:41:30 PST ARM REFUSED: bzImage is not the known-good kernel now
+2026-11-24 16:41:30 PST ARMED: next payload boot loads bzImage.cand (146d841bbc01fa6eee5b94e4dc1f56dfebac4c12d45a0f4f8e66e1dc6ea893e8). Good copy: bzImage.good.
+2026-11-24 16:41:30 PST DISABLE present: doing nothing

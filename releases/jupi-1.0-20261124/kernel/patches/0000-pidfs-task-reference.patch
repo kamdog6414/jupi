@@ -1,0 +1,11 @@
+--- a/fs/pidfs.c
++++ b/fs/pidfs.c
+@@ -249,7 +249,7 @@
+ 	struct pidfd_info kinfo = {};
+ 	struct pidfs_exit_info *exit_info;
+ 	struct user_namespace *user_ns;
+-	struct task_struct *task;
++	struct task_struct *task __free(put_task) = NULL;
+ 	const struct cred *c;
+ 	__u64 mask;
+ 

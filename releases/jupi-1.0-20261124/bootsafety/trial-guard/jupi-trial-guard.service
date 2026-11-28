@@ -1,0 +1,12 @@
+[Unit]
+Description=JUPI trial kernel guard (boot-once, auto-revert; idle = read-only; never reboots)
+After=network-online.target sshd.service
+Wants=network-online.target
+ConditionPathExists=/etc/jupi-trial/conf
+ConditionPathExists=!/etc/jupi-trial/DISABLE
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/jupi-trial-guard.sh check
+Nice=10
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,60 @@
+JUPI 1  (the regular PS4)  -  RECOVERY CARD  v1.1 (Nov 24 2026)
+===========================================================
+How it normally starts: you turn it on and start the Linux
+loader (out of scope; kept private). It then starts Linux BY
+ITSELF from an auto-start entry. The boot stick (PS4BOOT) is
+the first choice. The PS4's own disk has a known-good backup
+copy.
+
+GOLDEN RULE: If anything goes wrong, PULL THE STICK first.
+Without the stick, JUPI 1 boots the known-good backup.
+NEVER choose "Initialize PS4". It erases Linux.
+
+-----------------------------------------------------------
+IF: Linux won't start (error "Failed to load file", or
+    you are back at the PS4 home screen)
+DO: 1. Turn the PS4 fully off.
+    2. Check the stick is pushed in all the way. Turn on.
+    3. Start the loader again. Wait 3 minutes.
+    4. Still nothing? Turn off, PULL THE STICK, turn on,
+       start the loader. It boots the backup.
+    5. Tell Groku what you saw on screen.
+
+-----------------------------------------------------------
+IF: It keeps going into a bad boot (black screen or
+    frozen, every time you start the loader)
+DO: 1. Hold the power button until the light goes OFF.
+    2. PULL THE STICK.
+    3. Turn on, start the loader. Linux starts from the
+       backup on the PS4's disk.
+    4. Once Linux is up, plug the stick back in and tell
+       Groku. Groku puts the good kernel back on the stick.
+    Do NOT keep retrying with the stick in.
+
+-----------------------------------------------------------
+IF: Linux is up on the TV but nobody can reach it
+    (no network / locked out)
+DO: 1. Wait 15 minutes. If a test kernel is on, it fixes
+       the stick by itself (trial guard).
+    2. Check the network cable at both ends.
+    3. Turn off fully, turn on, start the loader. It comes
+       back on the good kernel.
+    4. Still locked out: pull the stick and boot (above).
+
+-----------------------------------------------------------
+IF: Black screen, nothing on the TV
+DO: 1. Wait 3 full minutes. Black for 1-2 min is normal.
+    2. Ask Groku: "can you reach JUPI 1?" If yes, it is
+       only the picture. Leave it running.
+    3. If not: hold power until the light goes OFF,
+       pull the AC cord for 60 seconds, plug back in.
+    4. Pull the stick, turn on, start the loader (backup
+       boot).
+
+-----------------------------------------------------------
+LAST RESORT (PS4 itself won't start normally):
+    Safe Mode: from OFF, hold power until the SECOND beep
+    (about 7 seconds). Plug in the controller with a cable,
+    press PS. Choose "Restart PS4".
+    NEVER "Initialize PS4". NEVER "Update System Software".
+- groku

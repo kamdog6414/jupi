@@ -1,0 +1,283 @@
+--- a/drivers/net/ethernet/marvell/sky2.c
++++ b/drivers/net/ethernet/marvell/sky2.c
+@@ -90,6 +90,10 @@
+ static int disable_msi = -1;
+ module_param(disable_msi, int, 0);
+ MODULE_PARM_DESC(disable_msi, "Disable Message Signaled Interrupt (MSI)");
++
++static bool aeolia_poll_phy __read_mostly;
++module_param(aeolia_poll_phy, bool, 0444);
++MODULE_PARM_DESC(aeolia_poll_phy, "Poll the single-port Aeolia PHY instead of using its IRQ");
+ 
+ static int legacy_pme = 0;
+ module_param(legacy_pme, int, 0);
+@@ -152,6 +156,33 @@
+ static const unsigned rxqaddr[] = { Q_R1, Q_R2 };
+ static const u32 portirq_msk[] = { Y2_IS_PORT_1, Y2_IS_PORT_2 };
+ 
++static bool sky2_aeolia_phy_poll(const struct sky2_hw *hw)
++{
++	return aeolia_poll_phy && hw->ports == 1 &&
++	       hw->pdev->vendor == PCI_VENDOR_ID_SONY &&
++	       hw->pdev->device == PCI_DEVICE_ID_SONY_AEOLIA_GBE &&
++	       (hw->flags & SKY2_HW_USE_AEOLIA_MSI);
++}
++
++static u32 sky2_port_irq_mask(const struct sky2_hw *hw, unsigned int port)
++{
++	u32 mask = portirq_msk[port];
++
++	if (!port && sky2_aeolia_phy_poll(hw))
++		mask &= ~Y2_IS_IRQ_PHY1;
++	return mask;
++}
++
++/* Call after NAPI is disabled so a PHY event cannot rearm the timer. */
++static void sky2_aeolia_stop_phy_poll(struct sky2_hw *hw)
++{
++	if (!sky2_aeolia_phy_poll(hw))
++		return;
++
++	timer_delete_sync(&hw->watchdog_timer);
++	clear_bit(0, &hw->phy_poll_pending);
++}
++
+ static void sky2_set_multicast(struct net_device *dev);
+ static irqreturn_t sky2_intr(int irq, void *dev_id);
+ 
+@@ -1769,9 +1800,12 @@
+ 	    hw->chip_id == CHIP_ID_YUKON_OP_2)
+ 		imask |= Y2_IS_PHY_QLNK;	/* enable PHY Quick Link */
+ 
+-	imask |= portirq_msk[port];
++	imask |= sky2_port_irq_mask(hw, port);
+ 	sky2_write32(hw, B0_IMSK, imask);
+ 	sky2_read32(hw, B0_IMSK);
++
++	if (sky2_aeolia_phy_poll(hw))
++		mod_timer(&hw->watchdog_timer, jiffies + 1);
+ 
+ 	netif_info(sky2, ifup, dev, "enabling interface\n");
+ 
+@@ -2134,6 +2168,7 @@
+ 		sky2_read32(hw, B0_IMSK);
+ 
+ 		napi_disable(&hw->napi);
++		sky2_aeolia_stop_phy_poll(hw);
+ 		free_irq(hw->pdev->irq, hw);
+ 		hw->flags &= ~SKY2_HW_IRQ_SETUP;
+ 	} else {
+@@ -2240,14 +2275,11 @@
+ 		return tx ? FC_TX : FC_NONE;
+ }
+ 
+-static int sky2_autoneg_done(struct sky2_port *sky2, u16 aux)
++static int sky2_resolve_autoneg(struct sky2_port *sky2, u16 aux,
++				u16 advert, u16 lpa)
+ {
+ 	struct sky2_hw *hw = sky2->hw;
+ 	unsigned port = sky2->port;
+-	u16 advert, lpa;
+-
+-	advert = gm_phy_read(hw, port, PHY_MARV_AUNE_ADV);
+-	lpa = gm_phy_read(hw, port, PHY_MARV_AUNE_LP);
+ 	if (lpa & PHY_M_AN_RF) {
+ 		netdev_err(sky2->netdev, "remote fault\n");
+ 		return -1;
+@@ -2300,6 +2332,65 @@
+ 		sky2_write8(hw, SK_REG(port, GMAC_CTRL), GMC_PAUSE_OFF);
+ 
+ 	return 0;
++}
++
++static int sky2_autoneg_done(struct sky2_port *sky2, u16 aux)
++{
++	struct sky2_hw *hw = sky2->hw;
++	unsigned int port = sky2->port;
++	u16 advert = gm_phy_read(hw, port, PHY_MARV_AUNE_ADV);
++	u16 lpa = gm_phy_read(hw, port, PHY_MARV_AUNE_LP);
++
++	return sky2_resolve_autoneg(sky2, aux, advert, lpa);
++}
++
++/* Carrier must recover even when the masked PHY interrupt has no latch. */
++static void sky2_phy_poll(struct sky2_hw *hw)
++{
++	struct net_device *dev = hw->dev[0];
++	struct sky2_port *sky2 = netdev_priv(dev);
++	u16 events, status, basic, advert, lpa;
++	bool carrier;
++
++	if (!netif_running(dev))
++		return;
++
++	spin_lock(&sky2->phy_lock);
++	/* Read the clear-on-read event latch, then sample the PHY's level. */
++	if (__gm_phy_read(hw, 0, PHY_MARV_INT_STAT, &events) ||
++	    __gm_phy_read(hw, 0, PHY_MARV_PHY_STAT, &status) ||
++	    events == 0xffff || status == 0xffff)
++		goto out;
++
++	carrier = netif_carrier_ok(dev);
++	if (!(status & PHY_M_PS_LINK_UP)) {
++		if (carrier)
++			sky2_link_down(sky2);
++		goto out;
++	}
++
++	if (sky2->flags & SKY2_FLAG_AUTO_SPEED) {
++		if (!(status & PHY_M_PS_SPDUP_RES))
++			goto out;
++		if (carrier && !(events & (PHY_M_IS_AN_COMPL | PHY_M_IS_LST_CHANGE |
++					   PHY_M_IS_LSP_CHANGE | PHY_M_IS_DUP_CHANGE)) &&
++		    sky2->speed == sky2_phy_speed(hw, status) &&
++		    sky2->duplex == ((status & PHY_M_PS_FULL_DUP) ? DUPLEX_FULL : DUPLEX_HALF))
++			goto out;
++		if (__gm_phy_read(hw, 0, PHY_MARV_STAT, &basic) ||
++		    __gm_phy_read(hw, 0, PHY_MARV_AUNE_ADV, &advert) ||
++		    __gm_phy_read(hw, 0, PHY_MARV_AUNE_LP, &lpa) ||
++		    basic == 0xffff || advert == 0xffff || lpa == 0xffff ||
++		    !(basic & PHY_ST_AN_OVER) ||
++		    sky2_resolve_autoneg(sky2, status, advert, lpa))
++			goto out;
++	} else if (carrier) {
++		goto out;
++	}
++
++	sky2_link_up(sky2);
++out:
++	spin_unlock(&sky2->phy_lock);
+ }
+ 
+ /* Interrupt from PHY */
+@@ -2970,11 +3061,14 @@
+ static void sky2_watchdog(struct timer_list *t)
+ {
+ 	struct sky2_hw *hw = from_timer(hw, t, watchdog_timer);
+-
+-	/* Check for lost IRQ once a second */
+-	if (sky2_read32(hw, B0_ISRC)) {
+-		napi_schedule(&hw->napi);
+-	} else {
++	u32 status = sky2_read32(hw, B0_ISRC);
++	bool poll_phy = sky2_aeolia_phy_poll(hw);
++
++	if (poll_phy)
++		status &= ~Y2_IS_IRQ_PHY1;
++
++	/* Check for lost IRQ and a stuck RX FIFO once a second. */
++	if (!status) {
+ 		int i, active = 0;
+ 
+ 		for (i = 0; i < hw->ports; i++) {
+@@ -2996,6 +3090,12 @@
+ 			return;
+ 	}
+ 
++	if (poll_phy && netif_running(hw->dev[0]))
++		set_bit(0, &hw->phy_poll_pending);
++
++	if (status || test_bit(0, &hw->phy_poll_pending))
++		napi_schedule(&hw->napi);
++
+ 	mod_timer(&hw->watchdog_timer, round_jiffies(jiffies + HZ));
+ }
+ 
+@@ -3037,8 +3137,12 @@
+ 	if (unlikely(status & Y2_IS_ERROR))
+ 		sky2_err_intr(hw, status);
+ 
+-	if (status & Y2_IS_IRQ_PHY1)
++	if (sky2_aeolia_phy_poll(hw)) {
++		if (test_and_clear_bit(0, &hw->phy_poll_pending))
++			sky2_phy_poll(hw);
++	} else if (status & Y2_IS_IRQ_PHY1) {
+ 		sky2_phy_intr(hw, 0);
++	}
+ 
+ 	if (status & Y2_IS_IRQ_PHY2)
+ 		sky2_phy_intr(hw, 1);
+@@ -3500,6 +3604,7 @@
+ 		synchronize_irq(hw->pdev->irq);
+ 		napi_disable(&hw->napi);
+ 	}
++	sky2_aeolia_stop_phy_poll(hw);
+ 
+ 	for (i = 0; i < hw->ports; i++) {
+ 		struct net_device *dev = hw->dev[i];
+@@ -3516,6 +3621,7 @@
+ 
+ static void sky2_all_up(struct sky2_hw *hw)
+ {
++	bool poll_phy = sky2_aeolia_phy_poll(hw);
+ 	u32 imask = Y2_IS_BASE;
+ 	int i;
+ 
+@@ -3528,15 +3634,22 @@
+ 
+ 		sky2_hw_up(sky2);
+ 		sky2_set_multicast(dev);
+-		imask |= portirq_msk[i];
++		imask |= sky2_port_irq_mask(hw, i);
+ 		netif_wake_queue(dev);
+ 	}
+ 
+ 	if (hw->flags & SKY2_HW_IRQ_SETUP) {
++		/* The next IRQ must be able to schedule NAPI after our restart. */
++		if (poll_phy)
++			napi_enable(&hw->napi);
+ 		sky2_write32(hw, B0_IMSK, imask);
+ 		sky2_read32(hw, B0_IMSK);
+ 		sky2_read32(hw, B0_Y2_SP_LISR);
+-		napi_enable(&hw->napi);
++		if (!poll_phy)
++			napi_enable(&hw->napi);
++
++		if (poll_phy && netif_running(hw->dev[0]))
++			mod_timer(&hw->watchdog_timer, jiffies + 1);
+ 	}
+ }
+ 
+@@ -5058,9 +5171,19 @@
+ 
+ 	netif_napi_add(dev, &hw->napi, sky2_poll);
+ 
++	/* ndo_open can run as soon as the device is registered. */
++	if (sky2_aeolia_phy_poll(hw)) {
++		timer_setup(&hw->watchdog_timer, sky2_watchdog, 0);
++		INIT_WORK(&hw->restart_work, sky2_restart);
++	}
++
+ 	err = register_netdev(dev);
+ 	if (err) {
+ 		dev_err(&pdev->dev, "cannot register net device\n");
++		if (sky2_aeolia_phy_poll(hw)) {
++			timer_shutdown_sync(&hw->watchdog_timer);
++			cancel_work_sync(&hw->restart_work);
++		}
+ 		goto err_out_free_netdev;
+ 	}
+ 
+@@ -5088,8 +5211,10 @@
+ 		sky2_show_addr(dev1);
+ 	}
+ 
+-	timer_setup(&hw->watchdog_timer, sky2_watchdog, 0);
+-	INIT_WORK(&hw->restart_work, sky2_restart);
++	if (!sky2_aeolia_phy_poll(hw)) {
++		timer_setup(&hw->watchdog_timer, sky2_watchdog, 0);
++		INIT_WORK(&hw->restart_work, sky2_restart);
++	}
+ 
+ 	pci_set_drvdata(pdev, hw);
+ 	pdev->d3hot_delay = 300;
+--- a/drivers/net/ethernet/marvell/sky2.h
++++ b/drivers/net/ethernet/marvell/sky2.h
+@@ -2302,6 +2302,7 @@
+ 	dma_addr_t   	     st_dma;
+ 
+ 	struct timer_list    watchdog_timer;
++	unsigned long        phy_poll_pending;
+ 	struct work_struct   restart_work;
+ 	wait_queue_head_t    msi_wait;
+ 

@@ -1,0 +1,17 @@
+16:15:53 CHAIN START pgid=745539 mem=4816 swapused=395 bad0=0
+16:17:14 B-stock-floor rc=0 512 0 1 32.63 0.11;0 128 1 29.17 0.07; mem=4918 swapused=399 bad_new=0
+16:17:25 B-stock-ub64 rc=0 512 0 64 526.9 0.26;0 128 64 74.82 0.05; mem=5072 swapused=399 bad_new=0
+16:17:34 B-stock-ub512 rc=0 512 0 512 760.23 0.33;0 128 512 74.85 0.06; mem=5074 swapused=399 bad_new=0
+16:18:35 B-patched-floor rc=0 512 0 1 55.41 0.05;0 128 1 74.78 0.22; mem=5049 swapused=399 bad_new=0
+16:18:46 B-patched-ub64 rc=0 512 0 64 552.73 0.28;0 128 64 75.01 0.11; mem=5047 swapused=399 bad_new=0
+16:18:56 B-patched-ub512 rc=0 512 0 512 795.68 0.12;0 128 512 74.62 0.08; mem=5057 swapused=399 bad_new=0
+16:20:49 A-stock-floor srv p20 rc=0 vram=805MiB gtt=124MiB mem=4627 swapused=399
+16:20:49 A-stock-floor bad_new=0
+16:22:40 A-patched-floor srv p20 rc=0 vram=805MiB gtt=124MiB mem=4617 swapused=399
+16:22:40 A-patched-floor bad_new=0
+16:24:06 A-patched-ub64 srv p20 rc=0 vram=825MiB gtt=136MiB mem=4643 swapused=399
+16:24:06 A-patched-ub64 bad_new=0
+16:25:25 A-patched-ub512 srv p20 rc=0 vram=906MiB gtt=178MiB mem=4582 swapused=399
+16:25:25 A-patched-ub512 bad_new=0
+16:26:36 A-stock-ub64-NEG srv p20 rc=0 vram=813MiB gtt=136MiB mem=4613 swapused=399
+16:26:36 A-stock-ub64-NEG bad_new=0

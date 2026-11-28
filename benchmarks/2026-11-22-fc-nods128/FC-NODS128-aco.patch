@@ -1,0 +1,25 @@
+--- a/src/amd/compiler/aco_instruction_selection.cpp	2026-11-22 06:12:19.892976868 -0800
++++ b/src/amd/compiler/aco_instruction_selection.cpp	2026-11-22 06:12:19.931978132 -0800
+@@ -3926,7 +3926,10 @@
+ 
+    Operand m = load_lds_size_m0(bld);
+ 
+-   bool large_ds_read = bld.program->chip_class >= GFX7;
++   /* FC-NODS128: on PS4 Liverpool/Gladius (GFX7) ds_read_b128/ds_read_b96 return wrong LDS data
++    * (Garlic finding; LLVM keeps ds128 off by default). Split to ds_read2_b64/ds_read_b64 there. */
++   bool large_ds_read = bld.program->chip_class >= GFX7 &&
++                        bld.program->family != CHIP_LIVERPOOL && bld.program->family != CHIP_GLADIUS;
+    bool usable_read2 = bld.program->chip_class >= GFX7;
+ 
+    bool read2 = false;
+@@ -4311,7 +4314,9 @@
+    assert(util_is_power_of_two_nonzero(elem_size_bytes) && elem_size_bytes <= 8);
+ 
+    Builder bld(ctx->program, ctx->block);
+-   bool large_ds_write = ctx->options->chip_class >= GFX7;
++   /* FC-NODS128: same for ds_write_b128/ds_write_b96 on Liverpool/Gladius. */
++   bool large_ds_write = ctx->options->chip_class >= GFX7 &&
++                         ctx->program->family != CHIP_LIVERPOOL && ctx->program->family != CHIP_GLADIUS;
+    bool usable_write2 = ctx->options->chip_class >= GFX7;
+ 
+    unsigned write_count = 0;

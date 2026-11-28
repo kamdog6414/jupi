@@ -1,0 +1,148 @@
+# FC-NODS128: Mesa ACO without ds_read/write_b128 on PS4 GPUs, 2026-11-22
+
+```
+VERDICT   JUPI 2 (PS4 Pro, RADV GLADIUS): PASS.
+          JUPI 1 (PS4, RADV LIVERPOOL): output and speed PASS, but the full
+          op sweep CRASHED the GPU (ring timeout, GPU reset failed).
+
+patch     2 hunks in src/amd/compiler/aco_instruction_selection.cpp,
+          on mesa-ps4 21.3.2. On CHIP_LIVERPOOL and CHIP_GLADIUS, ACO no
+          longer emits ds_read_b128/b96 or ds_write_b128/b96. It splits them
+          into ds_read2_b64 / ds_write2_b64 / b64.
+effect    llama.cpp's batched mul_mm path becomes correct on these GPUs.
+          JUPI 2 pp512 goes from 72.87 to 854.71 tok/s at -ub 512. tg is unchanged.
+status    test-only. Loaded per process with VK_ICD_FILENAMES. No system
+          library was replaced and no live service was switched.
+```
+
+Times are PST (UTC-8). Tags: [M] measured, [R] lab record, [S] suspected.
+Idea credit: Leonardo Alegria, Garlic LLM (garlic-llm#10, `-enable-ds128` stays off
+on this GPU in LLVM). He found that the PS4 GPU's 128-bit LDS loads return wrong
+data. This patch carries that finding into Mesa's ACO compiler. Garlic's code was studied, and none was copied.
+
+## Why
+
+On both PS4 GPUs (GFX7), llama.cpp's matrix-matrix shader (mul_mm) gave wrong
+results. That is why the 2026-11-19 full-offload setup forced `-ub 1`, which sends
+every product down the matrix-vector path. A shader-ISA count showed stock ACO turning
+the mul_mm LDS tile loads into `ds_read_b128`. With the patch, every one of those
+becomes a `ds_read2_b64`, and mul_mm passes. [M]
+
+```
+ISA, 11 representative MUL_MAT shaders (JUPI 2, final ACO IR)   data/jupi2/isa-SUMMARY.txt
+build      ds_read_b128  ds_read2_b64  ds_write2_b64  ds_write_b64  cases OK
+stock          320           320            48            104        0/11
+patched          0           640            48            104       11/11
+```
+
+## Results
+
+### JUPI 2 (PS4 Pro), 2026-11-22 06:15-07:45 [M]
+
+```
+test-backend-ops on Vulkan0 (chunk crashes re-run alone; SKIP = no CPU reference)
+op                     stock OK/FAIL           patched OK/FAIL
+MUL_MAT     (2754)     1421 / 1067 (234 skip)  2488 / 0 (234 skip)
+MUL_MAT_ID  (1109)      500 / 593              1093 / 0
+amdgpu ring timeouts / resets in dmesg: 0 on all four sweeps
+
+llama-bench qwen3-0.6b Q4_K_M, -ngl 99 -fa 0 -t 6 -r 3
+path                                  pp512     tg128
+accepted live, forced -ub 1 -b 2      72.87     86.92
+patched  -ub 1  -b 2                  72.55     86.76
+patched  -ub 16                      194.67     87.04
+patched  -ub 64                      713.66     86.55
+patched  -ub 512                     854.71     86.70
+
+20-prompt byte-match vs the accepted live outputs (temp 0, seed 1)
+config                         identical   deep-2048 answer
+stock self-built -ub 1 (ctrl)    20/20      same
+patched -ub 1                    20/20      same
+patched -ub 16 / 64 / 512        19/20      same   (short-3 differs, see logit check)
+stock -ub 16 (negative ctrl)      0/20      -      (garbage)
+
+server deep-2048 prompt: pp 78 -> 640 tok/s, wall 28.1 s -> 7.3 s
+soak: 100 loops of llama-bench -ub 512 + the 11-case op test over 15 min,
+      100/100 passed, 0 new amdgpu faults
+```
+
+### JUPI 1 (PS4), 2026-11-22 08:15-08:37 [M]
+
+The same patched `libvulkan_radeon.so` (built on JUPI 2) was loaded on JUPI 1. JUPI 1's
+system RADV is byte-identical to JUPI 2's side-installed live RADV, and glibc is the same.
+
+```
+llama-bench qwen3-0.6b, -ngl 99 -fa 0 -t 6 -r 3 (desktop + services up)
+path                                  pp512     tg128
+stock  -ub 64   (wrong output)       526.90     74.82
+stock  -ub 512  (wrong output)       760.23     74.85
+patched -ub 1  -b 2                   55.41     74.78
+patched -ub 64                       552.73     75.01
+patched -ub 512                      795.68     74.62
+(stock -ub 1 bench excluded: a second copy ran at the same time by mistake.)
+
+20-prompt byte-match vs the JUPI 2 accepted live outputs
+config                   identical  tg med  pp med   deep-2048
+stock  -ub 1 (control)     20/20    65.73    79.53   same, 33.19 s
+patched -ub 1              20/20    65.72    80.26   same, 33.01 s
+patched -ub 64             19/20    61.36   214.70   same,  9.27 s (pp 437)
+patched -ub 512            19/20    56.68   232.45   same,  8.47 s (pp 597)
+stock  -ub 64 (negative)    0/20    61.36   235.12   -    (garbage)
+cross-node: JUPI 1 patched == JUPI 2 patched, 20/20 in each of the 3 configs
+```
+
+**The crash, JUPI 1.** At 08:35:29, during the full MUL_MAT sweep under the patched driver,
+compute ring comp_1.1.0 timed out in the test process. The kernel's GPU reset failed
+("asic atom init failed", "GPU Recovery Failed"). The gfx (desktop compositor) and both
+sdma rings then timed out in turn. The watchdog stopped the run at 08:35:30.
+MUL_MAT_ID, both stock op sweeps and the soak were not run on JUPI 1.
+data/jupi1/crash-kernel-lines.txt has the kernel lines. [M]
+
+What this does and does not show. The same full sweep ran on JUPI 2 with 0 faults.
+On JUPI 1, inference and the 20-prompt test were clean before the sweep. Two earlier
+sweep chunks also hit Vulkan device-lost without a ring timeout, the same pattern JUPI 2
+recovered from. Before this patch existed, JUPI 1 had frozen under Vulkan op testing
+(2026-11-10) [R]. Whether stock would hang the same way on this sweep is UNKNOWN,
+because the stock sweep never ran. Until that is settled, the full op sweep is not safe
+on JUPI 1.
+
+### Logit check on the one difference (JUPI 2) [M]
+
+short-3 diverges at generated token 53 ("...speak to her in the"):
+
+```
+           top-1                 top-2                 margin
+-ub 1      " next"    -1.4169    " village" -1.4188    0.0019 nats
+-ub 64     " village" -1.4157    " next"    -1.4181    0.0024 nats
+-ub 512    same as -ub 64
+max |d logprob| over the 53 identical earlier tokens: 0.0012 nats
+```
+
+The two tokens are a near tie (p 0.2425 vs 0.2420). A change in float summation order
+(batched mul_mm vs mat-vec) swaps them. The top-5 set and its order are otherwise
+unchanged. This is a near-tie flip, not corruption. data/jupi2/logit/
+
+## Method
+
+```
+llama.cpp  3b4d6ab3f79651935fba1dd93732f29022a7f5f5
+model      qwen3-0.6b Q4_K_M (Ollama blob), sha256 7f4030143c1c477224c5434f8272c662a8b042079a0a584f0a27a1684fe2e1fa
+mesa       mesa-ps4 21.3.2 + this patch, ACO only (no LLVM in the self-built lib)
+prompts    the 2026-11-19 packet's prompts20.json and deep-prompt-2048.json, unchanged
+op test    tools/opdriver.py runs test-backend-ops case lists in chunks of 40
+           and records OK/FAIL/CRASH per case. tools/rerun.py re-runs CRASH cases
+           alone. It stops on any amdgpu ring timeout/reset.
+loading    VK_ICD_FILENAMES=<dir>/radeon_icd.json (per process); system ICD untouched
+```
+
+Data: data/jupi2/ and data/jupi1/ (bench JSON, 20-prompt JSONL, deep-2048, op counts
+plus per-case results as .json.xz, soak/chain logs, ISA summary, logit tops).
+
+## Limits
+
+- One model, one seat grading. No second key yet.
+- The ISA count covers 11 shaders. The JUPI 2 op sweeps are the behavioral proof.
+- JUPI 1 sweep not finished (crash above). No ISA count on JUPI 1.
+- During the JUPI 2 windows an earlier worker stopped the live service for about 15
+  minutes to free VRAM. It was restored each time. [R]
+- Upstream form not done: gate on a device quirk, check current Mesa main.

@@ -1,0 +1,11 @@
+RECEIPTS (sha256 of lab artifacts this packet summarizes; artifacts are not published)
+
+ef0d6315ccc92f1575e0c1638e3a5d2a3a2e4d7ef303a4b97cdad1b3498a5ee3  FC-NODS128-aco.patch (same file as in this packet)
+117805de2dd841a42532ffd371ab3077d88a59f2c3686eb090d6eed2749ff0d5  patched libvulkan_radeon.so (Mesa 21.3.2 + ps4 + FC-NODS128, built on JUPI 2)
+09fcd182e31113f1629981cd0effce97fb1de844839b3f865be5636be7f4744b  stock self-built libvulkan_radeon.so (control)
+acf91948754480ed906e0b90df2a908abe4cde446fe45e94d75a9ee408a34ae5  live RADV (JUPI 2 side install = JUPI 1 system lib)
+5406c2a7baf34c6dd689f7b68ea36559a7690d37fb48e5c257b4ca2bdcf6f8bb  accepted live 20-prompt outputs (2026-11-19 switch)
+c7837d4782856a2a785d18cadcfb90f9431c09c5779fba2dd05663edd8903ec7  JUPI 2 logit verdict (lab)
+736f7b1bcc5a49781441dce809d0d9d9ec1cc2e044af75047073497e78b33cc1  JUPI 1 result with crash evidence (lab)
+947327f99783811325008f093cce9bfd3988280dbd2ec9e8ed27c9b67187f81f  JUPI 1 amdgpu devcoredump (lab)
+1cd0b3d6c7f36f28cc75c78e0cf5d33174963a52a04db919f8f2faa3a5407e5a  JUPI 2 RESULT (lab)

@@ -1,0 +1,4 @@
+Test1 ISA (final ACO IR via RADV_DEBUG=shaders,nocache; no LLVM disassembler in self-built libs) Sun Nov 22 06:24:51 PST 2026
+stock ok=0 fail=11 cs=9 ds_read_b128=320 ds_read_b96=0 ds_write_b128=0 ds_write_b96=0 ds_read2_b64=320 ds_write2_b64=48 ds_read_b64=0 ds_write_b64=104 
+patched ok=11 fail=0 cs=9 ds_read_b128=0 ds_read_b96=0 ds_write_b128=0 ds_write_b96=0 ds_read2_b64=640 ds_write2_b64=48 ds_read_b64=0 ds_write_b64=104 
+optjupi ok=0 fail=11 cs=9 ds_read_b128=320 ds_read_b96=0 ds_write_b128=0 ds_write_b96=0 ds_read2_b64=320 ds_write2_b64=48 ds_read_b64=0 ds_write_b64=104 

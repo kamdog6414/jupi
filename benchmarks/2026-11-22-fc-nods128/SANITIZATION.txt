@@ -1,0 +1,21 @@
+SANITIZATION (public edition, 2026-11-22)
+
+This file lists categories of change. It does not restate what was removed.
+
+data/*/p20/*.jsonl, data/*/deep/*.jsonl
+  - Dropped the model-server port and the live-service health fields. Every
+    other field, including generated text, is unchanged.
+data/*/bench/*.json
+  - model_filename reduced to the file name.
+data/*/ops/*.json.xz
+  - The ICD path is replaced by "stock" or "patched". Per-case results are unchanged.
+data/*/chain.log, data/jupi2/soak.log
+  - Live-health probe results removed.
+data/jupi1/crash-kernel-lines.txt
+  - Selected amdgpu kernel lines only, with the host name removed.
+tools/*.py
+  - Paths come from the environment (TBO, NODS_OUT).
+
+Not published
+  - Lab receipts, node addresses, access paths, ssh configuration, the GPU
+    devcoredump, full dmesg, and the built driver binary (hash in RECEIPTS.txt).

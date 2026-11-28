@@ -1,0 +1,66 @@
+{
+ "mm-patched": {
+  "name": "mm-patched",
+  "chunk_counts": {
+   "OK": 2469,
+   "FAIL": 0,
+   "CRASH": 253,
+   "NOTRUN": 0
+  },
+  "final_counts": {
+   "OK": 2488,
+   "FAIL": 0,
+   "CRASH": 0,
+   "NOTRUN": 0,
+   "SKIP_CPU": 234
+  }
+ },
+ "mm-stock": {
+  "name": "mm-stock",
+  "chunk_counts": {
+   "OK": 1415,
+   "FAIL": 1035,
+   "CRASH": 272,
+   "NOTRUN": 0
+  },
+  "final_counts": {
+   "OK": 1421,
+   "FAIL": 1067,
+   "CRASH": 0,
+   "NOTRUN": 0,
+   "SKIP_CPU": 234
+  }
+ },
+ "mmid-patched": {
+  "name": "mmid-patched",
+  "chunk_counts": {
+   "OK": 1081,
+   "FAIL": 0,
+   "CRASH": 12,
+   "NOTRUN": 0
+  },
+  "final_counts": {
+   "OK": 1093,
+   "FAIL": 0,
+   "CRASH": 0,
+   "NOTRUN": 0,
+   "SKIP_CPU": 0
+  }
+ },
+ "mmid-stock": {
+  "name": "mmid-stock",
+  "chunk_counts": {
+   "OK": 500,
+   "FAIL": 576,
+   "CRASH": 17,
+   "NOTRUN": 0
+  },
+  "final_counts": {
+   "OK": 500,
+   "FAIL": 593,
+   "CRASH": 0,
+   "NOTRUN": 0,
+   "SKIP_CPU": 0
+  }
+ }
+}

@@ -1,0 +1,38 @@
+ub1 same_as_accepted=True len=299 prompt_n=13
+ub64 same_as_accepted=False len=295 prompt_n=13
+ub512 same_as_accepted=False len=295 prompt_n=13
+keys ['id', 'token', 'bytes', 'logprob', 'top_logprobs']
+
+== ub1 vs ub64: first differing token index 53; prefix text: 'tter said that she would be the first to speak to her in the'
+max |dlogprob| of chosen token over the 53 identical tokens: 0.0012
+ ub1 chose ' next' lp=-1.4169
+    ' next'        logprob -1.4169 p=0.2425
+    ' village'     logprob -1.4188 p=0.2420
+    ' future'      logprob -1.6108 p=0.1997
+    ' new'         logprob -2.4276 p=0.0882
+    ' coming'      logprob -2.8744 p=0.0564
+    top1-top2 margin 0.0019 nats
+ ub64 chose ' village' lp=-1.4157
+    ' village'     logprob -1.4157 p=0.2428
+    ' next'        logprob -1.4181 p=0.2422
+    ' future'      logprob -1.6114 p=0.1996
+    ' new'         logprob -2.4302 p=0.0880
+    ' coming'      logprob -2.8757 p=0.0564
+    top1-top2 margin 0.0024 nats
+
+== ub1 vs ub512: first differing token index 53; prefix text: 'tter said that she would be the first to speak to her in the'
+max |dlogprob| of chosen token over the 53 identical tokens: 0.0012
+ ub1 chose ' next' lp=-1.4169
+    ' next'        logprob -1.4169 p=0.2425
+    ' village'     logprob -1.4188 p=0.2420
+    ' future'      logprob -1.6108 p=0.1997
+    ' new'         logprob -2.4276 p=0.0882
+    ' coming'      logprob -2.8744 p=0.0564
+    top1-top2 margin 0.0019 nats
+ ub512 chose ' village' lp=-1.4157
+    ' village'     logprob -1.4157 p=0.2428
+    ' next'        logprob -1.4181 p=0.2422
+    ' future'      logprob -1.6114 p=0.1996
+    ' new'         logprob -2.4302 p=0.0880
+    ' coming'      logprob -2.8757 p=0.0564
+    top1-top2 margin 0.0024 nats

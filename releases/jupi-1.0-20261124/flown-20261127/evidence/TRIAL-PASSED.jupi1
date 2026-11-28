@@ -1,0 +1,8 @@
+cand_file=bzImage.jupi-1.0
+cand_sha=a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e
+good_file=bzImage.pidfsfix-20261120
+good_sha=0bd2726640d571c1c28fad7a721ba7db65e04472adcb7f7674312ecf9d72b289
+cand_tag=jupi-1.0
+armed=2026-11-25 01:57:18 GMT
+result=PASSED
+when=2026-11-25 02:29:19 GMT

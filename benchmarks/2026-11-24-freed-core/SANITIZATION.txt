@@ -1,0 +1,7 @@
+SANITIZATION (public edition, 2026-11-27)
+
+Same rules as benchmarks/2026-11-22-fc-nods128/SANITIZATION.txt.
+RESULTS.md: the lab copy, unchanged (sha256 90355fafa52f04d5dcf615963559e9e17eed3a6623d2371d5fbfa6a0d3dcc37b);
+  it carried no addresses, MACs or home paths.
+Not published: raw per-step logs and json (jupi1/, jupi2/), network counters (net-roach/), screen frames
+  (shots/), and the bench scripts, because they carry lab addresses and host paths. Pins are in README.md.

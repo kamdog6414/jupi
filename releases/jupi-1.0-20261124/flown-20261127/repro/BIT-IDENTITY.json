@@ -1,0 +1,24 @@
+{
+  "grade": "VERIFIED",
+  "selected_sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+  "selected_bytes": 15733760,
+  "direct_comparisons": [
+    {
+      "path": "build-a-resume-temporal/artifacts/bzImage-canonical-rebuild",
+      "bytes": 15733760,
+      "sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+      "cmp_against_selected_exit": 0
+    },
+    {
+      "path": "build-b-finalize-temporal/artifacts/bzImage-canonical-rebuild",
+      "bytes": 15733760,
+      "sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+      "cmp_against_selected_exit": 0
+    }
+  ],
+  "two_independently_extracted_source_trees": true,
+  "two_uninterrupted_clean_builds": false,
+  "B_finalization_reused_own_completed_vmlinux_o": true,
+  "original_release_unchanged": true,
+  "same_host_and_pinned_toolchain_scope": true
+}

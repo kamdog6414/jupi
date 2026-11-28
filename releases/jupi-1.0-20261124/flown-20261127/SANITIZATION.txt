@@ -1,0 +1,21 @@
+SANITIZATION (public edition, 2026-11-27)
+
+Same rules as ../SANITIZATION.txt and benchmarks/2026-11-22-fc-nods128/SANITIZATION.txt.
+evidence/RECEIPT-*.md, repro/RECIPE.md, benchmarks/2026-11-24-freed-core/RESULTS.md:
+  - Lab, Wi-Fi and pair-link addresses and fragments replaced by <lab-ip> / <lab-subnet>.
+  - Tailnet addresses replaced by <tailnet-ip>. Local tunnel ports replaced by <port>.
+  - MAC addresses replaced by <mac>. Filesystem UUIDs and boot IDs replaced by <uuid>.
+  - Build-host home and storage prefixes replaced by <lab-home>, <peer-home>, <lab-store>, <lab-media>.
+  - The readiness receipt's section 3 (lab storage cleanup) is omitted; its sha256 therefore differs from the lab original.
+  - Public-edition pass (2026-11-27): loader-delivery steps replaced by "start the loader the usual way";
+    ssh alias and tunnel names replaced by plain words;
+    RECEIPT-HDD-INSTALL section 6 (JUPI 1 network-address diagnosis) omitted.
+  - repro/MAINTENANCE-RESULT-20261125.md: links to lab-only HANDOFF.md / ROLLBACK.md turned into plain
+    text; the RECIPE link points at repro/RECIPE.md.
+  - Nothing else changed. Hashes inside the text (kernel, initramfs, trial records) are untouched.
+evidence/TRIAL-PASSED.jupi1, TRIAL-PASSED.jupi2: byte-identical copies of the records on the boot sticks
+  (sha256 15f54734ef064b27022078c6fe9e911eb3591916fb816c5e954ae13fb6f517b7 and
+   2626a52d38989c2f316d4886cab212325b908092c196536bbffed53fec681d68).
+repro/*.json: unchanged.
+../README.md: a dated status banner was added on 2026-11-27; ../SHA256SUMS updated for that one line.
+Not published: raw lab logs, ssh configuration, the kernel binary, firmware, loader binaries. Jailbreak and payload material is kept private by design.

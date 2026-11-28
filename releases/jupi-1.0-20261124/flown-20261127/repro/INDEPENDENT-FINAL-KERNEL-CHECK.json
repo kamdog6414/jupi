@@ -1,0 +1,21 @@
+{
+  "kernel_images": [
+    {
+      "run": "build-a-resume-temporal",
+      "image_bytes": 15733760,
+      "image_sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+      "selected_match": true
+    },
+    {
+      "run": "build-b-finalize-temporal",
+      "image_bytes": 15733760,
+      "image_sha256": "a06fdd7ac62a84d6481962d8dafa615ef1914605890e0bf520fc26af2dd72b8e",
+      "selected_match": true
+    }
+  ],
+  "swappiness": 60,
+  "proc_swaps": "Filename\t\t\t\tType\t\tSize\t\tUsed\t\tPriority\n/swap.img                               file\t\t4194300\t\t416000\t\t-2\n",
+  "unit": "ActiveState=inactive\nSubState=dead\nMainPID=0\nResult=success\nExecMainStatus=0\n",
+  "unit_rc": 0,
+  "compile_source_origin": "Two independently extracted trees; all source compilation from each tree; resource holds and resumed linking preserved, not uninterrupted builds."
+}

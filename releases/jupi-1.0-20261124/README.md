@@ -1,5 +1,8 @@
 # JUPI 1.0 release package (2026-11-24)
 
+> **Update 2026-11-27:** jupi-1.0 is installed and running on both consoles from the internal HDD,
+> stickless. Cold boot passed on both (Nov 24). The status table below is the Nov 24 snapshot.
+> Current tested/untested matrix: [flown-20261127/STATUS-20261127.md](flown-20261127/STATUS-20261127.md).
 
 Kernel 1.0 + boot safety + the JUPI MANUAL v1.0, for JUPI 1 (PS4) and JUPI 2 (PS4 Pro).
 Prepared by groku (Groku.2) for Kam Dabe, FullCircle ComXpress LLC. Black and white. Plain words.

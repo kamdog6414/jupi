@@ -1,0 +1,39 @@
+{
+  "schema": "jupi.maintenance-source-lineage.v2",
+  "base_git_commit": "e76750add3f25514e75c0a045f67545fa6af9c35",
+  "scope": "Portable local maintenance source supplement; no operational instance data or installer.",
+  "trial_guard": {
+    "reviewed_native_source_sha256": "b0c2927c73aca367a3e56c7ee6992ca0879bc4650e405b84a827237e01d42569",
+    "published_source_sha256": "1ef5e9d934f3262f36d79b51eca7e392a1fe782d50ec75b36828fd5e3a6c17d8",
+    "published_file": "jupi-trial-guard.sh",
+    "only_source_change": "Default peer endpoint replaced with RFC 5737 documentation address 192.0.2.3; all other source bytes preserved.",
+    "native_qualification": "48/48 owned-loopback FAT fault cases; all fsck clean, mocked health, no physical boot.",
+    "published_qualification": "Separate portable owned-directory transaction tests; no FAT or boot claim for the redacted source."
+  },
+  "archive_parser": {
+    "file": "boot_archive.py",
+    "sha256": "a277ac1ed0ec759096556052ab881a55e6297a358d0886b7dd2e4c5e40316729",
+    "source_copy": "Exact unchanged strict parser and supplement source; original key-handling contract remains strict single-archive."
+  },
+  "archive_audit_helper": {
+    "file": "audit_sequence.py",
+    "sha256": "6ccb9482ff772350a33b372aa9b42660e8ed7caf4bef67166ed7b7cb2b9c00dd",
+    "source_copy": "Function body is byte-for-byte the read-only helper extracted from the native boot manager; explicit stat and boot_archive imports added for a directly usable module. No host configuration copied.",
+    "test_loader_change": "18 original assertions retained; tests now normally import audit_sequence, without injected globals or importing host-bound boot_manager.py.",
+    "original_test_source_sha256": "35909f0f567fb17214fe653016a055e8acee9e83c74af3c372e374585c4f26f8",
+    "published_test_sha256": "1c577fb3e03c053b4b1336a20ea14483afc12e4c9bcf698294b8b4324c8d6c25",
+    "extracted_function_source_sha256": "56477c11cabb5276b05a5276d98ff2ab1e42bc53145c60e6cc5067e68d139fd6"
+  },
+  "portable_transaction_tests": {
+    "file": "test_trial_transactions.py",
+    "sha256": "6a117208bc0ded31df77677156a7a4d54568e91529fbd55a3ea11fad607e04c6",
+    "cases": 15,
+    "scope": "Owned temporary directories with NOMOUNT=1, redirected boot identity/version, explicit local health and file-operation stubs."
+  },
+  "excluded": [
+    "Native health adapter and per-host status reader; live identity and configuration",
+    "Package configuration and operational receipts",
+    "Keys, archives, FAT loopback images and private logs",
+    "Runtime installer, service activation and reboot procedures"
+  ]
+}

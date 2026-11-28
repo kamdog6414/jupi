@@ -2,6 +2,10 @@
 
 Start with **[RUNBOOK.md](RUNBOOK.md)** if JUPI is frozen or unreachable right now.
 
+The [2026-11-25 maintenance supplement](../maintenance/20261125-stability/README.md)
+contains portable trial-transaction and initramfs-audit source with isolated
+regression tests. It does not install or activate a runtime configuration.
+
 | Doc | Covers |
 |---|---|
 | [RUNBOOK.md](RUNBOOK.md) | Freeze & recovery: triage flowchart, R0 warm mux, R1 gauge, R2 shed, R3 restart X, R4 HDMI re-handshake, R5 no-login paths, R6 post-reboot checks, R7 rollback, R8 log housekeeping, quick card |

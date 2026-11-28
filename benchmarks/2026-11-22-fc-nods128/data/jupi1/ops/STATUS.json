@@ -1,0 +1,9 @@
+{
+ "node": "jupi1",
+ "status": "INCOMPLETE - no successful op aggregate",
+ "runs": [
+  {"config": "patched (FC-NODS128 ICD)", "op": "MUL_MAT", "start_pst": "2026-11-22 08:26:36", "end": "GPU hang 08:35:29, comp_1.1.0, reset failed", "hung_chunk": "UNKNOWN (log buffered, lost on SIGKILL)", "per_case_results": "not retained"},
+  {"config": "stock system RADV, VK_ICD_FILENAMES removed", "op": "MUL_MAT", "start_pst": "2026-11-22 13:34:39", "end": "GPU hang 13:38:38, comp_1.1.0, reset failed", "hung_chunk": "chunk 7, cases [179:219] (40 candidates; executing case UNKNOWN)", "chunks_1_6_rc": [1, 1, 1, -6, -6, -11], "note": "chunks 1-6 returned failures/process faults; not a pass of cases 0-208", "per_case_results": "not retained (run stopped before final JSON)"}
+ ],
+ "not_run": ["MUL_MAT_ID (both)", "soak", "ISA count", "stock ub1 llama-bench replacement timing"]
+}

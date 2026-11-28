@@ -2,8 +2,11 @@
 
 ```
 VERDICT   JUPI 2 (PS4 Pro, RADV GLADIUS): PASS.
-          JUPI 1 (PS4, RADV LIVERPOOL): output and speed PASS, but the full
-          op sweep CRASHED the GPU (ring timeout, GPU reset failed).
+          JUPI 1 (PS4, RADV LIVERPOOL): output and speed PASS. The full MUL_MAT
+          op sweep hung the GPU with the patch (08:35) AND without it (stock
+          control, 13:38): the same first ring timeout and the same failed reset.
+          Patch cleared of a patch-exclusive hang attribution only. Root cause and
+          general patch safety are UNKNOWN. Both JUPI 1 sweeps are incomplete.
 
 patch     2 hunks in src/amd/compiler/aco_instruction_selection.cpp,
           on mesa-ps4 21.3.2. On CHIP_LIVERPOOL and CHIP_GLADIUS, ACO no
@@ -44,6 +47,10 @@ test-backend-ops on Vulkan0 (chunk crashes re-run alone; SKIP = no CPU reference
 op                     stock OK/FAIL           patched OK/FAIL
 MUL_MAT     (2754)     1421 / 1067 (234 skip)  2488 / 0 (234 skip)
 MUL_MAT_ID  (1109)      500 / 593              1093 / 0
+(2754 / 1109 = nominal enumerations. The retained per-case files hold 2722 distinct
+ MUL_MAT entries (2488 OK + 234 SKIP_CPU, no CPU reference) and 1093 MUL_MAT_ID.
+ The reason for that gap was not established. "Passes" means every case with a
+ CPU reference that was retained.)
 amdgpu ring timeouts / resets in dmesg: 0 on all four sweeps
 
 llama-bench qwen3-0.6b Q4_K_M, -ngl 99 -fa 0 -t 6 -r 3
@@ -91,20 +98,62 @@ stock  -ub 64 (negative)    0/20    61.36   235.12   -    (garbage)
 cross-node: JUPI 1 patched == JUPI 2 patched, 20/20 in each of the 3 configs
 ```
 
-**The crash, JUPI 1.** At 08:35:29, during the full MUL_MAT sweep under the patched driver,
+**Crash 1, JUPI 1, patched (morning).** At 08:35:29, during the full MUL_MAT sweep under the patched driver,
 compute ring comp_1.1.0 timed out in the test process. The kernel's GPU reset failed
 ("asic atom init failed", "GPU Recovery Failed"). The gfx (desktop compositor) and both
 sdma rings then timed out in turn. The watchdog stopped the run at 08:35:30.
 MUL_MAT_ID, both stock op sweeps and the soak were not run on JUPI 1.
 data/jupi1/crash-kernel-lines.txt has the kernel lines. [M]
 
-What this does and does not show. The same full sweep ran on JUPI 2 with 0 faults.
-On JUPI 1, inference and the 20-prompt test were clean before the sweep. Two earlier
-sweep chunks also hit Vulkan device-lost without a ring timeout, the same pattern JUPI 2
-recovered from. Before this patch existed, JUPI 1 had frozen under Vulkan op testing
-(2026-11-10) [R]. Whether stock would hang the same way on this sweep is UNKNOWN,
-because the stock sweep never ran. Until that is settled, the full op sweep is not safe
-on JUPI 1.
+As of the morning report (08:43), no stock sweep had been run. That was settled
+later the same day:
+
+**Reboot and stock control, JUPI 1 (afternoon).** [M]
+
+```
+13:28:49  reboot sent (operator GO); PlayStation-side boot done by the operator
+13:34:10  SSH back; 0 ring timeouts in dmesg, display up, swap 0 MiB
+13:34:39  stock MUL_MAT sweep starts: system RADV (mesa-ps4 21.3.2, libvulkan_radeon.so
+          sha256 acf91948...a34ae5), VK_ICD_FILENAMES removed in tools/stockdrv.py.
+          Chunks of 40; CURRENT.txt (the in-flight case list) and the log are fsynced
+          per chunk.
+13:38:38  chunk 7 = cases [179:219] hangs compute ring comp_1.1.0 (test-backend-op);
+          GPU reset fails ("asic atom init failed", "GPU Recovery Failed: 1"); gfx
+          (Xorg, xfwm4) and sdma0 timeouts follow. Guard stops the run at 13:38:40,
+          swap 0 MiB.
+14:03:42  second reboot (operator GO); 14:06 back, no timeouts, GPU left idle since. [R]
+```
+
+Chunk 7 candidates (data/jupi1/stock-control/HUNG-CHUNK7-cases.txt, sha256
+7cc937ab3fb02f08bd169d9837526f4c3065ca2529a728d5f04e6be98812bd4c), all MUL_MAT,
+type_b f32, m=16: q3_K n1/n8 k4096; q4_K, q5_K, q6_K n1..9 k256 and n1/n8 k4096;
+tq2_0 n1..5 k256. Which of the 40 was executing is UNKNOWN.
+Chunks 1-6 returned rc 1, 1, 1, -6, -6, -11 (failures and process faults, no new
+ring fault). That does NOT mean cases 0-208 passed.
+Kernel lines: data/jupi1/stock-control/kernel-lines.txt (sha256 7c386bd1...0cf1).
+
+**Comparison (independent review, review/).**
+
+```
+                         patched (08:35)             stock control (13:38)
+first timeout            comp_1.1.0                  comp_1.1.0
+reset                    asic atom init failed, GPU Recovery Failed (both)
+then                     gfx, sdma1, sdma0, xfwm4    gfx, sdma0, Xorg, xfwm4
+hung chunk               UNKNOWN (log buffered)      chunk 7 [179:219]
+```
+
+Verdict (independent review, NIKOLAI-2): **PATCH CLEARED of a patch-exclusive hang
+attribution under the recorded stock-control setup; exact root cause and general
+patch safety remain UNKNOWN.** Both runs hang in the same MUL_MAT op family. Same
+chunk or same case is NOT established, because the patched run's log was buffered and
+lost. A matching timeout signature is not proof of the same initiating instruction or
+of defective silicon.
+
+Both JUPI 1 sweeps are incomplete. There is no successful JUPI 1 op aggregate
+(data/jupi1/ops/COUNTS.json stays empty; see data/jupi1/ops/STATUS.json), no JUPI 1
+ISA count and no valid stock ub1 timing. Full op sweeps stay unsafe on JUPI 1 with
+either driver. The same full sweep ran on JUPI 2 with 0 faults. JUPI 1 had also frozen
+under Vulkan op testing on 2026-11-10, before this patch existed [R].
 
 ### Logit check on the one difference (JUPI 2) [M]
 
@@ -120,7 +169,9 @@ max |d logprob| over the 53 identical earlier tokens: 0.0012 nats
 
 The two tokens are a near tie (p 0.2425 vs 0.2420). A change in float summation order
 (batched mul_mm vs mat-vec) swaps them. The top-5 set and its order are otherwise
-unchanged. This is a near-tie flip, not corruption. data/jupi2/logit/
+unchanged. This is consistent with a near-tie flip under numerical order sensitivity.
+It does not prove corruption is absent everywhere, or isolate summation order as the
+only cause. data/jupi2/logit/
 
 ## Method
 
@@ -137,12 +188,17 @@ loading    VK_ICD_FILENAMES=<dir>/radeon_icd.json (per process); system ICD unto
 
 Data: data/jupi2/ and data/jupi1/ (bench JSON, 20-prompt JSONL, deep-2048, op counts
 plus per-case results as .json.xz, soak/chain logs, ISA summary, logit tops).
+Stock control: data/jupi1/stock-control/ and tools/stockdrv.py. Independent review:
+review/ (public copy, lab paths replaced; original sha256 in RECEIPTS.txt).
+Log times in data/jupi1/stock-control/*.log are UTC (13:38 PST = 21:38 UTC).
 
 ## Limits
 
 - One model, one seat grading. No second key yet.
 - The ISA count covers 11 shaders. The JUPI 2 op sweeps are the behavioral proof.
-- JUPI 1 sweep not finished (crash above). No ISA count on JUPI 1.
+- Both JUPI 1 MUL_MAT sweeps (patched, stock) hung the GPU. MUL_MAT_ID, the soak and
+  the ISA count were never run on JUPI 1. The single hanging case was not isolated,
+  because that needs a deliberate hang plus a recovery reboot and owner approval.
 - During the JUPI 2 windows an earlier worker stopped the live service for about 15
   minutes to free VRAM. It was restored each time. [R]
 - Upstream form not done: gate on a device quirk, check current Mesa main.

@@ -1,0 +1,11 @@
+21:34:39 START stock bad0=0
+cases 2754
+21:35:00 chunk1 [0:40] rc=1 n=40 ok=12 fail=28 mem=5974 bad_new=0 | ggml_vulkan: 0 = AMD RADV LIVERPOOL (radv) | uma: 1 | rebar: 1 | fp16: 0 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: 
+21:35:14 chunk2 [40:80] rc=1 n=40 ok=36 fail=4 mem=5859 bad_new=0 | ggml_vulkan: 0 = AMD RADV LIVERPOOL (radv) | uma: 1 | rebar: 1 | fp16: 0 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: 
+21:35:47 chunk3 [80:120] rc=1 n=40 ok=37 fail=3 mem=5559 bad_new=0 | ggml_vulkan: 0 = AMD RADV LIVERPOOL (radv) | uma: 1 | rebar: 1 | fp16: 0 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 65536 | int dot: 0 | matrix cores: 
+21:37:15 chunk4 [120:160] rc=-6 n=40 ok=33 fail=3 mem=5840 bad_new=0 | timeout: the monitored command dumped core
+CRASH at MUL_MAT(type_a=nvfp4,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0)
+21:37:27 chunk5 [157:197] rc=-6 n=40 ok=10 fail=0 mem=5844 bad_new=0 | timeout: the monitored command dumped core
+CRASH at MUL_MAT(type_a=q2_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0)
+21:37:34 chunk6 [168:208] rc=-11 n=40 ok=2 fail=8 mem=5831 bad_new=0 | timeout: the monitored command dumped core
+CRASH at MUL_MAT(type_a=q3_K,type_b=f32,m=16,n=9,k=256,bs=[1,1],nr=[1,1],per=[0,1,2,3],k_v=0,o=1,src_overlap=0,m_v=0,pad=0)

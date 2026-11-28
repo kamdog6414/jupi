@@ -1,0 +1,49 @@
+2026-11-22T13:38:38-08:00 amdgpu: ring comp_1.1.0 timeout, signaled seq=1192, emitted seq=1194
+2026-11-22T13:38:38-08:00 amdgpu: Process information: process test-backend-op pid 3866 thread test-backend-op pid 3866
+2026-11-22T13:38:38-08:00 amdgpu: GPU reset begin!
+2026-11-22T13:38:38-08:00 amdgpu: asic atom init failed!
+2026-11-22T13:38:38-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:38:38-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:38:40-08:00 amdgpu: GPU reset(2) failed
+2026-11-22T13:38:40-08:00 amdgpu: GPU reset end with ret = 1
+2026-11-22T13:38:40-08:00 amdgpu: GPU Recovery Failed: 1
+2026-11-22T13:38:48-08:00 amdgpu: ring gfx timeout, signaled seq=4209, emitted seq=4211
+2026-11-22T13:38:48-08:00 amdgpu: GPU reset begin!
+2026-11-22T13:38:48-08:00 amdgpu: asic atom init failed!
+2026-11-22T13:38:48-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:38:48-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:38:50-08:00 amdgpu: GPU reset(4) failed
+2026-11-22T13:38:50-08:00 amdgpu: GPU reset end with ret = 1
+2026-11-22T13:38:50-08:00 amdgpu: GPU Recovery Failed: 1
+2026-11-22T13:38:58-08:00 amdgpu: ring sdma0 timeout, signaled seq=2698, emitted seq=2700
+2026-11-22T13:38:58-08:00 amdgpu: GPU reset begin!
+2026-11-22T13:38:58-08:00 amdgpu: asic atom init failed!
+2026-11-22T13:38:58-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:38:58-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:39:00-08:00 amdgpu: GPU reset(5) failed
+2026-11-22T13:39:00-08:00 amdgpu: GPU reset end with ret = 1
+2026-11-22T13:39:00-08:00 amdgpu: GPU Recovery Failed: 1
+2026-11-22T13:39:10-08:00 amdgpu: ring gfx timeout, signaled seq=4211, emitted seq=4214
+2026-11-22T13:39:10-08:00 amdgpu: Process information: process Xorg pid 651 thread Xorg:cs0 pid 732
+2026-11-22T13:39:10-08:00 amdgpu: GPU reset begin!
+2026-11-22T13:39:10-08:00 amdgpu: asic atom init failed!
+2026-11-22T13:39:11-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:39:11-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:39:13-08:00 amdgpu: GPU reset(7) failed
+2026-11-22T13:39:13-08:00 amdgpu: GPU reset end with ret = 1
+2026-11-22T13:39:13-08:00 amdgpu: GPU Recovery Failed: 1
+2026-11-22T13:39:13-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:39:13-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:39:15-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:39:15-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:39:23-08:00 amdgpu: ring gfx timeout, signaled seq=4214, emitted seq=4216
+2026-11-22T13:39:23-08:00 amdgpu: Process information: process xfwm4 pid 925 thread xfwm4:cs0 pid 950
+2026-11-22T13:39:23-08:00 amdgpu: GPU reset begin!
+2026-11-22T13:39:23-08:00 amdgpu: asic atom init failed!
+2026-11-22T13:39:23-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:39:23-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed
+2026-11-22T13:39:25-08:00 amdgpu: GPU reset(9) failed
+2026-11-22T13:39:25-08:00 amdgpu: GPU reset end with ret = 1
+2026-11-22T13:39:25-08:00 amdgpu: GPU Recovery Failed: 1
+2026-11-22T13:40:35-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* displayport link status failed
+2026-11-22T13:40:35-08:00 [drm:amdgpu_atombios_dp_link_train] *ERROR* clock recovery failed

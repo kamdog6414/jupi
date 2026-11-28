@@ -19,3 +19,18 @@ tools/*.py
 Not published
   - Lab receipts, node addresses, access paths, ssh configuration, the GPU
     devcoredump, full dmesg, and the built driver binary (hash in RECEIPTS.txt).
+
+Added 2026-11-22 afternoon
+data/jupi1/stock-control/
+  - HUNG-CHUNK7-cases.txt, kernel-lines.txt, guard.log: unchanged copies.
+    sweep.log: no live-health fields were present, so it is byte-identical too.
+    kernel-lines.txt already had the host name removed at capture.
+  - RESULT-STOCK-J1-as-written.md: an unchanged copy of the lab result. Its unqualified
+    "NOT caused" / "patch cleared" wording is superseded by the review's scoped
+    verdict (README and review/).
+tools/stockdrv.py
+  - Output directory and test binary come from the environment (NODS_OUT, TBO).
+review/REVIEW-NODS128-STOCK-HANG-20261122-public.md
+  - Lab home-directory prefixes are replaced by <lab-home> and <jupi1-home>.
+    Nothing else changed. The original sha256 is in RECEIPTS.txt.
+Not published: the stock devcoredump, full dmesg, the pre-reboot process list.
